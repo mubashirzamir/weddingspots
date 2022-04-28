@@ -3,9 +3,10 @@ const app = express();
 
 const cors = require('cors');
 const cookieSession = require('cookie-session');
-const passportSetup = require("./passport");
 const passport = require('passport');
-const db = require('./api/models')
+require('dotenv').config();
+const passportSetup = require("./passport");
+const db = require('./api/models');
 
 const errorHandler = require('./api/middleware/ErrorHandler')
 

@@ -5,11 +5,11 @@ const bcrypt = require('bcryptjs');
 const { users } = require('./api/models');
 const UserService = require('./api/services/UserServices');
 
-const GOOGLE_CLIENT_ID = "517927526096-20t6j8hd21ecfejq8q4u114mdgufsijg.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-const FACEBOOK_APP_ID = "374853097933577";
-const FACEBOOK_APP_SECRET = "4e0a5de7fa3d4deabf43c3fc37ceff8a";
+const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
