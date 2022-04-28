@@ -50,12 +50,6 @@ router.get("/facebook/callback", passport.authenticate("facebook", {
 
 });
 
-// Login Failure
-
-router.get("/login/failed", (req, res) => {
-    return res.status(400).json({ error: { status: 1, message: "Social login failed" }, data: {}, message: {} });
-});
-
 module.exports = router;
 
 
