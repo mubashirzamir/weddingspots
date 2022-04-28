@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Social from './Layout/Social'
 
 class Register extends Component {
 
@@ -108,8 +109,6 @@ class Register extends Component {
     }
 
 
-
-
     render() {
         return (
             <div class="container">
@@ -159,6 +158,8 @@ class Register extends Component {
 
                     <br></br>
                     <h2>{this.state.registerStatus}</h2>
+
+                    <Social />
 
                 </div>
 

@@ -14,6 +14,7 @@ import UserList from './Component/Dashboards/UserList'
 import EditUser from './Component/EditUser'
 import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
 import SearchResults from './Component/Layout/SearchResults'
+import LoginFailure from './Component/Layout/LoginFailure'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -32,6 +33,15 @@ function App() {
     type: "1",
     status: false
   })
+
+  const cookieToToken = async () => {
+    const theToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const flag = theToken === 'undefined' || theToken === null;
+    if (!flag) {
+      sessionStorage.setItem("accessToken", theToken)
+      document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+  }
 
   const checkLoginStatus = async () => {
     await axios({
@@ -65,7 +75,12 @@ function App() {
       })
   }
 
+
+
   useEffect(() => {
+    if (sessionStorage.getItem("accessToken") === null || sessionStorage.getItem("accessToken") === '') {
+      cookieToToken()
+    }
     checkLoginStatus()
   }, [])
 
@@ -98,7 +113,7 @@ function App() {
             </Route>
 
             <Route exact path="/Login">
-              <Login />
+              {!authState.status ? <Login /> : <Home />}
             </Route>
 
             <Route exact path="/GetUser">
@@ -135,6 +150,10 @@ function App() {
 
             <Route exact path="/NotAuthenticated">
               <NotAuthenticated />
+            </Route>
+
+            <Route exact path="/Login/Failure">
+              <LoginFailure />
             </Route>
 
             <Route>

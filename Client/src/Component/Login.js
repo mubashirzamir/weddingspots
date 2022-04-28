@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import { useContext } from "react"
 import { AuthContext } from '../Helpers/AuthContext'
+import Social from "./Layout/Social";
 
 const Login = () => {
 
@@ -96,8 +97,7 @@ const Login = () => {
 
                 <br></br>
                 <h2>{message}</h2>
-
-
+                <Social />
             </div>
 
         </div>

@@ -1,6 +1,5 @@
 const { users } = require('../models')
-const { featured_venues } = require('../models')
-const { venues } = require('../models')
+const { accounts } = require('../models')
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
