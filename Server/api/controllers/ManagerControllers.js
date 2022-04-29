@@ -43,12 +43,25 @@ exports.deleteVenue = async function (req, res, next) {
     }
 }
 
-exports.uploadImage = async function (req, res, next) {
+exports.s3URL = async function (req, res, next) {
 
     try {
-
         const url = { url: await s3.generateUploadURL() };
         return res.status(200).json({ error: noError, data: url, message: "s3 URL retrieved" });
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+
+}
+
+exports.addImage = async function (req, res, next) {
+
+    try {
+        const venue = await ManagerService.addImage(req.body.imageURL, req.params.venue_id, res.locals.decoded.user_id, res.locals.decoded.type);
+        if (venue) {
+            return res.status(200).json({ error: noError, data: req.body.imageURL, message: "Image added to database" });
+        }
 
     } catch (e) {
         return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });

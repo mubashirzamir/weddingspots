@@ -19,11 +19,10 @@ import ImageForm from './Component/Layout/ImageForm'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
-
-import "../node_modules/bootstrap/dist/css/bootstrap.css"
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios'
+
+import "../node_modules/bootstrap/dist/css/bootstrap.css"
 
 function App() {
 
@@ -149,7 +148,7 @@ function App() {
               <ViewVenue />
             </Route>
 
-            <Route exact path="/ImageForm">
+            <Route exact path="/venue/addImage/:venue_id">
               {authState.type > 1 ? <ImageForm /> : <NotAuthenticated />}
             </Route>
 
