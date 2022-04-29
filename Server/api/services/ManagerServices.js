@@ -47,3 +47,7 @@ exports.deleteVenue = async function (venue_id, user_id, type) {
     return venue;
 
 }
+
+exports.uploadImage = async function (file, description) {
+
+}

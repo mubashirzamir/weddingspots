@@ -15,6 +15,7 @@ import EditUser from './Component/EditUser'
 import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
 import SearchResults from './Component/Layout/SearchResults'
 import LoginFailure from './Component/Layout/LoginFailure'
+import ImageForm from './Component/Layout/ImageForm'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -146,6 +147,10 @@ function App() {
 
             <Route exact path="/venue/:venue_id">
               <ViewVenue />
+            </Route>
+
+            <Route exact path="/ImageForm">
+              {authState.type > 1 ? <ImageForm /> : <NotAuthenticated />}
             </Route>
 
             <Route exact path="/NotAuthenticated">

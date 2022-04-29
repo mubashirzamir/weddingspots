@@ -1,3 +1,4 @@
+const s3 = require('../../s3');
 const ManagerService = require('../services/ManagerServices')
 const noError = { status: 0, message: "No error" }
 
@@ -40,4 +41,17 @@ exports.deleteVenue = async function (req, res, next) {
     } catch (e) {
         return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
     }
+}
+
+exports.uploadImage = async function (req, res, next) {
+
+    try {
+
+        const url = { url: await s3.generateUploadURL() };
+        return res.status(200).json({ error: noError, data: url, message: "s3 URL retrieved" });
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+
 }

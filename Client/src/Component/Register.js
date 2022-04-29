@@ -19,7 +19,6 @@ class Register extends Component {
     }
 
     typehandler = (event) => {
-        console.log("EYa", this.state.type)
         this.setState({
             type: event.target.value
         })
