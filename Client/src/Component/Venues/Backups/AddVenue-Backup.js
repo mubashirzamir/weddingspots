@@ -49,8 +49,7 @@ const AddVenue = () => {
                 setLoading(true)
                 console.log(response.data)
                 setMessage(response.data.message)
-                const venue_id = response.data.data.venue_id
-                history.push("/venue/addImage/" + venue_id)
+
             }))
             .catch((error) => {
                 setLoading(true)
@@ -58,10 +57,9 @@ const AddVenue = () => {
                 setMessage(error.response.data.error.message)
 
             });
+
         //history.push("/")
     }
-
-
 
     return (
         <div class="container">
@@ -153,6 +151,14 @@ const AddVenue = () => {
                         <label for="inputText3" class="col-sm-2 col-form-label">Maximum Capacity</label>
                         <div class="col-sm-10">
                             <input type="number" step="any" class="form-control" id="inputText3" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} />
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label for="inputText3" class="col-sm-2 col-form-label">Image Thumbnail</label>
+                        <div class="col-sm-10">
+                            <input type="text" step="any" class="form-control" id="inputText3" name="image_thumb" value={image_thumb} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 

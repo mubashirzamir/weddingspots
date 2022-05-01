@@ -96,13 +96,15 @@ const EditVenue = () => {
         }).catch(error => console.log(error.response.data))
     }
 
+    const routeChange = async () => {
+        history.push("/venue/addImage/" + venue_id)
+    }
+
 
     return (
         <div class="container">
 
             <div className="py-4">
-
-
 
                 <div class="row mb-3">
                     <div class="col-sm">
@@ -143,9 +145,12 @@ const EditVenue = () => {
                         />
                     </div>
 
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" onClick={routeChange}>Edit Thumbnail</button>
+                    </div>
+
+
                 </div>
-
-
 
                 <form onSubmit={e => onSubmit(e)}>
                     <div class="row mb-3">
@@ -232,19 +237,10 @@ const EditVenue = () => {
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Image Thumbnail</label>
-                        <div class="col-sm-10">
-                            <input type="text" step="any" class="form-control" id="inputText3" name="image_thumb" value={image_thumb} onChange={e => onInputChange(e)} />
-                        </div>
-                    </div>
-
 
                     <div class="col-12">
                         <button class="btn btn-warning" type="submit">Update</button>
                     </div>
-
-
 
                 </form>
 

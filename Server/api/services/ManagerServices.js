@@ -3,6 +3,7 @@ const { venues } = require('../models')
 exports.createVenue = async function (venueInfo, user_id) {
     const newVenue = venues.build(venueInfo);
     newVenue.user_id = user_id;
+    newVenue.image_thumb = 'placeholder';
     await newVenue.save();
     return newVenue;
 }

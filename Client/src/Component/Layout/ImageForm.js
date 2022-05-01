@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const ImageForm = () => {
@@ -9,6 +10,8 @@ const ImageForm = () => {
     const { venue_id } = useParams();
     const { register, handleSubmit } = useForm();
     const [image, setImage] = useState();
+
+    let history = useHistory();
 
     const onSubmit = async (data) => {
 
@@ -63,6 +66,7 @@ const ImageForm = () => {
                     url: "http://localhost:3001/managerAPI/addImage/" + venue_id,
                 })
                     .then((response => {
+                        history.push("/venue/edit/" + venue_id)
                         console.log(response.data);
                     }))
                     .catch((error) => {
@@ -92,23 +96,15 @@ const ImageForm = () => {
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Description</label>
-                        <div class="col-sm-10">
-                            <input {...register('description', { required: true })} type="text" class="form-control" id="inputText3" name="description" required />
-                        </div>
-                    </div>
-
-
                     <div class="col-12">
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
 
                 </form>
 
-                {image &&
+                {/*{image &&
                     <img src={image} alt="S3"></img>
-                }
+                }*/}
 
             </div>
 
