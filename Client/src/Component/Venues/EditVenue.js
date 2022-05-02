@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
+import MapDisplay from "../Layout/MapDisplay"
+
 
 const EditVenue = () => {
 
@@ -47,7 +49,7 @@ const EditVenue = () => {
         await axios({
             method: 'post',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
             },
             url: 'http://localhost:3001/managerAPI/updateVenue',
             data: {
@@ -59,12 +61,12 @@ const EditVenue = () => {
                 address: address,
                 city: city,
                 area: area,
-                latitude: latitude,
-                longitude: longitude,
+                //latitude: latitude,
+                //longitude: longitude,
                 price_per_head: price_per_head,
                 min_cap: min_cap,
                 max_cap: max_cap,
-                image_thumb: image_thumb
+                //image_thumb: image_thumb
             }
         })
             .then((response => {
@@ -96,10 +98,13 @@ const EditVenue = () => {
         }).catch(error => console.log(error.response.data))
     }
 
-    const routeChange = async () => {
+    const imageChange = async () => {
         history.push("/venue/addImage/" + venue_id)
     }
 
+    const locationChange = async () => {
+        history.push("/venue/addLocation/" + venue_id)
+    }
 
     return (
         <div class="container">
@@ -146,7 +151,7 @@ const EditVenue = () => {
                     </div>
 
                     <div class="col-12">
-                        <button class="btn btn-outline-primary" onClick={routeChange}>Edit Thumbnail</button>
+                        <button class="btn btn-outline-primary" onClick={imageChange}>Edit Thumbnail</button>
                     </div>
 
 
@@ -203,20 +208,6 @@ const EditVenue = () => {
                     </div>
 
                     <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Latitude</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="latitude" value={latitude} onChange={e => onInputChange(e)} />
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Longitude</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="longitude" value={longitude} onChange={e => onInputChange(e)} />
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <label for="inputText3" class="col-sm-2 col-form-label">Price Per Head</label>
                         <div class="col-sm-10">
                             <input type="number" step="any" class="form-control" id="inputText3" name="price_per_head" value={price_per_head} onChange={e => onInputChange(e)} />
@@ -241,6 +232,13 @@ const EditVenue = () => {
                     <div class="col-12">
                         <button class="btn btn-warning" type="submit">Update</button>
                     </div>
+
+                    <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
+                    </div>
+
 
                 </form>
 

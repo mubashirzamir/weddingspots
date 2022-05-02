@@ -3,7 +3,11 @@ const { venues } = require('../models')
 exports.createVenue = async function (venueInfo, user_id) {
     const newVenue = venues.build(venueInfo);
     newVenue.user_id = user_id;
+
     newVenue.image_thumb = 'placeholder';
+    newVenue.latitude = "24.941985222562053"
+    newVenue.longitude = "67.11435194116635"
+
     await newVenue.save();
     return newVenue;
 }
@@ -65,6 +69,30 @@ exports.addImage = async function (imageURL, venue_id, user_id, type) {
 
     if (venue) {
         venue.image_thumb = imageURL;
+        await venue.save();
+    }
+
+    return venue;
+
+}
+
+exports.addLocation = async function (lat, lng, venue_id, user_id, type) {
+
+    const venue = await venues.findOne({ where: { venue_id: venue_id, isDelete: false } });
+
+    if (!venue) {
+        throw new Error("The venue you are trying to add an image to does not exist");
+    }
+
+    if (type != 3) {
+        if (venue.user_id != user_id) {
+            throw new Error("Insufficient privileges to add image to venue");
+        }
+    }
+
+    if (venue) {
+        venue.latitude = lat;
+        venue.longitude = lng;
         await venue.save();
     }
 

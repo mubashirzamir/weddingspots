@@ -68,3 +68,17 @@ exports.addImage = async function (req, res, next) {
     }
 
 }
+
+exports.addLocation = async function (req, res, next) {
+
+    try {
+        const venue = await ManagerService.addLocation(req.body.lat, req.body.lng, req.params.venue_id, res.locals.decoded.user_id, res.locals.decoded.type);
+        if (venue) {
+            return res.status(200).json({ error: noError, data: req.body.imageURL, message: "Location added to database" });
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+
+}

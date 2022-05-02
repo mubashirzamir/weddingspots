@@ -13,6 +13,10 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 export default function Places() {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
@@ -23,23 +27,48 @@ export default function Places() {
     return <Map />;
 }
 
-const handleSubmit = async (selected) => {
-    console.log(selected)
-}
-
-const placeMarker = (e) => {
-    console.log(e)
-}
-
 function Map() {
     const center = useMemo(() => ({ lat: 24.941985222562053, lng: 67.11435194116635 }), []);
     const [selected, setSelected] = useState(null);
     const [recenter, setRecenter] = useState(null);
 
+    let history = useHistory();
+    const { venue_id } = useParams();
+
+    const searchOptions = {
+        componentRestrictions: { country: ['pk'] },
+        types: ['city']
+    }
+
+    const handleSubmit = async (selected) => {
+
+        const lat = selected.lat
+        const lng = selected.lng
+
+        await axios({
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
+            },
+            data: {
+                lat: lat,
+                lng: lng
+            },
+            url: "http://localhost:3001/managerAPI/addLocation/" + venue_id,
+        })
+            .then((response => {
+                history.push("/venue/edit/" + venue_id)
+                console.log(response.data);
+            }))
+            .catch((error) => {
+                console.log(error.response.data)
+            })
+    }
+
     return (
         <>
             <div className="places-container">
-                <PlacesAutocomplete setSelected={setSelected} setRecenter={setRecenter} />
+                <PlacesAutocomplete setSelected={setSelected} setRecenter={setRecenter} searchOptions={searchOptions} />
             </div>
 
             <GoogleMap

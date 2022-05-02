@@ -16,7 +16,7 @@ import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
 import SearchResults from './Component/Layout/SearchResults'
 import LoginFailure from './Component/Layout/LoginFailure'
 import ImageForm from './Component/Layout/ImageForm'
-import MapForm from './Component/Layout/Map/MapForm'
+import MapForm from './Component/Layout/MapForm'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -24,6 +24,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
+import MapDisplay from './Component/Layout/MapDisplay'
 
 function App() {
 
@@ -153,8 +154,12 @@ function App() {
               {authState.type > 1 ? <ImageForm /> : <NotAuthenticated />}
             </Route>
 
-            <Route exact path="/map">
-              <MapForm />
+            <Route exact path="/venue/addLocation/:venue_id">
+              {authState.type > 1 ? <MapForm /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/Map">
+              <MapDisplay />
             </Route>
 
             <Route exact path="/NotAuthenticated">

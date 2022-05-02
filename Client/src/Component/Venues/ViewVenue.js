@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import ReviewList from "./ReviewList";
+import MapDisplay from "../Layout/MapDisplay"
 
 const ViewVenue = () => {
 
@@ -141,20 +142,6 @@ const ViewVenue = () => {
                 </div>
 
                 <div class="row mb-3">
-                    <label for="inputText3" class="col-sm-2 col-form-label">Latitude</label>
-                    <div class="col-sm-10">
-                        <input type="number" step="any" class="form-control" id="inputText3" name="latitude" value={latitude} readOnly />
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="inputText3" class="col-sm-2 col-form-label">Longitude</label>
-                    <div class="col-sm-10">
-                        <input type="number" step="any" class="form-control" id="inputText3" name="longitude" value={longitude} readOnly />
-                    </div>
-                </div>
-
-                <div class="row mb-3">
                     <label for="inputText3" class="col-sm-2 col-form-label">Price Per Head</label>
                     <div class="col-sm-10">
                         <input type="number" step="any" class="form-control" id="inputText3" name="price_per_head" value={price_per_head} readOnly />
@@ -174,6 +161,10 @@ const ViewVenue = () => {
                         <input type="number" step="any" class="form-control" id="inputText3" name="max_cap" value={max_cap} readOnly />
                     </div>
                 </div>
+
+                <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
+
+
 
                 {/*<div class="col-12">
                     <Link class="btn btn-primary" type="submit" to={"/"}>Back</Link>

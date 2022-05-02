@@ -121,21 +121,6 @@ const AddVenue = () => {
                     </div>
 
                     <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Latitude</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="latitude" value={latitude} onChange={e => onInputChange(e)} />
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Longitude</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="longitude" value={longitude} onChange={e => onInputChange(e)} />
-                        </div>
-                    </div>
-
-
-                    <div class="row mb-3">
                         <label for="inputText3" class="col-sm-2 col-form-label">Price Per Head</label>
                         <div class="col-sm-10">
                             <input type="number" step="any" class="form-control" id="inputText3" name="price_per_head" value={price_per_head} onChange={e => onInputChange(e)} />

@@ -9,5 +9,6 @@ router.post('/deleteVenue/:venue_id', validateToken, permitManager, ManagerContr
 router.post('/addImage/:venue_id', validateToken, permitManager, ManagerController.addImage);
 router.get('/s3URL', validateToken, permitManager, ManagerController.s3URL);
 
+router.post('/addLocation/:venue_id', validateToken, permitManager, ManagerController.addLocation);
 
 module.exports = router;
