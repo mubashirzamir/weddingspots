@@ -48,8 +48,8 @@ const AddReview = ({ loadReview }) => {
             <form onSubmit={e => onSubmit(e)}>
 
                 <div>
-                    <label for="exampleFormControlTextarea1" class="form-label">Review</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text" value={review_text} onChange={e => onInputChange(e)} required></textarea>
+                    <label for="exampleFormControlTextarea1" className="form-label">Review</label>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text" value={review_text} onChange={e => onInputChange(e)} required></textarea>
                 </div>
 
                 <label className="mt-2 me-2" for="rating">Rating</label>
@@ -64,7 +64,7 @@ const AddReview = ({ loadReview }) => {
                 </select>
 
                 <div className="mt-2">
-                    <button class="btn btn-primary" type="submit">Post</button>
+                    <button className="btn btn-primary" type="submit">Post</button>
                 </div>
 
             </form >

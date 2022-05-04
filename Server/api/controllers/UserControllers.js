@@ -67,4 +67,13 @@ exports.getUser = async function (req, res, next) {
     }
 }
 
+exports.about = async function (req, res, next) {
+    try {
+        const info = "A platform where you can find the venue of your choice with one click! Welcome to the world of celebrations"
+        return res.status(200).json({ error: noError, data: info, message: "Successfully retrieved info" })
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+}
+
 

@@ -12,10 +12,10 @@ const Social = () => {
 
     return (
         <div>
-            <button class="btn btn-primary" onClick={google}>Google</button>
+            <button className="btn btn-primary" onClick={google}>Google</button>
             <br />
             <br />
-            <button class="btn btn-primary" onClick={facebook}>Facebook</button>
+            <button className="btn btn-primary" onClick={facebook}>Facebook</button>
         </div>
 
     )

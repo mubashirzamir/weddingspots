@@ -34,7 +34,7 @@ const ReviewList = () => {
             <h1>Review List</h1>
 
 
-            <table class="table shadow">
+            <table className="table shadow">
                 <thead>
                     <tr>
                         {/*<th scope="col">Review ID</th>

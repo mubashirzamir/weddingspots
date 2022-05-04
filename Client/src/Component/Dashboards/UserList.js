@@ -62,13 +62,12 @@ const UserList = () => {
                 'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
             },
             url: 'http://localhost:3001/adminAPI/deleteUser/' + user_id,
-        }).
-            then((response => {
-                setLoading02(true);
-                console.log(response.data)
-                loadUsers(helper);
+        }).then((response => {
+            setLoading02(true);
+            console.log(response.data)
+            loadUsers(helper);
 
-            }))
+        }))
             .catch((error) => {
                 setLoading02(true);
                 console.log(error.response.data)
@@ -84,23 +83,23 @@ const UserList = () => {
     }
 
     return (
-        <div class="container">
+        <div className="container">
             <div className="py-4">
 
-                <div class="row mb-3">
-                    <div class="col-sm">
+                <div className="row mb-3">
+                    <div className="col-sm">
                         <h1>Manage Users</h1>
                     </div>
                 </div>
 
                 {(!loading && !loading02) &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
-                <table class="table shadow mb-3">
+                <table className="table shadow mb-3">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -124,10 +123,10 @@ const UserList = () => {
 
                                         <div className='btn-group'>
 
-                                            <Link class="btn btn-primary me-2" to={`/user/edit/${user.user_id}`}>Edit</Link>
+                                            <Link className="btn btn-primary me-2" to={`/user/edit/${user.user_id}`}>Edit</Link>
 
-                                            <button class="btn btn-danger" onClick={() => setOpenModal01({ status: true, user_id: user.user_id })}>Delete</button>
-                                            {/*<button class="btn btn-danger me-2" onClick={() => deleteuser(user.user_id)}>Delete</button>*/}
+                                            <button className="btn btn-danger" onClick={() => setOpenModal01({ status: true, user_id: user.user_id })}>Delete</button>
+                                            {/*<button className="btn btn-danger me-2" onClick={() => deleteuser(user.user_id)}>Delete</button>*/}
 
                                         </div>
 

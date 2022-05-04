@@ -38,20 +38,20 @@ function GetUser() {
     }
 
     return (
-        <div class="container">
+        <div className="container">
 
             <div className="py-4">
 
                 <h1>Get User</h1>
 
                 {!loading &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
-                <table class="table shadow">
+                <table className="table shadow">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>

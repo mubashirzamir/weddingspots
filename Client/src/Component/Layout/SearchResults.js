@@ -61,7 +61,7 @@ function SearchResults(props) {
 
                 <h1>Results</h1>
                 <div>
-                    <table class="table shadow mb-3">
+                    <table className="table shadow mb-3">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -83,7 +83,7 @@ function SearchResults(props) {
                                         <th scope="row">{venue.venue_id}</th>
                                         <td>
                                             <div >
-                                                <img class="img-thumbnail" style={{ width: 100, height: 100 }}
+                                                <img className="img-thumbnail" style={{ width: 100, height: 100 }}
                                                     src={venue.image_thumb}
                                                     alt={venue.venue_id}
                                                     width={200} height={200}
@@ -99,7 +99,7 @@ function SearchResults(props) {
                                         <td>
 
                                             <div className='btn-group'>
-                                                <Link class="btn btn-primary me-2" to={`/venue/${venue.venue_id}`}>View</Link>
+                                                <Link className="btn btn-primary me-2" to={`/venue/${venue.venue_id}`}>View</Link>
                                             </div>
 
                                         </td>

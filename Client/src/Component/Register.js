@@ -110,7 +110,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div class="container">
+            <div className="container">
 
                 <div className="py-4">
 
@@ -118,39 +118,39 @@ class Register extends Component {
 
                         <h1>Register</h1>
 
-                        <div class="row mb-3">
-                            <label for="inputType3" class="col-sm-2 col-form-label">User Type</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" value={this.state.type} onChange={this.typehandler} required>
+                        <div className="row mb-3">
+                            <label for="inputType3" className="col-sm-2 col-form-label">User Type</label>
+                            <div className="col-sm-10">
+                                <select className="form-control" value={this.state.type} onChange={this.typehandler} required>
                                     <option value="2">Manager</option>
                                     <option value="1">User</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} required />
+                        <div className="row mb-3">
+                            <label for="inputName3" className="col-sm-2 col-form-label">Name</label>
+                            <div className="col-sm-10">
+                                <input type="text" className="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} required />
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} required />
+                        <div className="row mb-3">
+                            <label for="inputEmail3" className="col-sm-2 col-form-label">Email</label>
+                            <div className="col-sm-10">
+                                <input type="email" className="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} required />
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} required />
+                        <div className="row mb-3">
+                            <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+                            <div className="col-sm-10">
+                                <input type="password" className="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} required />
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Register</button>
+                        <div className="col-12">
+                            <button className="btn btn-primary" type="submit">Register</button>
                         </div>
 
                     </form>

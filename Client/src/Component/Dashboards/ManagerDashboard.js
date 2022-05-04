@@ -59,13 +59,12 @@ const ManagerDashboard = () => {
                 'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
             },
             url: 'http://localhost:3001/managerAPI/deleteVenue/' + venue_id,
-        }).
-            then((response => {
-                setLoading02(true);
-                console.log(response.data)
-                loadVenues();
+        }).then((response => {
+            setLoading02(true);
+            console.log(response.data)
+            loadVenues();
 
-            }))
+        }))
             .catch((error) => {
                 setLoading02(true);
                 console.log(error.response.data)
@@ -80,30 +79,30 @@ const ManagerDashboard = () => {
     }
 
     return (
-        <div class="container">
+        <div className="container">
             <div className="py-4">
 
-                <div class="row mb-3">
-                    <div class="col-sm">
+                <div className="row mb-3">
+                    <div className="col-sm">
                         <h1>Manage Venues</h1>
                     </div>
-                    <div class="col-sm">
-                        <div class="text-end">
-                            <Link class="btn btn-primary" to={"venue/add"}>Add Venue</Link>
+                    <div className="col-sm">
+                        <div className="text-end">
+                            <Link className="btn btn-primary" to={"venue/add"}>Add Venue</Link>
                         </div>
                     </div>
                 </div>
 
                 {(!loading && !loading02 && loading03) &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
 
 
-                <table class="table shadow mb-3">
+                <table className="table shadow mb-3">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -124,7 +123,7 @@ const ManagerDashboard = () => {
                                     <th scope="row">{venue.venue_id}</th>
                                     <td>
                                         <div >
-                                            <img class="img-thumbnail" style={{ width: 100, height: 100 }}
+                                            <img className="img-thumbnail" style={{ width: 100, height: 100 }}
                                                 src={venue.image_thumb}
                                                 alt={venue.venue_id}
                                                 width={200} height={200}
@@ -140,15 +139,15 @@ const ManagerDashboard = () => {
 
                                         <div className='btn-group'>
 
-                                            <Link class="btn btn-primary me-2" to={`/venue/${venue.venue_id}`}>View</Link>
-                                            <Link class="btn btn-outline-primary me-2" to={`/venue/edit/${venue.venue_id}`}>Edit</Link>
+                                            <Link className="btn btn-primary me-2" to={`/venue/${venue.venue_id}`}>View</Link>
+                                            <Link className="btn btn-outline-primary me-2" to={`/venue/edit/${venue.venue_id}`}>Edit</Link>
 
 
-                                            <button class="btn btn-danger me-2" onClick={() => setOpenModal01({ status: true, venue_id: venue.venue_id })}>Delete</button>
-                                            {/*<button class="btn btn-danger me-2" onClick={() => deleteVenue(venue.venue_id)}>Delete</button>*/}
+                                            <button className="btn btn-danger me-2" onClick={() => setOpenModal01({ status: true, venue_id: venue.venue_id })}>Delete</button>
+                                            {/*<button className="btn btn-danger me-2" onClick={() => deleteVenue(venue.venue_id)}>Delete</button>*/}
 
                                             {venue.isFeatured &&
-                                                <button style={{ minWidth: 100 }} class="btn btn-warning me-2" disabled>Featured</button>
+                                                <button style={{ minWidth: 100 }} className="btn btn-warning me-2" disabled>Featured</button>
                                             }
 
 

@@ -58,38 +58,38 @@ const Login = () => {
 
 
     return (
-        <div class="container">
+        <div className="container">
 
             <div className="py-4">
 
                 <h1>Login</h1>
 
                 {!loading &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
                 <form onSubmit={e => onSubmit(e)}>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} required />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Email</label>
+                        <div className="col-sm-10">
+                            <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} required />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} required />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Password</label>
+                        <div className="col-sm-10">
+                            <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} required />
                         </div>
                     </div>
 
 
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Login</button>
+                    <div className="col-12">
+                        <button className="btn btn-primary" type="submit">Login</button>
                     </div>
 
 

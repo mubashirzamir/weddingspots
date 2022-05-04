@@ -20,7 +20,7 @@ import MapForm from './Component/Layout/MapForm'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
@@ -37,7 +37,7 @@ function App() {
   })
 
   const cookieToToken = async () => {
-    const theToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const theToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //eslint-disable-line
     const flag = theToken === 'undefined' || theToken === null;
     if (!flag) {
       sessionStorage.setItem("accessToken", theToken)

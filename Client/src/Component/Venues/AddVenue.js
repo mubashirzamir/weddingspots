@@ -44,14 +44,13 @@ const AddVenue = () => {
             },
             url: 'http://localhost:3001/managerAPI/createVenue',
             data: venue
-        }).
-            then((response => {
-                setLoading(true)
-                console.log(response.data)
-                setMessage(response.data.message)
-                const venue_id = response.data.data.venue_id
-                history.push("/venue/addImage/" + venue_id)
-            }))
+        }).then((response => {
+            setLoading(true)
+            console.log(response.data)
+            setMessage(response.data.message)
+            const venue_id = response.data.data.venue_id
+            history.push("/venue/addImage/" + venue_id)
+        }))
             .catch((error) => {
                 setLoading(true)
                 console.log(error.response.data)
@@ -64,86 +63,86 @@ const AddVenue = () => {
 
 
     return (
-        <div class="container">
+        <div className="container">
 
             <div className="py-4">
 
                 <h1>Add Venue</h1>
 
                 <form onSubmit={e => onSubmit(e)}>
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="name" value={name} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Name</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="name" value={name} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Type</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="type" value={type} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Type</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="type" value={type} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Halls</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputText3" name="halls" value={halls} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Halls</label>
+                        <div className="col-sm-10">
+                            <input type="number" className="form-control" id="inputText3" name="halls" value={halls} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Description</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="description" value={description} onChange={e => onInputChange(e)} ></textarea>
+                    <div className="row mb-3">
+                        <label for="exampleFormControlTextarea1" className="col-sm-2 col-form-label">Description</label>
+                        <div className="col-sm-10">
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" name="description" value={description} onChange={e => onInputChange(e)} ></textarea>
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Address</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="address" value={address} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Address</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="address" value={address} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">City</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="city" value={city} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">City</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="city" value={city} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Area</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="area" value={area} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Area</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="area" value={area} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Price Per Head</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="price_per_head" value={price_per_head} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Price Per Head</label>
+                        <div className="col-sm-10">
+                            <input type="number" step="any" className="form-control" id="inputText3" name="price_per_head" value={price_per_head} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Minimum Capacity</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="min_cap" value={min_cap} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Minimum Capacity</label>
+                        <div className="col-sm-10">
+                            <input type="number" step="any" className="form-control" id="inputText3" name="min_cap" value={min_cap} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Maximum Capacity</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputText3" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Maximum Capacity</label>
+                        <div className="col-sm-10">
+                            <input type="number" step="any" className="form-control" id="inputText3" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
 
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                    <div className="col-12">
+                        <button className="btn btn-primary" type="submit">Submit</button>
                     </div>
 
 

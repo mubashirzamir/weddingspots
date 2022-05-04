@@ -85,17 +85,17 @@ const EditUser = () => {
 
 
     return (
-        <div class="container">
+        <div className="container">
 
             <div className="py-4">
 
-                <div class="row mb-3">
-                    <div class="col-sm">
+                <div className="row mb-3">
+                    <div className="col-sm">
                         <h1>Edit Venue</h1>
                     </div>
-                    <div class="col-sm">
-                        <div class="text-end">
-                            <button class="btn btn-primary" onClick={() => history.goBack()}>Back</button>
+                    <div className="col-sm">
+                        <div className="text-end">
+                            <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
 
                         </div>
                     </div>
@@ -105,15 +105,15 @@ const EditUser = () => {
 
 
                 {!loading01 &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
                 {!loading02 &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
@@ -122,32 +122,32 @@ const EditUser = () => {
 
                 <form onSubmit={e => onSubmit(e)}>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">ID</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="user_id" value={user_id} onChange={e => onInputChange(e)} readOnly />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">ID</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="user_id" value={user_id} onChange={e => onInputChange(e)} readOnly />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputText3" name="name" value={name} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Name</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" id="inputText3" name="name" value={name} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} />
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Email</label>
+                        <div className="col-sm-10">
+                            <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
 
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Type</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" value={type} name="type" onChange={e => onInputChange(e)}>
+                    <div className="row mb-3">
+                        <label for="inputText3" className="col-sm-2 col-form-label">Type</label>
+                        <div className="col-sm-10">
+                            <select className="form-control" value={type} name="type" onChange={e => onInputChange(e)}>
                                 <option value="3">Admin</option>
                                 <option value="2">Manager</option>
                                 <option value="1">User</option>
@@ -156,8 +156,8 @@ const EditUser = () => {
                     </div>
 
 
-                    <div class="col-12">
-                        <button class="btn btn-warning" type="submit">Update</button>
+                    <div className="col-12">
+                        <button className="btn btn-warning" type="submit">Update</button>
                     </div>
 
 
