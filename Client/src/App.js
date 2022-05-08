@@ -4,6 +4,7 @@ import GetUser from './Component/GetUser'
 import Home from './Component/Home'
 import About from './Component/About'
 import Navbar from './Component/Layout/Navbar'
+import Footer from './Component/Layout/Footer'
 import NotFound from './Component/Layout/NotFound'
 import NotAuthenticated from './Component/Layout/NotAuthenticated'
 import AddVenue from './Component/Venues/AddVenue'
@@ -175,6 +176,9 @@ function App() {
             </Route>
 
           </Switch>
+
+          <Footer />
+
 
         </Router>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 const Social = () => {
 
@@ -12,11 +13,19 @@ const Social = () => {
 
     return (
         <div>
-            <button className="btn btn-primary" onClick={google}>Google</button>
-            <br />
-            <br />
-            <button className="btn btn-primary" onClick={facebook}>Facebook</button>
-        </div>
+            <div className='row mb-3'>
+                <div className="col-sm-6 mx-auto">
+                    <GoogleLoginButton onClick={(google)} />
+                </div>
+            </div>
+
+            <div className='row'>
+                <div className="col-sm-6 mx-auto">
+                    <FacebookLoginButton onClick={(facebook)} />
+                </div>
+            </div>
+
+        </div >
 
     )
 }

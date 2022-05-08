@@ -62,42 +62,44 @@ const Login = () => {
 
             <div className="py-4">
 
-                <h1>Login</h1>
+                <div className="row">
+                    <div className="card shadow py-4 col-sm-6 mx-auto">
+                        <h4 class="card-title text-center mb-4 mt-1">Login
+                            {!loading &&
+                                <div className="spinner-border ms-3" role="status">
+                                    <span className="sr-only"></span>
+                                </div>}
+                        </h4>
 
-                {!loading &&
-                    <div className="spinner-border" role="status">
-                        <span className="sr-only"></span>
+                        <form onSubmit={e => onSubmit(e)}>
+
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} required />
+                                </div>
+                            </div>
+
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} required />
+                                </div>
+                            </div>
+
+                            <div className='row'>
+                                <div className="col-sm-10 mx-auto">
+                                    <button className="btn btn-primary" type="submit">Login</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                        <hr />
+                        <Social />
                     </div>
-
-                }
-
-                <form onSubmit={e => onSubmit(e)}>
-
-                    <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">Email</label>
-                        <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} required />
-                        </div>
-                    </div>
-
-                    <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">Password</label>
-                        <div className="col-sm-10">
-                            <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} required />
-                        </div>
-                    </div>
+                </div>
 
 
-                    <div className="col-12">
-                        <button className="btn btn-primary" type="submit">Login</button>
-                    </div>
-
-
-                </form>
-
-                <br></br>
-                <h2>{message}</h2>
-                <Social />
             </div>
 
         </div>

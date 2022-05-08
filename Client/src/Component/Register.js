@@ -64,47 +64,6 @@ class Register extends Component {
                 })
             })
 
-        /*try {
-
-            fetch("http://localhost:3001/api/register", {
-                method: 'post',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state)
-            }).then(response => response.json())
-                .then((data) => {
-
-                    if (data.errors) {
-                        this.setState({
-                            registerStatus: data.errors[0].msg
-                        })
-                    }
-
-                    else {
-                        this.setState({
-                            registerStatus: data.message
-                        })
-                    }
-
-
-                    console.log(data)
-                });
-
-        } catch (e) {
-            console.log(e)
-        }
-
-
-        this.setState({
-            name: "",
-            email: "",
-            password: "",
-            registerStatus: ""
-        })
-        event.preventDefault()*/
-
     }
 
 
@@ -114,55 +73,64 @@ class Register extends Component {
 
                 <div className="py-4">
 
-                    <form onSubmit={this.handleSubmit}>
+                    <div className='row'>
+                        <div className='card shadow py-4 col-sm-6 mx-auto'>
 
-                        <h1>Register</h1>
+                            <h4 class="card-title text-center mb-4 mt-1">Register</h4>
 
-                        <div className="row mb-3">
-                            <label for="inputType3" className="col-sm-2 col-form-label">User Type</label>
-                            <div className="col-sm-10">
-                                <select className="form-control" value={this.state.type} onChange={this.typehandler} required>
-                                    <option value="2">Manager</option>
-                                    <option value="1">User</option>
-                                </select>
-                            </div>
-                        </div>
+                            <form onSubmit={this.handleSubmit}>
 
-                        <div className="row mb-3">
-                            <label for="inputName3" className="col-sm-2 col-form-label">Name</label>
-                            <div className="col-sm-10">
-                                <input type="text" className="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} required />
-                            </div>
-                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-10 mx-auto">
+                                        <select className="form-control" value={this.state.type} onChange={this.typehandler} required>
+                                            <option value="2">Manager</option>
+                                            <option value="1">User</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div className="row mb-3">
-                            <label for="inputEmail3" className="col-sm-2 col-form-label">Email</label>
-                            <div className="col-sm-10">
-                                <input type="email" className="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} required />
-                            </div>
-                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-10 mx-auto">
+                                        <input type="text" className="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} placeholder="Name" required />
+                                    </div>
+                                </div>
 
-                        <div className="row mb-3">
-                            <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
-                            <div className="col-sm-10">
-                                <input type="password" className="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} required />
-                            </div>
-                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-10 mx-auto">
+                                        <input type="email" className="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} placeholder="Email Address" required />
+                                    </div>
+                                </div>
 
-                        <div className="col-12">
-                            <button className="btn btn-primary" type="submit">Register</button>
-                        </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-10 mx-auto">
+                                        <input type="password" className="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required />
+                                    </div>
+                                </div>
 
-                    </form>
+                                <div className='row'>
+                                    <div className="col-sm-10 mx-auto">
+                                        <button className="btn btn-primary" type="submit">Register</button>
+                                    </div>
+                                </div>
 
-                    <br></br>
-                    <h2>{this.state.registerStatus}</h2>
+                            </form>
 
-                    <Social />
+                            <hr />
 
-                </div>
 
-            </div>
+                            <Social />
+
+                            <h2>{this.state.registerStatus}</h2>
+
+
+                        </div >
+                    </div >
+
+
+
+                </div >
+
+            </div >
 
         )
     }

@@ -72,27 +72,6 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
-                        {!authState.status && (
-
-                            <>
-
-                                <li className="nav-item me-2">
-                                    <NavLink className="nav-link" aria-current="page" exact to="/register">
-                                        Register
-                                    </NavLink>
-                                </li>
-
-                                <li className="nav-item me-2">
-                                    <NavLink className="nav-link" aria-current="page" exact to="/login">
-                                        Login
-                                    </NavLink>
-                                </li>
-
-
-
-                            </>
-
-                        )}
 
                         {authState.type === 2 && (
                             <li className="nav-item me-2">
@@ -123,10 +102,27 @@ const Navbar = () => {
 
                 <div>
 
+
+                    {!authState.status && (
+
+                        <>
+
+                            <Link className="btn btn-outline-secondary me-2 my-button" to="/login">
+                                Login
+                            </Link>
+
+                            <Link className="btn btn-outline-secondary me-2 my-button" to="/register">
+                                Register
+                            </Link>
+
+                        </>
+
+                    )}
+
                     {authState.status && (
                         <>
                             <Link className="btn btn-outline-primary me-2 my-button" to="/getUser">{authState.name} ({roleName})</Link>
-                            <button className="btn btn-outline-primary my-button" onClick={logout}>Logout</button>
+                            <button className="btn btn-outline-danger my-button" onClick={logout}>Logout</button>
                         </>
                     )}
 
