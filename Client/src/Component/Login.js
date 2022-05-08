@@ -63,7 +63,7 @@ const Login = () => {
             <div className="py-4">
 
                 <div className="row">
-                    <div className="card shadow py-4 col-sm-6 mx-auto">
+                    <div className="card shadow py-4 col-xl-6 mx-auto">
                         <h4 class="card-title text-center mb-4 mt-1">Login
                             {!loading &&
                                 <div className="spinner-border ms-3" role="status">
