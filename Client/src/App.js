@@ -17,6 +17,7 @@ import SearchResults from './Component/Layout/SearchResults'
 import LoginFailure from './Component/Layout/LoginFailure'
 import ImageForm from './Component/Layout/ImageForm'
 import MapForm from './Component/Layout/MapForm'
+import MapDisplay from './Component/Layout/MapDisplay'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -24,7 +25,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
-import MapDisplay from './Component/Layout/MapDisplay'
 
 function App() {
 

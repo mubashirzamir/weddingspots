@@ -60,7 +60,7 @@ const ViewVenue = () => {
 
                 <div className="row mb-3">
                     <div className="col-sm">
-                        <h1>View Venue</h1>
+                        <h3>{venue.name}</h3>
                     </div>
                     <div className="col-sm">
                         <div className="text-end">
