@@ -19,6 +19,7 @@ import LoginFailure from './Component/Layout/LoginFailure'
 import ImageForm from './Component/Layout/ImageForm'
 import MapForm from './Component/Layout/MapForm'
 import MapDisplay from './Component/Layout/MapDisplay'
+import ForgotPassword from './Component/Layout/ForgotPassword'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -26,6 +27,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
+
 
 function App() {
 
@@ -112,11 +114,15 @@ function App() {
             </Route>
 
             <Route exact path="/Register">
-              <Register />
+              {!authState.status ? <Register /> : <Home />}
             </Route>
 
             <Route exact path="/Login">
               {!authState.status ? <Login /> : <Home />}
+            </Route>
+
+            <Route exact path="/ForgotPassword">
+              {!authState.status ? <ForgotPassword /> : <Home />}
             </Route>
 
             <Route exact path="/GetUser">

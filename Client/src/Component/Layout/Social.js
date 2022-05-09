@@ -1,5 +1,7 @@
 import React from "react";
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+
 
 const Social = () => {
 
@@ -13,20 +15,22 @@ const Social = () => {
 
     return (
         <div>
-            <div className='row mb-3'>
-                <div className="col-sm-6 mx-auto">
-                    <GoogleLoginButton onClick={(google)} />
-                </div>
-            </div>
 
-            <div className='row'>
-                <div className="col-sm-6 mx-auto">
-                    <FacebookLoginButton onClick={(facebook)} />
+            <div className='row mb-3'>
+                <div className="col-sm-3 mx-auto">
+
+                    <btn className="btn">
+                        <FaFacebook size="2em" color="#1778F2" onClick={(facebook)} />
+                    </btn>
+
+                    <btn className="btn">
+                        <FcGoogle size="2em" onClick={(google)} />
+                    </btn>
+
                 </div>
             </div>
 
         </div >
-
     )
 }
 

@@ -21,7 +21,7 @@ exports.login = async function (req, res, next) {
             }
 
             else {
-                return res.status(400).json({ error: { status: 1, message: "Invalid password" }, data: {}, message: {} });
+                return res.status(400).json({ error: { status: 1, message: "Invalid email address or password" }, data: {}, message: {} });
             }
 
         }

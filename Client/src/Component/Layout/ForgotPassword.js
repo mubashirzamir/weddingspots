@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import axios from 'axios'
 import { useHistory, Link } from 'react-router-dom';
 import { useContext } from "react"
-import { AuthContext } from '../Helpers/AuthContext'
-import Social from "./Layout/Social";
+import { AuthContext } from '../../Helpers/AuthContext'
 
-const Login = () => {
+const ForgotPassword = () => {
 
     const [loading, setLoading] = useState(true);
 
@@ -65,12 +64,25 @@ const Login = () => {
                 <div className="row">
                     <div className="card shadow py-4 col-xl-6 mx-auto">
 
-                        <h4 class="card-title text-center mb-4 mt-1">Login
+                        <h4 class="card-title text-center mb-4 mt-1">Forgot Password?
                             {!loading &&
                                 <div className="spinner-border ms-3" role="status">
                                     <span className="sr-only"></span>
                                 </div>}
                         </h4>
+
+                        <div className='row'>
+                            <div className="col-sm-10 mx-auto">
+                                <div className="row">
+                                    <div className="row mb-3">
+                                        <div className="ms-2 text-center">
+                                            Please enter your email address. You will receive an email message with instructions on how to reset your password.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <form onSubmit={e => onSubmit(e)}>
 
@@ -80,25 +92,11 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            <div className="row mb-2">
-                                <div className="col-sm-10 mx-auto">
-                                    <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} placeholder="Password" required />
-                                </div>
-                                <div className="col-sm-10 mt-1 mx-auto">
-                                    <span class="error text-danger">{message}</span>
-                                </div>
-                            </div>
-
-
                             <div className='row'>
                                 <div className="col-sm-10 mx-auto">
                                     <div className="row">
                                         <div className="col-sm">
-                                            <button className="btn btn-primary" type="submit">Login</button>
-                                        </div>
-
-                                        <div className="col-sm text-end">
-                                            <Link className="text-decoration-none" to="/ForgotPassword">Forgot password?</Link>
+                                            <button className="btn btn-success" type="submit">Get New Password</button>
                                         </div>
                                     </div>
                                 </div>
@@ -109,8 +107,6 @@ const Login = () => {
 
                         </form>
 
-                        <hr />
-                        <Social />
                     </div>
                 </div>
 
@@ -121,4 +117,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default ForgotPassword;
