@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import ReviewList from "./ReviewList";
 import MapDisplay from "../Layout/MapDisplay"
+import ContactCard from "./ContactCard";
+
 
 const ViewVenue = () => {
 
@@ -58,6 +60,57 @@ const ViewVenue = () => {
 
             <div className="py-4">
 
+                <div className="row">
+
+                    <h2>{message02}</h2>
+
+                    {!message02 &&
+                        <>
+                            <div className="col-xl-8">
+
+                                <div className="row mb-3">
+
+                                    <span>
+                                        {!loading &&
+                                            <div className="spinner-border" role="status">
+                                                <span className="sr-only"></span>
+                                            </div>
+                                        }
+                                        <h3 className="ms-2 d-inline">{venue.name}</h3>
+                                    </span>
+
+
+                                    <div className="w-100 mb-3 mt-3 ">
+                                        <img
+                                            src={venue.image_thumb}
+                                            alt={venue.venue_id}
+                                        />
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            <div className="col-xl-4">
+                                <div className="row">
+                                    <div className="col">
+                                        <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
+                                        <ContactCard venue_id={venue_id} />
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+
+
+                    }
+
+
+
+                </div>
+
+                {/*Divider*/}
+
                 <div className="row mb-3">
                     <div className="col-sm">
                         <h3>{venue.name}</h3>
@@ -78,7 +131,6 @@ const ViewVenue = () => {
                     <div className="spinner-border" role="status">
                         <span className="sr-only"></span>
                     </div>
-
                 }
 
 
@@ -163,8 +215,6 @@ const ViewVenue = () => {
                 </div>
 
                 <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
-
-
 
                 {/*<div className="col-12">
                     <Link className="btn btn-primary" type="submit" to={"/"}>Back</Link>

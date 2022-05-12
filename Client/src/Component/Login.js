@@ -56,7 +56,6 @@ const Login = () => {
 
     }
 
-
     return (
         <div className="container">
 
@@ -103,9 +102,6 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
 
                         </form>
 

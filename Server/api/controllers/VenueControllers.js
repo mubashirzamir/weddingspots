@@ -42,6 +42,26 @@ exports.getVenues = async function (req, res, next) {
     }
 }
 
+exports.getVenueContact = async function (req, res, next) {
+    try {
+        // findOne
+        const venue = await VenueService.findOne(req.params.venue_id);
+        if (venue) {
+            const contact = await VenueService.findContact(venue.user_id);
+            return res.status(200).json({ error: noError, data: contact, message: "Successfully contact retrieved" })
+        }
+
+        else {
+            return res.status(200).json({ error: noError, data: contact, message: "No contact to retrieve" })
+        }
+
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+
+    }
+}
+
 
 /*exports.getVenues = async function (req, res, next) {
 

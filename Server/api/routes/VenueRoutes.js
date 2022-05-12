@@ -7,6 +7,6 @@ router.post('/addReview', validateToken, VenueController.addReview);
 
 router.get('', VenueController.getVenues);
 router.get('/:venue_id', VenueController.getVenues);
-
+router.get('/contact/:venue_id', VenueController.getVenueContact);
 
 module.exports = router;

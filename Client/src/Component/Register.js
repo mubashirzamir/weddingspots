@@ -1,139 +1,106 @@
-import React, { Component } from 'react'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 import Social from './Layout/Social'
+import { AiOutlineUser } from "react-icons/ai"
 
-class Register extends Component {
+const Register = () => {
 
-    constructor(props) {
-        super(props)
+    const { register, handleSubmit } = useForm();
+    const [loading, setLoading] = useState(true);
+    const [registerStatus, setRegisterStatus] = useState();
 
-        this.state = {
-            type: "1",
-            name: "",
-            email: "",
-            password: "",
-            registerStatus: ""
-        }
+    let history = useHistory();
 
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    typehandler = (event) => {
-        this.setState({
-            type: event.target.value
-        })
-    }
-
-    namehandler = (event) => {
-        this.setState({
-            name: event.target.value
-        })
-    }
-    emailhandler = (event) => {
-        this.setState({
-            email: event.target.value
-        })
-    }
-    passwordhandler = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-
-
-    handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(this.state);
-
+    const onSubmit = async (data) => {
+        setLoading(false)
         await axios({
             method: 'post',
             url: "http://localhost:3001/api/register",
-            data: this.state
+            data: data
         })
             .then((response => {
                 console.log(response.data.message)
-                this.setState({
-                    registerStatus: response.data.message
-                })
-                //history.push("/login")
+                setLoading(true)
+                history.push("/login")
             }))
             .catch((error) => {
+                setLoading(true)
                 console.log(error.response.data)
-                this.setState({
-                    registerStatus: error.response.data.error.message
-                })
+                setRegisterStatus(error.response.data.error.message)
             })
-
     }
 
+    return (
+        <div className="container">
 
-    render() {
-        return (
-            <div className="container">
+            <div className="py-4">
 
-                <div className="py-4">
+                <div className='row'>
+                    <div className='card shadow py-4 col-xl-6 mx-auto'>
 
-                    <div className='row'>
-                        <div className='card shadow py-4 col-xl-6 mx-auto'>
+                        <h4 class="card-title text-center mb-4 mt-1">Register
+                            {!loading &&
+                                <div className="spinner-border ms-3" role="status">
+                                    <span className="sr-only"></span>
+                                </div>}
+                        </h4>
 
-                            <h4 class="card-title text-center mb-4 mt-1">Register</h4>
+                        <form onSubmit={handleSubmit(onSubmit)}>
 
-                            <form onSubmit={this.handleSubmit}>
-
-                                <div className="row mb-3">
-                                    <div className="col-sm-10 mx-auto">
-                                        <select className="form-control" value={this.state.type} onChange={this.typehandler} required>
-                                            <option value="2">Manager</option>
-                                            <option value="1">User</option>
-                                        </select>
-                                    </div>
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <select  {...register('type', { required: true })} className="form-control dropdown-toggle" required>
+                                        <option value="1">User</option>
+                                        <option value="2">Vendor</option>
+                                    </select>
                                 </div>
+                            </div>
 
-                                <div className="row mb-3">
-                                    <div className="col-sm-10 mx-auto">
-                                        <input type="text" className="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} placeholder="Name" required />
-                                    </div>
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('name', { required: true })} type="text" className="form-control" placeholder="Name" required />
                                 </div>
+                            </div>
 
-                                <div className="row mb-3">
-                                    <div className="col-sm-10 mx-auto">
-                                        <input type="email" className="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} placeholder="Email Address" required />
-                                    </div>
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('email', { required: true })} type="email" className="form-control" placeholder="Email" required />
                                 </div>
+                            </div>
 
-                                <div className="row mb-3">
-                                    <div className="col-sm-10 mx-auto">
-                                        <input type="password" className="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" required />
-                                    </div>
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('password', { required: true })} type="password" className="form-control" placeholder="Password" required />
                                 </div>
-
-                                <div className='row'>
-                                    <div className="col-sm-10 mx-auto">
-                                        <button className="btn btn-primary" type="submit">Register</button>
-                                    </div>
+                                <div className="col-sm-10 mt-1 mx-auto">
+                                    <span class="error text-danger">{registerStatus}</span>
                                 </div>
+                            </div>
 
-                            </form>
+                            <div className="col-sm-10 mx-auto">
+                                <button className="btn btn-primary" type="submit">Register</button>
+                            </div>
 
-                            <hr />
+                        </form>
+
+                        <hr />
+
+                        <Social />
+
+                        <h2>{registerStatus}</h2>
 
 
-                            <Social />
-
-                            <h2>{this.state.registerStatus}</h2>
-
-
-                        </div >
                     </div >
+                </div>
 
 
 
-                </div >
+            </div>
 
-            </div >
-
-        )
-    }
+        </div>
+    )
 }
 
 export default Register

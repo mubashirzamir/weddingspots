@@ -1,4 +1,4 @@
-const { featured_venues, venues } = require('../models')
+const { venues, users } = require('../models')
 const { Op } = require("sequelize");
 
 
@@ -46,6 +46,15 @@ exports.findAll = async function (req) {
 exports.findOne = async function (venue_id) {
     const venue = await venues.findOne({ where: { venue_id: venue_id, isDelete: false } });
     return venue;
+}
+
+exports.findContact = async function (user_id) {
+    const user = await users.findOne({ where: { user_id: user_id, isDelete: false } });
+    const contact = {
+        name: user.name,
+        email: user.email
+    }
+    return contact;
 }
 
 

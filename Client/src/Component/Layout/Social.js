@@ -16,17 +16,21 @@ const Social = () => {
     return (
         <div>
 
-            <div className='row mb-3'>
-                <div className="col-sm-3 mx-auto">
+            <div className='row'>
+                <div className="col-mx-auto">
+                    <div className="row">
+                        <div className="col text-end">
+                            <btn className="btn">
+                                <FaFacebook size="2em" color="#1778F2" onClick={(facebook)} />
+                            </btn>
+                        </div>
 
-                    <btn className="btn">
-                        <FaFacebook size="2em" color="#1778F2" onClick={(facebook)} />
-                    </btn>
-
-                    <btn className="btn">
-                        <FcGoogle size="2em" onClick={(google)} />
-                    </btn>
-
+                        <div className="col text-start">
+                            <btn className="btn">
+                                <FcGoogle size="2em" onClick={(google)} />
+                            </btn>
+                        </div>
+                    </div>
                 </div>
             </div>
 
