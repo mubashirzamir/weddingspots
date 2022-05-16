@@ -17,6 +17,7 @@ const ViewVenue = () => {
     const { venue_id } = useParams();
 
     const [venue, setVenue] = useState({
+        user_id: "",
         name: "",
         type: "",
         halls: "",
