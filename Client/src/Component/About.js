@@ -36,7 +36,7 @@ function About() {
                 <h1></h1>
 
                 {!loading &&
-                    <div className="spinner-border" role="status">
+                    <div className="spinner-border text-primary" role="status">
                         <span className="sr-only"></span>
                     </div>
 

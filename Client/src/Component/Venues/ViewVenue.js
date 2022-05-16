@@ -4,13 +4,17 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import ReviewList from "./ReviewList";
 import MapDisplay from "../Layout/MapDisplay"
 import ContactCard from "./ContactCard";
+import Overview from "./Overview";
+import { GoLocation } from "react-icons/go"
+import { RiPriceTag3Line } from "react-icons/ri"
+
 
 
 const ViewVenue = () => {
 
     let history = useHistory();
 
-    const [message02, setMessage02] = useState("")
+    const [message01, setMessage01] = useState("")
 
     const [loading, setLoading] = useState(false);
 
@@ -32,9 +36,8 @@ const ViewVenue = () => {
         max_cap: ""
     })
 
-    const { name, type, halls, description, address, city, area, latitude, longitude, price_per_head, min_cap, max_cap } = venue;
-
     useEffect(() => {
+        window.scrollTo(0, 0)
         loadVenue()
     }, [])
 
@@ -49,7 +52,7 @@ const ViewVenue = () => {
             }
             else {
                 setLoading(true)
-                setMessage02("No such venue")
+                setMessage01("No such venue")
             }
         }).catch(error => console.log(error.response.data))
 
@@ -61,168 +64,101 @@ const ViewVenue = () => {
 
             <div className="py-4">
 
-                <div className="row">
+                <h2>{message01}</h2>
 
-                    <h2>{message02}</h2>
+                {!message01 &&
+                    <>
+                        <span>
+                            {!loading &&
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only"></span>
+                                </div>
+                            }
+                            <h3 className="ms-2 d-inline">{venue.name}</h3>
+                        </span>
 
-                    {!message02 &&
-                        <>
+                        <div className="row mt-2 px-2">
                             <div className="col-xl-8">
+                                <div className="row">
+                                    <div className="col">
+                                        <p className="mt-0 mb-0"><span className=""><GoLocation /></span> {venue.area}</p>
+                                    </div>
+                                    <div className="col">
+                                        <p className="text-end mt-0 mb-0"><span className=""><RiPriceTag3Line /></span> {venue.price_per_head} Rs/Head</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+
+                        <div className="row">
+
+                            <div className="col-xl-8">
                                 <div className="row mb-3">
-
-                                    <span>
-                                        {!loading &&
-                                            <div className="spinner-border" role="status">
-                                                <span className="sr-only"></span>
-                                            </div>
-                                        }
-                                        <h3 className="ms-2 d-inline">{venue.name}</h3>
-                                    </span>
-
-
                                     <div className="w-100 mb-3 mt-3 ">
                                         <img
                                             src={venue.image_thumb}
                                             alt={venue.venue_id}
                                         />
                                     </div>
-
-
                                 </div>
-
                             </div>
 
                             <div className="col-xl-4">
                                 <div className="row">
                                     <div className="col">
-                                        <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
                                         <ContactCard venue_id={venue_id} />
                                     </div>
                                 </div>
                             </div>
-                        </>
-
-
-                    }
-
-
-
-                </div>
-
-                {/*Divider*/}
-
-                <div className="row mb-3">
-                    <div className="col-sm">
-                        <h3>{venue.name}</h3>
-                    </div>
-                    <div className="col-sm">
-                        <div className="text-end">
-                            <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
 
                         </div>
-                    </div>
-                </div>
 
-                <h2>{message02}</h2>
+                        <div className="row mt-4 mb-2" >
+
+                            <div className="col-xl-8">
+                                <div className="row">
+                                    <h5 className="text-center">Description</h5>
+                                    <hr className="col-10 mx-auto" />
+                                    <div className="overflow-auto px-3" style={{ height: "175px" }}>
+                                        <div className="row">
+                                            <p className="mh-50">{venue.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-xl-4" >
+                                <div className="row">
+                                    <h5 className="text-center">Overview</h5>
+                                    <hr className="col-10 mx-auto" />
+                                    <Overview type={venue.type} halls={venue.halls} address={venue.address} min_cap={venue.min_cap} max_cap={venue.max_cap} />
+                                </div>
+                            </div>
+
+                        </div>
 
 
+                        <div>
+                            <h5 className="text-center mb-2">Location</h5>
+                            <MapDisplay lat={venue.latitude} lng={venue.longitude}></MapDisplay>
+                        </div>
 
-                {!loading &&
-                    <div className="spinner-border" role="status">
-                        <span className="sr-only"></span>
-                    </div>
+
+                        {/*<div className="col-12">
+                    <Link className="btn btn-primary" type="submit" to={"/"}>Back</Link>
+                 </div>*/}
+
+                        {/*<br />
+                <ReviewList />*/}
+                    </>
                 }
 
 
 
-                <div className="w-50 mx-auto mb-3 mt-3 ">
-                    <img className="img-thumbnail"
-                        src={venue.image_thumb}
-                        alt={venue.venue_id}
-                    />
-                </div>
 
 
 
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Name</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputText3" name="name" value={name} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Type</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputText3" name="type" value={type} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Halls</label>
-                    <div className="col-sm-10">
-                        <input type="number" className="form-control" id="inputText3" name="halls" value={halls} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="exampleFormControlTextarea1" className="col-sm-2 col-form-label">Description</label>
-                    <div className="col-sm-10">
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" name="description" value={description} readOnly ></textarea>
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Address</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputText3" name="address" value={address} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">City</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputText3" name="city" value={city} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Area</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" id="inputText3" name="area" value={area} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Price Per Head</label>
-                    <div className="col-sm-10">
-                        <input type="number" step="any" className="form-control" id="inputText3" name="price_per_head" value={price_per_head} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Minimum Capacity</label>
-                    <div className="col-sm-10">
-                        <input type="number" step="any" className="form-control" id="inputText3" name="min_cap" value={min_cap} readOnly />
-                    </div>
-                </div>
-
-                <div className="row mb-3">
-                    <label for="inputText3" className="col-sm-2 col-form-label">Maximum Capacity</label>
-                    <div className="col-sm-10">
-                        <input type="number" step="any" className="form-control" id="inputText3" name="max_cap" value={max_cap} readOnly />
-                    </div>
-                </div>
-
-                <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
-
-                {/*<div className="col-12">
-                    <Link className="btn btn-primary" type="submit" to={"/"}>Back</Link>
-                 </div>*/}
-
-                {/*<br />
-                <ReviewList />*/}
 
             </div>
 

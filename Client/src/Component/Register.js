@@ -42,7 +42,7 @@ const Register = () => {
 
                         <h4 class="card-title text-center mb-4 mt-1">Register
                             {!loading &&
-                                <div className="spinner-border ms-3" role="status">
+                                <div className="spinner-border text-primary ms-3" role="status">
                                     <span className="sr-only"></span>
                                 </div>}
                         </h4>

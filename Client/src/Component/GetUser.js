@@ -45,7 +45,7 @@ function GetUser() {
                 <h1>Get User</h1>
 
                 {!loading &&
-                    <div className="spinner-border" role="status">
+                    <div className="spinner-border text-primary" role="status">
                         <span className="sr-only"></span>
                     </div>
 
