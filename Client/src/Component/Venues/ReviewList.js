@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from "react-paginate"
+import ReactStars from "react-rating-stars-component";
+import dateFormat from 'dateformat';
 
 const ReviewList = ({ buttonPress }) => {
 
@@ -30,10 +32,10 @@ const ReviewList = ({ buttonPress }) => {
             setPageCount(Math.ceil(total / size))
             setReview(response.data.data.items)
             setLoading(true)
-            console.log(response.data.data)
+            console.log(response.data)
         }).catch(error => {
             setLoading(true)
-            console.log(error)
+            console.log(console.log(error.response.data))
         });
     }
 
@@ -53,61 +55,83 @@ const ReviewList = ({ buttonPress }) => {
                         <span className="sr-only"></span>
                     </div>
                 }
-                <h5 className="d-inline">Review List</h5>
             </span>
 
-            <table className="table shadow">
-                <thead>
-                    <tr>
-                        {/*<th scope="col">Review ID</th>
-                        <th scope="col">Venue ID</th>
-                        <th scope="col">User ID</th>*/}
-                        <th scope="col">ID</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Review</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        reviews.map((review, index) => (
+            <div className="row d-flex justify-content-center mt-3">
+                {reviews.map((review) => {
+                    return (
+                        <div key={review.review_id} className="row v my-2">
 
-                            <tr>
-                                <td>{review.user_id}</td>
-                                <td>{review.date}</td>
-                                <td>{review.rating}</td>
-                                <td>{review.review}</td>
-                            </tr>
+                            <div className="card shadow-sm w-100">
+                                <div className="card-body">
 
-                        ))
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <p className="">{review.review}</p>
 
-                    }
+                                        </div>
 
+                                        <div className="col-3 col-xs-3">
+                                            <p className="text-end">{dateFormat(review.date, "mmmm dS, yyyy")}</p>
+                                        </div>
+                                    </div>
 
-                </tbody>
-            </table>
+                                    <div className="row">
+                                        <div className="col">
+                                            <span className="fw-bold text-primary">{review.user.name} </span>
+                                            <span className="float-end">
+                                                <ReactStars
+                                                    count={review.rating}
+                                                    size={20}
+                                                    edit={false}
+                                                    color="#ffd700"
+                                                />
 
-            <ReactPaginate
-                previousLabel={"Previous"}
-                next={"Next"}
-                breakLabel={"..."}
-                pageCount={pageCount}
-                marginPagesDisplayed={3}
-                pageRangeDisplayed={3}
-                onPageChange={handlePageClick}
-                containerClassName={"pagination justify-content-center"}
-                pageClassName={"page-item"}
-                pageLinkClassName={"page-link"}
-                previousClassName={"page-link"}
-                nextClassName={"page-link"}
-                breakClassName={"page-item"}
-                breakLinkClassName={"page-link"}
-                activeClassName={"active"}
-            />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
 
 
 
-        </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div className="mt-3">
+
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
+
+            </div>
+
+
+
+
+
+
+        </div >
 
     )
 

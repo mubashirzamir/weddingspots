@@ -138,11 +138,14 @@ const ViewVenue = () => {
 
 
                         <div>
-                            <h5 className="text-center mb-2">Location</h5>
+                            <h5 className="mb-2">Location</h5>
                             <MapDisplay lat={venue.latitude} lng={venue.longitude}></MapDisplay>
                         </div>
 
-                        <ReviewParent />
+                        <div>
+                            <ReviewParent />
+                        </div>
+
                     </>
                 }
 

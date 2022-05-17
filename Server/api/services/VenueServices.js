@@ -71,8 +71,10 @@ exports.getReviews = async function (req) {
     const data = await venue_reviews.findAndCountAll({
         where: { isDelete: false, venue_id: venue_id },
         attributes: { exclude: ['isDelete', 'createdAt', 'updatedAt'] },
+        order: [['review_id', 'DESC']],
         limit,
-        offset
+        offset,
+        include: [{ model: users, attributes: ["name"] }]
     })
 
     const result = getPagingData(data, page, limit);

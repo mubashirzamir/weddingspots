@@ -7,7 +7,7 @@ const ReviewParent = () => {
     const [buttonPress, setButtonPress] = useState(false);
 
     return (
-        <div className="mt-4">
+        <div className="mt-5">
             <AddReview onButtonPressChange={() => setButtonPress(!buttonPress)} />
             <ReviewList buttonPress={buttonPress} />
         </div>
