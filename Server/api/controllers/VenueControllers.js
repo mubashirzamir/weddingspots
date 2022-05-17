@@ -1,9 +1,13 @@
 const VenueService = require('../services/VenueServices')
 const noError = { status: 0, message: "No error" }
 
-exports.getReviews = async function (req, res, next) {
-
+exports.addReview = async function (req, res, next) {
     try {
+        const result = await VenueService.addReview(req.body, res.locals.decoded.user_id);
+
+        if (result) {
+            return res.status(200).json({ error: noError, data: result, message: "Successfully added review" });
+        }
 
     } catch (e) {
         return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
@@ -11,10 +15,11 @@ exports.getReviews = async function (req, res, next) {
 
 }
 
-exports.addReview = async function (req, res, next) {
+exports.getReviews = async function (req, res, next) {
 
     try {
-
+        const reviews = await VenueService.getReviews(req);
+        return res.status(200).json({ error: noError, data: reviews, message: "Succesfully reviews retrieved" })
     } catch (e) {
         return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
     }

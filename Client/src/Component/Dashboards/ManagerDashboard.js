@@ -43,7 +43,7 @@ const ManagerDashboard = () => {
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
-            setVenue(response.data.data.venues)
+            setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
             console.log(error.response.data)

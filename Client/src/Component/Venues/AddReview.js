@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
+import { GiTruce } from "react-icons/gi";
 
-const AddReview = ({ loadReview }) => {
+const AddReview = ({ onButtonPressChange }) => {
 
     const { venue_id } = useParams();
 
-    //console.log(venue_id)
+    const [loading, setLoading] = useState(true);
 
     const [review, setReview] = useState({
         review_text: "",
@@ -17,38 +18,40 @@ const AddReview = ({ loadReview }) => {
 
     const onInputChange = e => {
         setReview({ ...review, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
     };
 
     const onSubmit = async e => {
-        console.log(review);
         e.preventDefault();
+        setLoading(false);
         await axios({
             method: 'post',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
             },
-            url: 'http://localhost:3001/api/venue/addreview',
+            url: 'http://localhost:3001/api/venues/addreview',
             data: {
                 venue_id: venue_id,
-                review_text: review_text,
+                review: review_text,
                 rating: rating
             }
-        });
-        //conditions 
-        loadReview()
-        //history.push("/")
+        }).then(response => {
+            setLoading(true)
+            onButtonPressChange();
+        }).catch(error => {
+            setLoading(true)
+            console.log(error)
+        })
+
     }
 
     return (
         <div>
 
-            <h1>Add Review</h1>
+            <h5>Add Review</h5>
 
             <form onSubmit={e => onSubmit(e)}>
 
                 <div>
-                    <label for="exampleFormControlTextarea1" className="form-label">Review</label>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text" value={review_text} onChange={e => onInputChange(e)} required></textarea>
                 </div>
 
@@ -63,8 +66,14 @@ const AddReview = ({ loadReview }) => {
                     <option value="5">5</option>
                 </select>
 
-                <div className="mt-2">
-                    <button className="btn btn-primary" type="submit">Post</button>
+                <div className="mt-2 mb-4">
+                    <button className="btn btn-primary me-2" type="submit">Post</button>
+                    {!loading &&
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+                    }
+
                 </div>
 
             </form >

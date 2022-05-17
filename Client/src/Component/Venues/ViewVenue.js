@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import ReviewList from "./ReviewList";
 import MapDisplay from "../Layout/MapDisplay"
 import ContactCard from "./ContactCard";
 import Overview from "./Overview";
 import { GoLocation } from "react-icons/go"
 import { RiPriceTag3Line } from "react-icons/ri"
-
-
+import ReviewParent from "./ReviewParent";
 
 const ViewVenue = () => {
 
@@ -144,21 +142,9 @@ const ViewVenue = () => {
                             <MapDisplay lat={venue.latitude} lng={venue.longitude}></MapDisplay>
                         </div>
 
-
-                        {/*<div className="col-12">
-                    <Link className="btn btn-primary" type="submit" to={"/"}>Back</Link>
-                 </div>*/}
-
-                        {/*<br />
-                <ReviewList />*/}
+                        <ReviewParent />
                     </>
                 }
-
-
-
-
-
-
 
             </div>
 

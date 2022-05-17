@@ -39,7 +39,7 @@ function SearchResults(props) {
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
-            setVenue(response.data.data.venues)
+            setVenue(response.data.data.items)
             setLoading01(true)
         }).catch(error => {
             console.log(error.response.data)

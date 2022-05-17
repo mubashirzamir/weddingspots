@@ -1,4 +1,4 @@
-const { venues, users } = require('../models')
+const { venues, users, venue_reviews } = require('../models')
 const { Op } = require("sequelize");
 
 
@@ -10,11 +10,11 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: venues } = data;
+    const { count: totalItems, rows: items } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
-    return { totalItems, venues, totalPages, currentPage };
+    return { totalItems, items, totalPages, currentPage };
 };
 
 exports.findAll = async function (req) {
@@ -56,6 +56,29 @@ exports.findContact = async function (user_id) {
     }
     return contact;
 }
+
+exports.addReview = async function (reviewInfo, user_id) {
+    const newReview = venue_reviews.build(reviewInfo);
+    newReview.user_id = user_id;
+    await newReview.save();
+    return newReview;
+}
+
+exports.getReviews = async function (req) {
+    const { page, size, venue_id } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const data = await venue_reviews.findAndCountAll({
+        where: { isDelete: false, venue_id: venue_id },
+        attributes: { exclude: ['isDelete', 'createdAt', 'updatedAt'] },
+        limit,
+        offset
+    })
+
+    const result = getPagingData(data, page, limit);
+    return result;
+};
+
 
 
 /*exports.getVenues = async function () {
