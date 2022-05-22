@@ -44,5 +44,9 @@ module.exports = (sequelize, DataTypes) => {
         users.hasMany(models.venue_reviews, { as: 'comments', foreignKey: 'user_id' });
     }
 
+    users.associate = function (models) {
+        users.hasMany(models.venues, { as: 'venues', foreignKey: 'user_id' });
+    }
+
     return users;
 };

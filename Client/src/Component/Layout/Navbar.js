@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Helpers/AuthContext";
 import { useHistory } from 'react-router-dom';
 import './Navbar.css'
+import logo from '../../Assets/logo.svg'
 
 const Navbar = () => {
 
@@ -41,6 +42,7 @@ const Navbar = () => {
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-primary shadow-sm bg-white my-navbar">
             <div className="container">
+                <img className="me-2" src={logo} width="70" alt="logo"></img>
                 <Link className="navbar-brand my-navbar-brand" to="/">
                     weddingspots
                 </Link>

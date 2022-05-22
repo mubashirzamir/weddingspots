@@ -102,7 +102,11 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         },
 
-    })
+    }, {})
+
+    venues.associate = function (models) {
+        venues.belongsTo(models.users, { foreignKey: 'user_id' });
+    }
 
     return venues;
 };

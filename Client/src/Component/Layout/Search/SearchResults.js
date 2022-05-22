@@ -55,7 +55,7 @@ function SearchResults(props) {
 
     return (
         <div className='container'>
-            <Search loadVenues={loadVenues} />
+            {/* <Search loadVenues={loadVenues} /> */}
 
             <div className='py-4'>
 

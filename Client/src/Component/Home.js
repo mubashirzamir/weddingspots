@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import FeaturedVenues from './Layout/FeaturedVenues'
-import Search from './Layout/Search'
+import Search from './Layout/Search/Search'
 
 function Home() {
 

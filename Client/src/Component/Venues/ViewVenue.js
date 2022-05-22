@@ -31,7 +31,8 @@ const ViewVenue = () => {
         longitude: "",
         price_per_head: "",
         min_cap: "",
-        max_cap: ""
+        max_cap: "",
+        user: "",
     })
 
     useEffect(() => {
@@ -46,14 +47,12 @@ const ViewVenue = () => {
                 setLoading(true)
                 console.log(response.data.data)
                 setVenue(response.data.data);
-
             }
             else {
                 setLoading(true)
                 setMessage01("No such venue")
             }
         }).catch(error => console.log(error.response.data))
-
     }
 
 
@@ -72,7 +71,7 @@ const ViewVenue = () => {
                                     <span className="sr-only"></span>
                                 </div>
                             }
-                            <h3 className="ms-2 d-inline">{venue.name}</h3>
+                            <h3 className="ms-2 d-inline">{venue.name} </h3>
                         </span>
 
                         <div className="row mt-2 px-2">
@@ -105,7 +104,7 @@ const ViewVenue = () => {
                             <div className="col-xl-4">
                                 <div className="row">
                                     <div className="col">
-                                        <ContactCard venue_id={venue_id} />
+                                        <ContactCard manager_name={venue.user.name} manager_email={venue.user.email} />
                                     </div>
                                 </div>
                             </div>

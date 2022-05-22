@@ -44,7 +44,10 @@ exports.findAll = async function (req) {
 
 
 exports.findOne = async function (venue_id) {
-    const venue = await venues.findOne({ where: { venue_id: venue_id, isDelete: false } });
+    const venue = await venues.findOne({
+        where: { venue_id: venue_id, isDelete: false },
+        include: [{ model: users, attributes: ["name", "email"] }]
+    });
     return venue;
 }
 
