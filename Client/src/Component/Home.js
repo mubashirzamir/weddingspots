@@ -7,10 +7,13 @@ import Gradient from '../Assets/Gradient.png'
 function Home() {
     return (
         <div>
+
             <div>
-                <div className="row position-relative d-flex align-items-center">
-                    <div className="col text-center"> <img className='img-fluid' src={Gradient} alt="banner" /> </div>
-                    <p className="col position-absolute"> <Search /> </p>
+                <div class="card border-0">
+                    <img class="card-img-top" alt="banner" src={Gradient} />
+                    <div class="card-img-overlay card-inverse d-flex align-items-center">
+                        <p className='col mt-5'> <Search /> </p>
+                    </div>
                 </div>
             </div>
 

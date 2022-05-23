@@ -53,7 +53,7 @@ const Navbar = () => {
                 </Link>
 
                 <button
-                    className="navbar-toggler navbar-light "
+                    className="navbar-toggler navbar-light"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
