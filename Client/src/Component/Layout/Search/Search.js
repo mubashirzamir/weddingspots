@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useHistory } from 'react-router-dom';
+import qs from 'query-string';
+import { AiOutlineSearch } from 'react-icons/ai'
+import "./search.css"
 
-const Search = (props) => {
+const Search = () => {
 
     let history = useHistory();
 
     const [query, setQuery] = useState({
+        city: "",
         name: "",
-        city: ""
+        type: "",
+        max_cap: "",
     })
 
-    const { name, city } = query;
+    const { city, name, type, max_cap } = query;
 
     const onInputChange = e => {
         setQuery({ ...query, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
     };
+
+    const searchString = qs.stringify(query);
 
     const onSubmit = async (e, currentPage) => {
         e.preventDefault();
-        /*props.loadVenues(query.name, query.city)*/
         history.push({
-            pathname: '/SearchResults',
-            state: {
-                name: query.name,
-                city: query.city,
-
-            }
+            pathname: '/Search',
+            search: searchString,
         })
     }
 
@@ -38,57 +39,30 @@ const Search = (props) => {
                     <div className="row">
 
                         <div className="col-md-3 mb-3">
-                            <label className="mb-1">City</label>
-                            <input type="text" className="form-control" placeholder="" name="city" value={city} onChange={e => onInputChange(e)} autoComplete="new-password" />
+                            <input type="text" className="search form-control" placeholder="City" name="city" value={city} onChange={e => onInputChange(e)} />
                         </div>
 
-                        <div className="col-md-9 mb-3">
-                            <label className="mb-1">Venue Name</label>
-                            <input type="text" className="form-control" placeholder="What are you looking for?" name="name" value={name} onChange={e => onInputChange(e)} autoComplete="new-password" />
+                        <div className="col-md-3 mb-3">
+                            <input type="text" className="search form-control" placeholder="Venue Name" name="name" value={name} onChange={e => onInputChange(e)} />
+                        </div>
 
+                        <div className="col-md-3 mb-3">
+                            <input type="text" className="search form-control" placeholder="Type" name="type" value={type} onChange={e => onInputChange(e)} />
+                        </div>
+
+                        <div className="col-md-3 mb-3">
+                            <input type="number" min="0" className="search form-control" placeholder="Capacity" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} />
                         </div>
 
                     </div>
 
                     <div>
-                        <button className="btn btn-primary float-end" type="submit">Search</button>
+                        <button className="btn btn-primary float-end" type="submit">
+                            <span style={{ fontWeight: "bold" }}>Search</span>
+                        </button>
                     </div>
 
-
-
-
-                    {/*<div className='row'>
-                        <div className="col-md-3 mb-3">
-                            <label className="mb-1">City</label>
-                            <input type="text" className="form-control" placeholder="" name="city" value={city} onChange={e => onInputChange(e)} autoComplete="new-password" />
-                        </div>
-
-
-                        <div className="col-md-3 mb-3">
-                            <label className="mb-1">PKR/Head</label>
-                            <input type="text" className="form-control" placeholder="" name="price_per_head" value={price_per_head} onChange={e => onInputChange(e)} autoComplete="new-password" />
-                        </div>
-
-                        <div className="col-md-3 mb-3">
-                            <label className="mb-1">Minimum Capacity</label>
-                            <input type="text" className="form-control" placeholder="" name="min_cap" value={min_cap} onChange={e => onInputChange(e)} autoComplete="new-password" />
-                        </div>
-
-                        <div className="col-md-3 mb-3">
-                            <label className="mb-1">Maximum capacity</label>
-                            <input type="text" className="form-control" placeholder="" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} autoComplete="new-password" />
-                        </div>
-                    </div>
-
-                    <div className="input-group">
-                        <input type="text" className="form-control" placeholder="What are you looking for?" name="name" value={name} aria-label="" aria-describedby="basic-addon1" onChange={e => onInputChange(e)} autoComplete="new-password" />
-                        <div className="input-group-prepend">
-                            <button className="btn btn-primary" type="submit">Search</button>
-                        </div>
-    </div>*/}
                 </form>
-
-
             </div >
         </div >
     )

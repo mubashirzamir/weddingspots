@@ -40,7 +40,7 @@ const Register = () => {
                 <div className='row'>
                     <div className='card shadow py-4 col-xl-6 mx-auto'>
 
-                        <h4 class="card-title text-center mb-4 mt-1">Register
+                        <h4 className="card-title text-center mb-4 mt-1">Register
                             {!loading &&
                                 <div className="spinner-border text-primary ms-3" role="status">
                                     <span className="sr-only"></span>
@@ -75,7 +75,7 @@ const Register = () => {
                                     <input {...register('password', { required: true })} type="password" className="form-control" placeholder="Password" required />
                                 </div>
                                 <div className="col-sm-10 mt-1 mx-auto">
-                                    <span class="error text-danger">{registerStatus}</span>
+                                    <span className="error text-danger">{registerStatus}</span>
                                 </div>
                             </div>
 

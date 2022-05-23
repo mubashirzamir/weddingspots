@@ -84,7 +84,7 @@ const AddReview = ({ onButtonPressChange }) => {
                                 activeColor="#ffd700"
                             />
 
-                            {warning && <span class="error text-danger">Please fill out the rating</span>}
+                            {warning && <span className="error text-danger">Please fill out the rating</span>}
                         </div>
                     </div>
 

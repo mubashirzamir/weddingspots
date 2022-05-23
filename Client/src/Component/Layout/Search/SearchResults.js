@@ -4,17 +4,8 @@ import { Link, useLocation } from 'react-router-dom'
 import ReactPaginate from "react-paginate"
 import axios from 'axios'
 
-function SearchResults(props) {
+function SearchResults(query) {
 
-    /*const location = useLocation();
-
-    const [state, setState] = useState({
-        name: location.state.name,
-        city: location.state.city
-    })
-
-    const name = console.log(location.state.name)
-    const city = console.log(location.state.city)*/
 
     let size = 5;
 
@@ -22,29 +13,28 @@ function SearchResults(props) {
     const [venues, setVenue] = useState([]);
     const [pageCount, setPageCount] = useState(0);
 
+
     useEffect(() => {
         loadVenues();
         //setTimeout(loadVenues, 5000);
         //console.log("Hello")
-    }, []);
+    }, [query]);
 
     const loadVenues = async (currentPage) => {
-        console.log("Current page", currentPage)
+        //console.log("Current page", currentPage)
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/api/venues?page=${currentPage}&size=${size}`).then(response => {
+        await axios.get(`http://localhost:3001/api/venues${query.query}&page=${currentPage}&size=${size}`).then(response => {
             console.log(response.data)
             console.log("total", response.data.data.totalItems)
             const total = response.data.data.totalItems
-            //total/size
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
             setLoading01(true)
         }).catch(error => {
             console.log(error.response.data)
         });
-
     }
 
     const handlePageClick = async (data) => {
@@ -54,9 +44,9 @@ function SearchResults(props) {
     }
 
     return (
-        <div className='container'>
-            {/* <Search loadVenues={loadVenues} /> */}
 
+
+        <div className='container'>
             <div className='py-4'>
 
                 <h1>Results</h1>
@@ -79,7 +69,7 @@ function SearchResults(props) {
                             {
                                 venues.map((venue, index) => (
 
-                                    <tr>
+                                    <tr key={venue.venue_id}>
                                         <th scope="row">{venue.venue_id}</th>
                                         <td>
                                             <div >
@@ -134,6 +124,8 @@ function SearchResults(props) {
                 />
             </div>
         </div>
+
+
     )
 }
 

@@ -64,7 +64,7 @@ const ForgotPassword = () => {
                 <div className="row">
                     <div className="card shadow py-4 col-xl-6 mx-auto">
 
-                        <h4 class="card-title text-center mb-4 mt-1">Forgot Password?
+                        <h4 className="card-title text-center mb-4 mt-1">Forgot Password?
                             {!loading &&
                                 <div className="spinner-border text-primary ms-3" role="status">
                                     <span className="sr-only"></span>

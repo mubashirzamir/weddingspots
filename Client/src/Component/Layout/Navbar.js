@@ -42,12 +42,18 @@ const Navbar = () => {
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-primary shadow-sm bg-white my-navbar">
             <div className="container">
-                <img className="me-2" src={logo} width="70" alt="logo"></img>
+
+
+                <Link className="me-2" to="/">
+                    <img src={logo} width="60" alt="logo"></img>
+                </Link>
+
                 <Link className="navbar-brand my-navbar-brand" to="/">
                     weddingspots
                 </Link>
+
                 <button
-                    className="navbar-toggler navbar-light"
+                    className="navbar-toggler navbar-light "
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -60,7 +66,7 @@ const Navbar = () => {
                 </button>
 
                 <div className={"collapse navbar-collapse " + show} id="navbarSupportedContent">
-                    <ul className="navbar-nav nav-pills nav-fill ms-2 me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav nav-pills nav-fill me-auto ms-2 mb-2 mb-lg-0">
 
                         <li className="nav-item me-2">
                             <NavLink className="nav-link" aria-current="page" exact to="/">
@@ -100,10 +106,6 @@ const Navbar = () => {
                         )}
 
                     </ul>
-                </div>
-
-                <div>
-
 
                     {!authState.status && (
 
@@ -127,6 +129,34 @@ const Navbar = () => {
                             <button className="btn btn-outline-danger my-button" onClick={logout}>Logout</button>
                         </>
                     )}
+
+                </div>
+
+                <div>
+
+
+                    {/* {!authState.status && (
+
+                        <>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/login">
+                                Login
+                            </Link>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/register">
+                                Register
+                            </Link>
+
+                        </>
+
+                    )} */}
+
+                    {/* {authState.status && (
+                        <>
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/getUser">{authState.name} ({roleName})</Link>
+                            <button className="btn btn-outline-danger my-button" onClick={logout}>Logout</button>
+                        </>
+                    )} */}
 
                 </div>
 

@@ -43,67 +43,71 @@ const FeaturedVenues = () => {
     }
 
     return (
-        <div className="container">
-            <div className="py-4">
+        <div>
+            <div className="container">
+                <div className="py-4">
 
-                <div className='mb-3 text-center'>
-                    <h1>Featured</h1>
-
-                </div>
-
-                {!loading &&
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only"></span>
+                    <div className='mb-3 text-center'>
+                        <h1>Featured</h1>
                     </div>
-                }
 
-                <div className="row d-flex justify-content-center mb-3">
-                    {venues.map((venue) => {
-                        return (
-                            <div key={venue.venue_id} className="col-sm-6 col-md-3 v my-2">
-                                <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to={`/venue/${venue.venue_id}`}>
-                                    <div className="card shadow-sm w-100">
-                                        <img src={venue.image_thumb} className="card-img-top mx-auto d-block" alt="..." style={{ width: 300, height: 200 }} />
-                                        <div className="card-body">
-                                            <h5 className="card-title text-left h3">{venue.name}</h5>
-                                            <h6 className="card-subtitle mb-2 text-muted text-left">
-                                                {venue.city}, {venue.area}
-                                            </h6>
-                                            <p className="card-subtitle text-muted text-left">{venue.price_per_head} PKR/Head</p>
-                                            <p className="btn btn-outline-primary text" style={{ float: 'right' }} to={`/venue/${venue.venue_id}`}>View</p>
+                    {!loading &&
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+                    }
+
+                    <div className="row d-flex justify-content-center mb-3">
+                        {venues.map((venue) => {
+                            return (
+                                <div key={venue.venue_id} className="col-sm-6 col-md-3 v my-2">
+                                    <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to={`/venue/${venue.venue_id}`}>
+                                        <div className="card shadow-sm w-100">
+                                            <img src={venue.image_thumb} className="card-img-top mx-auto d-block" alt="..." style={{ width: 300, height: 200 }} />
+                                            <div className="card-body">
+                                                <h5 className="card-title text-left h3">{venue.name}</h5>
+                                                <h6 className="card-subtitle mb-2 text-muted text-left">
+                                                    {venue.city}, {venue.area}
+                                                </h6>
+                                                <p className="card-subtitle text-muted text-left">{venue.price_per_head} PKR/Head</p>
+                                                <p className="btn btn-outline-primary text" style={{ float: 'right' }} to={`/venue/${venue.venue_id}`}>View</p>
+
+                                            </div>
 
                                         </div>
-
-                                    </div>
-                                </Link>
+                                    </Link>
 
 
-                            </div>
-                        );
-                    })}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+
+                    {!(pageCount <= 1) &&
+                        <ReactPaginate
+                            previousLabel={"Previous"}
+                            next={"Next"}
+                            breakLabel={"..."}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={3}
+                            pageRangeDisplayed={3}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-link"}
+                            nextClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
+                    }
+
                 </div>
+            </div >
+        </div>
 
-
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    next={"Next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={3}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    nextClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
-
-            </div>
-        </div >
 
     )
 

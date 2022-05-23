@@ -14,7 +14,7 @@ import AdminDashboard from './Component/Dashboards/AdminDashboard'
 import UserList from './Component/Dashboards/UserList'
 import EditUser from './Component/EditUser'
 import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
-import SearchResults from './Component/Layout/Search/SearchResults'
+import SearchParent from './Component/Layout/Search/SearchParent'
 import LoginFailure from './Component/Layout/LoginFailure'
 import ImageForm from './Component/Layout/ImageForm'
 import MapForm from './Component/Layout/MapForm'
@@ -105,8 +105,8 @@ function App() {
               <Home />
             </Route>
 
-            <Route exact path="/SearchResults">
-              <SearchResults />
+            <Route exact path="/Search">
+              <SearchParent />
             </Route>
 
             <Route exact path="/About">

@@ -64,7 +64,7 @@ const Login = () => {
                 <div className="row">
                     <div className="card shadow py-4 col-xl-6 mx-auto">
 
-                        <h4 class="card-title text-center mb-4 mt-1">Login
+                        <h4 className="card-title text-center mb-4 mt-1">Login
                             {!loading &&
                                 <div className="spinner-border text-primary ms-3" role="status">
                                     <span className="sr-only"></span>
@@ -84,7 +84,7 @@ const Login = () => {
                                     <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} placeholder="Password" required />
                                 </div>
                                 <div className="col-sm-10 mt-1 mx-auto">
-                                    <span class="error text-danger">{message}</span>
+                                    <span className="error text-danger">{message}</span>
                                 </div>
                             </div>
 
