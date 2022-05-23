@@ -18,22 +18,23 @@ const getPagingData = (data, page, limit) => {
 };
 
 exports.findAll = async function (req) {
-    const { page, size, isFeatured, user_id, name, city } = req.query;
+    const { page, size, isFeatured, user_id, city, name, type, max_cap } = req.query;
 
-    var condition_01 = { isDelete: false };
 
     var isFeaturedHelper = (isFeatured === 'true')
+    var condition_01 = { isDelete: false };
     var condition_02 = isFeatured ? { isFeatured: isFeaturedHelper } : null;
-
     var condition_03 = user_id ? { user_id: user_id } : null;
-
     var condition_04 = name ? { name: { [Op.like]: `%${name}%` } } : null;
     var condition_05 = city ? { city: { [Op.like]: `%${city}%` } } : null;
+    var condition_06 = type ? { type: { [Op.like]: `%${type}%` } } : null;
+    var condition_07 = max_cap ? { max_cap: { [Op.gte]: max_cap } } : null;
+
 
     const { limit, offset } = getPagination(page, size);
 
     const data = await venues.findAndCountAll({
-        where: { ...condition_01, ...condition_02, ...condition_03, ...condition_04, ...condition_05 },
+        where: { ...condition_01, ...condition_02, ...condition_03, ...condition_04, ...condition_05, ...condition_06, ...condition_07 },
         attributes: { exclude: ['user_id', 'isDelete', 'createdAt', 'updatedAt'] },
         limit,
         offset

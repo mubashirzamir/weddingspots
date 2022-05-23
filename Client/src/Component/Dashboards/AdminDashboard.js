@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
                 <div className="row mb-3">
                     <div className="col-sm">
-                        <h1>Manage Venues</h1>
+                        <h5>Manage Venues</h5>
                     </div>
                     <div className="col-sm">
                         <div className="text-end">

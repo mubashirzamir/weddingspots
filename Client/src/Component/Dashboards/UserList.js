@@ -88,7 +88,7 @@ const UserList = () => {
 
                 <div className="row mb-3">
                     <div className="col-sm">
-                        <h1>Manage Users</h1>
+                        <h5>Manage Users</h5>
                     </div>
                 </div>
 

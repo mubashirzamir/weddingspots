@@ -20,6 +20,7 @@ import ImageForm from './Component/Layout/ImageForm'
 import MapForm from './Component/Layout/MapForm'
 import MapDisplay from './Component/Layout/MapDisplay'
 import ForgotPassword from './Component/Layout/ForgotPassword'
+import ScrollToTop from './Component/ScrollToTop'
 
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
@@ -97,9 +98,12 @@ function App() {
 
         <Router>
 
+          <ScrollToTop />
+
           <Navbar />
 
           <Switch>
+
 
             <Route exact path="/">
               <Home />

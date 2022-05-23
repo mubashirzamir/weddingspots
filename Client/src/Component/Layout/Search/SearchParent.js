@@ -14,7 +14,10 @@ const SearchParent = () => {
     return (
         <div>
             <Search />
-            <SearchResults query={location.search} />
+            <div className='mt-4'>
+                <SearchResults query={location.search} />
+            </div>
+
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import MapDisplay from "../Layout/MapDisplay"
-
+import MemoizedMapDisplay from "../Layout/MapDisplay";
 
 const EditVenue = () => {
 
@@ -16,6 +16,11 @@ const EditVenue = () => {
 
     const { venue_id } = useParams();
 
+    const [location, setLocation] = useState({
+        latitude: "",
+        longitude: "",
+    })
+
     const [venue, setVenue] = useState({
         name: "",
         type: "",
@@ -24,15 +29,13 @@ const EditVenue = () => {
         address: "",
         city: "",
         area: "",
-        latitude: "",
-        longitude: "",
         price_per_head: "",
         min_cap: "",
         max_cap: "",
         image_thumb: ""
     })
 
-    const { name, type, halls, description, address, city, area, latitude, longitude, price_per_head, min_cap, max_cap, image_thumb } = venue;
+    const { name, type, halls, description, address, city, area, price_per_head, min_cap, max_cap } = venue;
 
     const onInputChange = e => {
         setVenue({ ...venue, [e.target.name]: e.target.value })
@@ -89,7 +92,10 @@ const EditVenue = () => {
                 setLoading01(true)
                 console.log(response.data.data)
                 setVenue(response.data.data);
-
+                setLocation({
+                    latitude: response.data.data.latitude,
+                    longitude: response.data.data.longitude,
+                })
             }
             else {
                 setLoading01(true)
@@ -112,15 +118,7 @@ const EditVenue = () => {
             <div className="py-4">
 
                 <div className="row mb-3">
-                    <div className="col-sm">
-                        <h1>Edit Venue</h1>
-                    </div>
-                    <div className="col-sm">
-                        <div className="text-end">
-                            <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-
-                        </div>
-                    </div>
+                    <h3>Edit Venue</h3>
                 </div>
 
                 <h2>{message02}</h2>
@@ -233,14 +231,16 @@ const EditVenue = () => {
                         <button className="btn btn-warning" type="submit">Update</button>
                     </div>
 
-                    <MapDisplay lat={latitude} lng={longitude}></MapDisplay>
-
-                    <div className="col-12">
-                        <button className="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
-                    </div>
 
 
                 </form>
+
+                <MemoizedMapDisplay lat={location.latitude} lng={location.longitude}></MemoizedMapDisplay>
+
+                <div className="col-12">
+                    <button className="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
+                </div>
+
 
                 <br></br>
                 <h2>{message}</h2>

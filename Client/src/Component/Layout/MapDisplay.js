@@ -1,9 +1,9 @@
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 const libraries = ['places'];
 
-export default function MapDisplay(props) {
+function MapDisplay(props) {
 
     const [selected, setSelected] = useState(null);
 
@@ -18,10 +18,14 @@ export default function MapDisplay(props) {
         libraries,
     });
 
+
     if (!isLoaded) return <div>Loading...</div>;
+
     return <Map />;
 
     function Map() {
+        console.log("hello")
+
         const center = useMemo(() => ({ lat: selected.lat, lng: selected.lng }), []);
 
         return (
@@ -37,6 +41,11 @@ export default function MapDisplay(props) {
             </>
         );
     }
+
 }
+
+export default React.memo(MapDisplay);
+
+
 
 

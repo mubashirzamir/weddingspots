@@ -7,6 +7,7 @@ import Overview from "./Overview";
 import { GoLocation } from "react-icons/go"
 import { RiPriceTag3Line } from "react-icons/ri"
 import ReviewParent from "./ReviewParent";
+import Booking from "./Booking";
 
 const ViewVenue = () => {
 
@@ -36,7 +37,6 @@ const ViewVenue = () => {
     })
 
     useEffect(() => {
-        window.scrollTo(0, 0)
         loadVenue()
     }, [])
 
@@ -105,6 +105,12 @@ const ViewVenue = () => {
                                 <div className="row">
                                     <div className="col">
                                         <ContactCard manager_name={venue.user.name} manager_email={venue.user.email} />
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col">
+                                        <Booking />
                                     </div>
                                 </div>
                             </div>
