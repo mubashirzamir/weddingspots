@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
-import MapDisplay from "../Layout/MapDisplay"
 import MemoizedMapDisplay from "../Layout/MapDisplay";
+import MaterialModal from "../Layout/MaterialModal"
 
 const EditVenue = () => {
 
@@ -155,7 +155,7 @@ const EditVenue = () => {
 
                 </div>
 
-                <form onSubmit={e => onSubmit(e)}>
+                <form className="mb-4" onSubmit={e => onSubmit(e)}>
                     <div className="row mb-3">
                         <label for="inputText3" className="col-sm-2 col-form-label">Name</label>
                         <div className="col-sm-10">
@@ -235,15 +235,14 @@ const EditVenue = () => {
 
                 </form>
 
-                <MemoizedMapDisplay lat={location.latitude} lng={location.longitude}></MemoizedMapDisplay>
 
-                <div className="col-12">
+                <div className="col-12 mt-4">
+                    <MemoizedMapDisplay lat={location.latitude} lng={location.longitude}></MemoizedMapDisplay>
+
                     <button className="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
                 </div>
 
-
-                <br></br>
-                <h2>{message}</h2>
+                <MaterialModal message={message} />
 
 
             </div>

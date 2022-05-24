@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Search from './Search'
-import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import ReactPaginate from "react-paginate"
 import axios from 'axios'
 import Slider from '@mui/material/Slider';
@@ -47,7 +46,7 @@ function SearchResults(query) {
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            console.log(error.response.data)
+            console.log(error.response)
         });
 
     }
@@ -110,13 +109,15 @@ function SearchResults(query) {
 
                 <div className='row'>
 
-                    <div className='col-md-3'>
+                    <div className='col-md-3 px-3 mb-3'>
                         <div className='col'>
 
                             <div className='row'>
-                                <label className='text-center mb-5'>Rs/Head</label>
+                                <label className='text-center mb-5'>PKR/Head</label>
                                 <div>
+
                                     <Slider
+                                        color={"primary"}
                                         min={0}
                                         step={25}
                                         max={10000}
@@ -128,6 +129,7 @@ function SearchResults(query) {
                                         valueLabelDisplay="on"
                                         getAriaValueText={priceText}
                                     />
+
                                 </div>
                             </div>
 
@@ -178,60 +180,43 @@ function SearchResults(query) {
                         {loading &&
 
                             <div>
-                                <table className="table shadow mb-3">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">City</th>
-                                            <th scope="col">Area</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Halls</th>
-                                            <th scope="col">Price per head</th>
-                                            <th scope="col">Capacity</th>
 
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            venues.map((venue, index) => (
+                                <div className="row d-flex justify-content-center mb-3">
+                                    {venues.map((venue) => {
+                                        return (
+                                            <div key={venue.venue_id} className="col-12 v my-2">
+                                                <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to={`/venue/${venue.venue_id}`}>
+                                                    <div className="card shadow-sm w-100">
+                                                        <div className='row'>
 
-                                                <tr key={venue.venue_id}>
-                                                    <th scope="row">{venue.venue_id}</th>
-                                                    <td>
-                                                        <div >
-                                                            <img className="img-thumbnail" style={{ width: 100, height: 100 }}
-                                                                src={venue.image_thumb}
-                                                                alt={venue.venue_id}
-                                                                width={200} height={200}
-                                                            />
-                                                        </div>
-                                                    </td>
-                                                    <td>{venue.name}</td>
-                                                    <td>{venue.city}</td>
-                                                    <td>{venue.area}</td>
-                                                    <td>{venue.type}</td>
-                                                    <td>{venue.halls}</td>
-                                                    <td>{venue.price_per_head}</td>
-                                                    <td>{venue.min_cap}-{venue.max_cap}</td>
-                                                    <td>
+                                                            <div className='col-md-5'>
+                                                                <img src={venue.image_thumb} className="card-img-top mx-auto mx-md-0 d-block" alt="..." style={{ width: 300, height: 200 }} />
+                                                            </div>
 
-                                                        <div className='btn-group'>
-                                                            <Link className="btn btn-primary me-2" to={`/venue/${venue.venue_id}`}>View</Link>
+                                                            <div className='col-md-6'>
+
+                                                                <div className="card-body mt-md-4">
+                                                                    <h5 className="card-title text-left h3">{venue.name}</h5>
+                                                                    <h6 className="card-subtitle mb-3 text-muted text-left">
+                                                                        {venue.city}, {venue.area}
+                                                                    </h6>
+                                                                    <p className="card-subtitle text-muted text-left">{venue.price_per_head} PKR/Head</p>
+                                                                    <p className="card-subtitle text-muted text-left">{venue.min_cap}-{venue.max_cap} people</p>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
 
-                                                    </td>
-                                                </tr>
-
-                                            ))
-
-                                        }
+                                                    </div>
+                                                </Link>
 
 
-                                    </tbody>
-                                </table>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+
                                 {!(pageCount <= 1) &&
                                     <ReactPaginate
                                         previousLabel={"Previous"}

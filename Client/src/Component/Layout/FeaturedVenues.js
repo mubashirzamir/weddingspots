@@ -10,7 +10,7 @@ const FeaturedVenues = () => {
 
     const [pageCount, setPageCount] = useState(0);
 
-    let size = 6;
+    let size = 4;
 
     useEffect(() => {
         loadVenues();

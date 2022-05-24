@@ -44,20 +44,37 @@ const Search = () => {
                     <div className="row">
 
                         <div className="col-md-3 mb-3">
-                            <input type="text" className="search form-control" placeholder="City" name="city" value={city} onChange={e => onInputChange(e)} />
+                            <span className="caret"></span>
+                            <select className="search form-select" placeholder="City" name="city" value={city} onChange={e => onInputChange(e)} required>
+                                <option selected>City</option>
+                                <option value="Karachi">Karachi</option>
+                                <option value="Lahore">Lahore</option>
+                                <option value="Islamabad">Islamabad</option>
+                            </select>
                         </div>
+
 
                         <div className="col-md-3 mb-3">
                             <input type="text" className="search form-control" placeholder="Venue Name" name="name" value={name} onChange={e => onInputChange(e)} />
                         </div>
 
                         <div className="col-md-3 mb-3">
-                            <input type="text" className="search form-control" placeholder="Type" name="type" value={type} onChange={e => onInputChange(e)} />
+                            <span className="caret"></span>
+                            <select className="search form-select" placeholder="Type" name="type" value={type} onChange={e => onInputChange(e)} required>
+                                <option selected>Type</option>
+                                <option value="Banquet">Banquet</option>
+                                <option value="Lawn">Lawn</option>
+                                <option value="Hotel">Hotel</option>
+                                <option value="Farmhouse">Farmhouse</option>
+                                <option value="Beach House">Beach House</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
 
                         <div className="col-md-3 mb-3">
                             <input type="text" className="search form-control" placeholder="Area" name="area" value={area} onChange={e => onInputChange(e)} />
                         </div>
+
 
                     </div>
 

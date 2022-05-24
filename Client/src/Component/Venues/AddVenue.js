@@ -67,7 +67,9 @@ const AddVenue = () => {
 
             <div className="py-4">
 
-                <h1>Add Venue</h1>
+                <div className="row mb-3">
+                    <h3>Add Venue</h3>
+                </div>
 
                 <form onSubmit={e => onSubmit(e)}>
                     <div className="row mb-3">

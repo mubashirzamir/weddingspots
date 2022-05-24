@@ -30,13 +30,13 @@ exports.findAll = async function (req) {
     var condition_06 = type ? { type: { [Op.like]: `%${type}%` } } : null;
     var condition_07 = area ? { area: { [Op.like]: `%${area}%` } } : null;
     var condition_08 = (min_price && max_price) ? { price_per_head: { [Op.between]: [min_price, max_price] } } : null
-    var condition_09 = (min_cap && max_cap) ? { price_per_head: { [Op.between]: [min_cap, max_cap] } } : null
-
+    var condition_09 = (min_cap) ? { min_cap: { [Op.gte]: min_cap } } : null
+    var condition_10 = (max_cap) ? { max_cap: { [Op.lte]: max_cap } } : null
 
     const { limit, offset } = getPagination(page, size);
 
     const data = await venues.findAndCountAll({
-        where: { ...condition_01, ...condition_02, ...condition_03, ...condition_04, ...condition_05, ...condition_06, ...condition_07, ...condition_08, ...condition_09 },
+        where: { ...condition_01, ...condition_02, ...condition_03, ...condition_04, ...condition_05, ...condition_06, ...condition_07, ...condition_08, ...condition_09, ...condition_10 },
         attributes: { exclude: ['user_id', 'isDelete', 'createdAt', 'updatedAt'] },
         limit,
         offset
@@ -49,18 +49,9 @@ exports.findAll = async function (req) {
 exports.findOne = async function (venue_id) {
     const venue = await venues.findOne({
         where: { venue_id: venue_id, isDelete: false },
-        include: [{ model: users, attributes: ["name", "email"] }]
+        include: [{ model: users, attributes: ["name", "email"], where: { isDelete: false } }]
     });
     return venue;
-}
-
-exports.findContact = async function (user_id) {
-    const user = await users.findOne({ where: { user_id: user_id, isDelete: false } });
-    const contact = {
-        name: user.name,
-        email: user.email
-    }
-    return contact;
 }
 
 exports.addReview = async function (reviewInfo, user_id) {
@@ -80,29 +71,9 @@ exports.getReviews = async function (req) {
         order: [['review_id', 'DESC']],
         limit,
         offset,
-        include: [{ model: users, attributes: ["name"] }]
+        include: [{ model: users, attributes: ["name"], where: { isDelete: false } }]
     })
 
     const result = getPagingData(data, page, limit);
     return result;
 };
-
-
-
-/*exports.getVenues = async function () {
-    const listOfVenues = await venues.findAll({
-        where: {
-            isDelete: false
-        },
-        attributes: { exclude: ['user_id', 'isDelete', 'createdAt', 'updatedAt'] }
-    });
-    return listOfVenues;
-}
-
-exports.getSingleVenue = async function (venue_id) {
-    const venue = await venues.findOne({ where: { venue_id: venue_id, isDelete: false } });
-    if (!venue) {
-        throw new Error("No such venue exists");
-    }
-    return venue;
-}*/

@@ -31,6 +31,8 @@ function Map() {
     const center = useMemo(() => ({ lat: 24.941985222562053, lng: 67.11435194116635 }), []);
     const [selected, setSelected] = useState(null);
     const [recenter, setRecenter] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     let history = useHistory();
     const { venue_id } = useParams();
@@ -44,6 +46,7 @@ function Map() {
 
         const lat = selected.lat
         const lng = selected.lng
+        setLoading(false)
 
         await axios({
             method: 'POST',
@@ -81,10 +84,15 @@ function Map() {
             </GoogleMap>
 
             <div>
-                <div className="col-12">
-                    <button className="btn btn-primary" type="submit" onClick={() => handleSubmit(selected)}>Submit</button>
-                </div>
+                <button className="btn btn-primary" type="submit" onClick={() => handleSubmit(selected)}>Submit</button>
+                {!loading &&
+                    <div className="spinner-border text-primary ms-4 mt-2" role="status">
+                        <span className="sr-only"></span>
+                    </div>
+                }
             </div>
+
+
 
         </>
     );

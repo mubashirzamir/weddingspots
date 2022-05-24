@@ -9,12 +9,13 @@ const ImageForm = () => {
 
     const { venue_id } = useParams();
     const { register, handleSubmit } = useForm();
-    const [image, setImage] = useState();
+    const [loading, setLoading] = useState(true);
 
     let history = useHistory();
 
     const onSubmit = async (data) => {
 
+        setLoading(false);
         var s3URL;
         var imageURL;
         var uploadSuccess = false;
@@ -46,7 +47,6 @@ const ImageForm = () => {
             }).then((response => {
                 console.log(response)
                 imageURL = s3URL.split('?')[0]
-                setImage(imageURL)
                 uploadSuccess = true
             }))
                 .catch((error) => {
@@ -77,6 +77,7 @@ const ImageForm = () => {
         }
 
         else {
+            setLoading(true)
             alert("Error uploading file to s3 bucket")
         }
 
@@ -99,6 +100,12 @@ const ImageForm = () => {
                     <div className="col-12">
                         <button className="btn btn-primary" type="submit">Submit</button>
                     </div>
+
+                    {!loading &&
+                        <div className="spinner-border text-primary mt-2" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+                    }
 
                 </form>
 

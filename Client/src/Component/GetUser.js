@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 function GetUser() {
+
+    let history = useHistory();
 
     const [loading, setLoading] = useState(false);
 
@@ -32,8 +35,11 @@ function GetUser() {
             }))
             .catch((error) => {
                 setLoading(true)
-                alert(error.response.data.error.message)
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    if (error.response.data.error.message === "jwt malformed") {
+                        history.go(0);
+                    }
+                }
             })
     }
 
@@ -42,7 +48,9 @@ function GetUser() {
 
             <div className="py-4">
 
-                <h1>Get User</h1>
+                <div className="row mb-3">
+                    <h3>User</h3>
+                </div>
 
                 {!loading &&
                     <div className="spinner-border text-primary" role="status">

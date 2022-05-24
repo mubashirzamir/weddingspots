@@ -24,7 +24,7 @@ exports.login = async function (email, password) {
     const passMatch = await bcrypt.compare(password, user.password);
 
     if (user && passMatch) {
-        const theToken = jwt.sign({ user_id: user.user_id, type: user.type }, 'the-super-strong-secret', { expiresIn: '1h' });
+        const theToken = jwt.sign({ user_id: user.user_id, type: user.type }, 'the-super-strong-secret', { expiresIn: '24h' });
         return {
             user,
             theToken
