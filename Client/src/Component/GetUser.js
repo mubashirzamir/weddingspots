@@ -21,7 +21,7 @@ function GetUser() {
         await axios({
             method: 'get',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
             url: "http://localhost:3001/api/getUser",
         })

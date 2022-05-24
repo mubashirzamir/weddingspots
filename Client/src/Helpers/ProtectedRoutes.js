@@ -9,7 +9,7 @@ function ProtectedRoutes({ component: Component, ...rest }) {
     console.log("Protected authState", authState)
 
 
-    if (sessionStorage.getItem('accessToken')) {
+    if (localStorage.getItem('accessToken')) {
         var isAuth = true;
     }
 

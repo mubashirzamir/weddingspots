@@ -37,7 +37,7 @@ const UserList = () => {
         await await axios({
             method: 'get',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
             url: `http://localhost:3001/adminAPI/getUsers?page=${currentPage}&size=${size}`
         }).then(response => {
@@ -59,7 +59,7 @@ const UserList = () => {
         await axios({
             method: 'post',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
             url: 'http://localhost:3001/adminAPI/deleteUser/' + user_id,
         }).then((response => {

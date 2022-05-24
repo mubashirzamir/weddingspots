@@ -26,7 +26,7 @@ const Navbar = () => {
 
 
     const logout = () => {
-        sessionStorage.removeItem("accessToken")
+        localStorage.removeItem("accessToken")
         setAuthState({
             user_id: "",
             email: "",

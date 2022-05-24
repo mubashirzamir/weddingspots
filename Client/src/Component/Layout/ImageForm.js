@@ -23,7 +23,7 @@ const ImageForm = () => {
         await axios({
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
             },
             url: "http://localhost:3001/managerAPI/s3Url",
         })
@@ -58,7 +58,7 @@ const ImageForm = () => {
                 await axios({
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
+                        'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
                     },
                     data: {
                         imageURL: imageURL

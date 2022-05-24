@@ -35,7 +35,7 @@ const ForgotPassword = () => {
         })
             .then((response => {
                 console.log(response.data)
-                sessionStorage.setItem("accessToken", response.data.data.theToken)
+                localStorage.setItem("accessToken", response.data.data.theToken)
                 setAuthState({
                     user_id: response.data.data.user.user_id,
                     email: response.data.data.user.email,

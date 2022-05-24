@@ -23,7 +23,7 @@ class GetUser extends Component {
             fetch("http://localhost:3001/api/getUser", {
                 method: 'get',
                 headers: {
-                    'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                    'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },

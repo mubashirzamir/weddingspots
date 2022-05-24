@@ -42,7 +42,7 @@ export default function Booking(props) {
         // await axios({
         //     method: 'post',
         //     headers: {
-        //         'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+        //         'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
         //     },
         //     url: 'http://localhost:3001/api/venues/book/' + venue_id,
         //     data: booking

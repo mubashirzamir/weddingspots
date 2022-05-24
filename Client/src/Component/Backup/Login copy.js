@@ -72,7 +72,7 @@ class Login extends Component {
             }
 
             else if (!data.message) {
-                sessionStorage.setItem("accessToken", data.token)
+                localStorage.setItem("accessToken", data.token)
 
                 this.setState({
                     loginStatus: "Logged in"

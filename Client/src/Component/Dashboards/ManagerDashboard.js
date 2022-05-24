@@ -56,7 +56,7 @@ const ManagerDashboard = () => {
         await axios({
             method: 'post',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
             url: 'http://localhost:3001/managerAPI/deleteVenue/' + venue_id,
         }).then((response => {

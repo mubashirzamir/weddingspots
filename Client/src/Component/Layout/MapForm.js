@@ -48,7 +48,7 @@ function Map() {
         await axios({
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken")),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
             },
             data: {
                 lat: lat,

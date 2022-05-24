@@ -114,7 +114,7 @@ function SearchResults(query) {
                         <div className='col'>
 
                             <div className='row'>
-                                <label className='text-center mb-5'>Price Per Head</label>
+                                <label className='text-center mb-5'>Rs/Head</label>
                                 <div>
                                     <Slider
                                         min={0}

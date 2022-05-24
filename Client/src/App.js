@@ -44,7 +44,7 @@ function App() {
     const theToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //eslint-disable-line
     const flag = theToken === 'undefined' || theToken === null;
     if (!flag) {
-      sessionStorage.setItem("accessToken", theToken)
+      localStorage.setItem("accessToken", theToken)
       document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
   }
@@ -53,7 +53,7 @@ function App() {
     await axios({
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+        'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
       },
       url: "http://localhost:3001/api/isloggedin",
     })
@@ -84,7 +84,7 @@ function App() {
 
 
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken") === null || sessionStorage.getItem("accessToken") === '') {
+    if (localStorage.getItem("accessToken") === null || localStorage.getItem("accessToken") === '') {
       cookieToToken()
     }
     checkLoginStatus()
