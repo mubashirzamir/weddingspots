@@ -23,7 +23,6 @@ const Footer = () => {
                         <ul className="nav flex-column">
                             <li><Link className='nav-item nav-link mb-2 p-0 text-muted' to="/">Home</Link></li>
                             <li><Link className='nav-item nav-link mb-2 p-0 text-muted' to="/about">About</Link></li>
-                            <li><Link className='nav-item nav-link mb-2 p-0 text-muted' to="/contact">Contact</Link></li>
                         </ul>
                     </div>
 

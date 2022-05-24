@@ -51,7 +51,7 @@ const Register = () => {
 
                             <div className="row mb-3">
                                 <div className="col-sm-10 mx-auto">
-                                    <select  {...register('type', { required: true })} className="form-control dropdown-toggle" required>
+                                    <select  {...register('type', { required: true })} className="form-select" required>
                                         <option value="1">User</option>
                                         <option value="2">Vendor</option>
                                     </select>

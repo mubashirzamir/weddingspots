@@ -12,10 +12,14 @@ const Search = () => {
         city: "",
         name: "",
         type: "",
+        area: "",
+        min_cap: "",
         max_cap: "",
+        min_price: "",
+        max_price: ""
     })
 
-    const { city, name, type, max_cap } = query;
+    const { city, name, type, area } = query;
 
     const onInputChange = e => {
         setQuery({ ...query, [e.target.name]: e.target.value })
@@ -36,6 +40,7 @@ const Search = () => {
             <div className="py-4">
                 <form onSubmit={e => onSubmit(e)} >
 
+
                     <div className="row">
 
                         <div className="col-md-3 mb-3">
@@ -51,7 +56,7 @@ const Search = () => {
                         </div>
 
                         <div className="col-md-3 mb-3">
-                            <input type="number" min="0" className="search form-control" placeholder="Capacity" name="max_cap" value={max_cap} onChange={e => onInputChange(e)} />
+                            <input type="text" className="search form-control" placeholder="Area" name="area" value={area} onChange={e => onInputChange(e)} />
                         </div>
 
                     </div>

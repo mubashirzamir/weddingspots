@@ -110,7 +110,7 @@ const ViewVenue = () => {
 
                                 <div className="row">
                                     <div className="col">
-                                        <Booking />
+                                        <Booking manager_id={venue.user_id} />
                                     </div>
                                 </div>
                             </div>

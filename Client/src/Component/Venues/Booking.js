@@ -6,8 +6,6 @@ import { useParams } from 'react-router-dom';
 
 export default function Booking(props) {
 
-    console.log("hello", props.manager_id);
-
     const [message, setMessage] = useState("")
     const [loading, setLoading] = useState(true);
 
@@ -83,7 +81,8 @@ export default function Booking(props) {
                             <div className='row mb-4'>
                                 <div className="col-sm-10 mx-auto">
                                     <p className="fw-light text-center mt-0 mb-0 ">Which time would you like to book</p>
-                                    <select className="form-control dropdown-toggle" name="booking_time" value={booking_time} onChange={e => onInputChange(e)} required>
+                                    <span className="caret"></span>
+                                    <select className="form-select" name="booking_time" value={booking_time} onChange={e => onInputChange(e)} required>
                                         <option value="Day">Day</option>
                                         <option value="Night">Night</option>
                                     </select>
@@ -92,13 +91,13 @@ export default function Booking(props) {
 
                             <div className='row'>
                                 <p className='text-center'>
-                                    <button class="col-sm-10 mx-auto btn btn-block btn-success">Check Availability</button>
+                                    <button className="col-sm-10 mx-auto btn btn-block btn-success">Check Availability</button>
                                 </p>
                             </div>
 
                             <div className='row'>
                                 <p className='text-center'>
-                                    <button class="col-sm-10 mx-auto btn btn-block btn-primary" type="submit">Book</button>
+                                    <button className="col-sm-10 mx-auto btn btn-block btn-primary" type="submit">Book</button>
                                 </p>
                             </div>
 

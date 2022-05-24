@@ -9,9 +9,9 @@ function Home() {
         <div>
 
             <div>
-                <div class="card border-0">
-                    <img class="card-img-top" alt="banner" src={Gradient} />
-                    <div class="card-img-overlay card-inverse d-flex align-items-center">
+                <div className="card border-0">
+                    <img className="card-img-top" alt="banner" src={Gradient} />
+                    <div className="card-img-overlay card-inverse d-flex align-items-center">
                         <p className='col mt-5'> <Search /> </p>
                     </div>
                 </div>
