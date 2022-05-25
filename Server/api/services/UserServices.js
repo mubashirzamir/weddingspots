@@ -1,5 +1,4 @@
-const { users, bookings } = require('../models')
-const { accounts } = require('../models')
+const { venues, users, bookings } = require('../models')
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -76,8 +75,11 @@ exports.getUserBookings = async function (user_id, req) {
 
     const data = await bookings.findAndCountAll({
         where: { user_id: user_id, isDelete: false },
+        order: [['booking_id', 'DESC']],
+        include: [{ model: venues, attributes: ["name"], where: { isDelete: false } }],
         limit,
         offset
+
     })
 
     const result = getPagingData(data, page, limit);

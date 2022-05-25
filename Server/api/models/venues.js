@@ -106,7 +106,9 @@ module.exports = (sequelize, DataTypes) => {
 
     venues.associate = function (models) {
         venues.belongsTo(models.users, { foreignKey: 'user_id' });
+        venues.hasMany(models.bookings, { as: 'bookings', foreignKey: 'venue_id' });
     }
+
 
     return venues;
 };

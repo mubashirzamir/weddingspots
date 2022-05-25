@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import ReactPaginate from "react-paginate"
 import axios from 'axios'
-import { useContext } from "react";
-import { AuthContext } from "../../Helpers/AuthContext";
 
 function ManagerBookings() {
 
-    /*const location = useLocation();
-
-    const [state, setState] = useState({
-        name: location.state.name,
-        city: location.state.city
-    })
-
-    const name = console.log(location.state.name)
-    const city = console.log(location.state.city)*/
-
     let size = 3;
-    const { authState, setAuthState } = useContext(AuthContext)
-    const [loading01, setLoading01] = useState(false);
+    //const [loading01, setLoading01] = useState(false);
     const [bookings, setbooking] = useState([]);
     const [pageCount, setPageCount] = useState(0);
-    const [loading02, setLoading02] = useState(true);
+    //const [loading02, setLoading02] = useState(true);
 
     useEffect(() => {
         loadBookings();
-        //setTimeout(loadBookings, 5000);
-        //console.log("Hello")
     }, []);
 
     const loadBookings = async (currentPage) => {
 
-        console.log("Current page", currentPage)
+
         if (!currentPage) {
             currentPage = 0;
         }
@@ -41,13 +26,18 @@ function ManagerBookings() {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
                 }
             }).then(response => {
-                console.log(response.data.data)
                 const total = response.data.data.totalItems
                 setPageCount(Math.ceil(total / size))
                 setbooking(response.data.data.items)
-                setLoading01(true)
+                //setLoading01(true)
             }).catch(error => {
-                console.log(error.response.data)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             });
 
     }
@@ -63,12 +53,17 @@ function ManagerBookings() {
             url: 'http://localhost:3001/managerAPI/approveBooking/' + booking_id,
         }).
             then((response => {
-                console.log(response)
                 loadBookings();
 
             }))
             .catch((error) => {
-                console.log(error)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }
@@ -84,18 +79,23 @@ function ManagerBookings() {
             url: 'http://localhost:3001/managerAPI/refuseBooking/' + booking_id,
         }).
             then((response => {
-                console.log(response)
                 loadBookings();
 
             }))
             .catch((error) => {
-                console.log(error)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadBookings(currentPage)
     }
@@ -111,8 +111,9 @@ function ManagerBookings() {
                     <table class="table shadow mb-3">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">Booking ID</th>
                                 <th scope="col">Venue name</th>
+                                <th scope="col">User Email</th>
                                 <th scope="col">Booking Date</th>
                                 <th scope="col">Booking Time</th>
                                 <th scope="col">Status</th>
@@ -123,8 +124,9 @@ function ManagerBookings() {
                                 bookings.map((booking, index) => (
 
                                     <tr>
-                                        <th scope="row">{booking.venue_id}</th>
+                                        <th scope="row">{booking.booking_id}</th>
                                         <td>{booking.venue_name}</td>
+                                        <td>{booking.user.email}</td>
                                         <td>{booking.booking_date}</td>
                                         <td>{booking.booking_time}</td>
                                         <td>{booking.status}</td>

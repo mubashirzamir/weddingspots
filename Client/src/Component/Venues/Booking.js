@@ -40,11 +40,11 @@ export default function Booking(props) {
             data: booking
         }).
             then((response => {
-                console.log(response.data)
+
                 setMessage(response.data.message)
             }))
             .catch((error) => {
-                console.log(error.response.data.error.message)
+
                 //setMessage(error.response.data.error.message)
 
             });

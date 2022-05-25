@@ -94,6 +94,8 @@ exports.getAdminBookings = async function (req) {
 
     const data = await bookings.findAndCountAll({
         where: { ...condition_01 },
+        order: [['booking_id', 'DESC']],
+        include: [{ model: users, attributes: ["name", "email"], where: { isDelete: false } }],
         limit,
         offset
     })

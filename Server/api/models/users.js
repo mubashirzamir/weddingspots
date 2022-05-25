@@ -42,9 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 
     users.associate = function (models) {
         users.hasMany(models.venue_reviews, { as: 'comments', foreignKey: 'user_id' });
-    }
-
-    users.associate = function (models) {
+        users.hasMany(models.bookings, { as: 'bookings', foreignKey: 'user_id' });
         users.hasMany(models.venues, { as: 'venues', foreignKey: 'user_id' });
     }
 

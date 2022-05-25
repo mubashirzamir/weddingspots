@@ -127,6 +127,8 @@ exports.getManagerBookings = async function (user_id, req) {
 
     const data = await bookings.findAndCountAll({
         where: { manager_id: user_id, isDelete: false },
+        order: [['booking_id', 'DESC']],
+        include: [{ model: users, attributes: ["name", "email"], where: { isDelete: false } }],
         limit,
         offset
     })
@@ -136,7 +138,7 @@ exports.getManagerBookings = async function (user_id, req) {
 }
 
 exports.approveBooking = async function (booking_id, user_id, type) {
-    console.log('hi')
+
     const booking = await bookings.findOne({ where: { booking_id: booking_id, isDelete: false } });
 
     if (!booking) {

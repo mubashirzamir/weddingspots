@@ -33,7 +33,7 @@ const ImageForm = () => {
             }))
             .catch((error) => {
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {

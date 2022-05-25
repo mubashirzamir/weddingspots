@@ -50,7 +50,7 @@ const UserList = () => {
             setLoading(true)
         }).catch(error => {
             if (typeof error.response === 'undefined') {
-                console.log(error.response)
+
                 alert("Server Down")
             }
             else {
@@ -77,7 +77,7 @@ const UserList = () => {
             .catch((error) => {
                 setLoading02(true);
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {

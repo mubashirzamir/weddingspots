@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import ReactPaginate from "react-paginate"
 import axios from 'axios'
-import { useContext } from "react";
-import { AuthContext } from "../../Helpers/AuthContext";
 
 function AdminBookings() {
 
     let size = 5;
 
-    const { authState, setAuthState } = useContext(AuthContext)
-    const [loading01, setLoading01] = useState(false);
+    //const [loading01, setLoading01] = useState(false);
     const [bookings, setbooking] = useState([]);
     const [pageCount, setPageCount] = useState(0);
 
@@ -19,7 +16,7 @@ function AdminBookings() {
 
     const loadBookings = async (currentPage) => {
 
-        console.log("Current page", currentPage)
+
         if (!currentPage) {
             currentPage = 0;
         }
@@ -29,13 +26,18 @@ function AdminBookings() {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
                 }
             }).then(response => {
-                console.log(response.data.data)
+
                 const total = response.data.data.totalItems
                 setPageCount(Math.ceil(total / size))
                 setbooking(response.data.data.items)
-                setLoading01(true)
             }).catch(error => {
-                console.log(error.response.data)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             });
 
     }
@@ -51,18 +53,22 @@ function AdminBookings() {
             url: 'http://localhost:3001/adminAPI/rejectBooking/' + booking_id,
         }).
             then((response => {
-                console.log(response)
                 loadBookings();
-
             }))
             .catch((error) => {
-                console.log(error)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadBookings(currentPage)
     }
@@ -78,7 +84,7 @@ function AdminBookings() {
                         <thead>
                             <tr>
                                 <th scope="col">Booking ID</th>
-                                <th scope="col">User ID</th>
+                                <th scope="col">User Email</th>
                                 <th scope="col">Venue Name</th>
                                 <th scope="col">Booking Date</th>
                                 <th scope="col">Booking Time</th>
@@ -91,7 +97,7 @@ function AdminBookings() {
 
                                     <tr>
                                         <th scope="row">{booking.booking_id}</th>
-                                        <td>{booking.user_id}</td>
+                                        <td>{booking.user.email}</td>
                                         <td>{booking.venue_name}</td>
                                         <td>{booking.booking_date}</td>
                                         <td>{booking.booking_time}</td>

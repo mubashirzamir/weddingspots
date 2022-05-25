@@ -39,7 +39,7 @@ const EditVenue = () => {
 
     const onInputChange = e => {
         setVenue({ ...venue, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
+        //
     };
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const EditVenue = () => {
             .catch((error) => {
                 setLoading02(true)
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {
@@ -94,7 +94,7 @@ const EditVenue = () => {
         await axios.get("http://localhost:3001/api/venues/" + venue_id).then(response => {
             if (response.data.data) {
                 setLoading01(true)
-                console.log(response.data.data)
+
                 setVenue(response.data.data);
                 setLocation({
                     latitude: response.data.data.latitude,
@@ -107,7 +107,7 @@ const EditVenue = () => {
             }
         }).catch(error => {
             if (typeof error.response === 'undefined') {
-                console.log(error.response)
+
                 alert("Server Down")
             }
             else {

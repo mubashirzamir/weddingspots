@@ -50,7 +50,7 @@ const ForgotPassword = () => {
             .catch((error) => {
                 setLoading(true)
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {

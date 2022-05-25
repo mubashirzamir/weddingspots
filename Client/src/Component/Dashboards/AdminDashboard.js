@@ -31,8 +31,6 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         loadVenues();
-        //setTimeout(loadVenues, 5000);
-        //
     }, []);
 
     const loadVenues = async (currentPage) => {
@@ -46,13 +44,12 @@ const AdminDashboard = () => {
 
 
             const total = response.data.data.totalItems
-            //total/size
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
             if (typeof error.response === 'undefined') {
-                console.log(error.response)
+
                 alert("Server Down")
             }
             else {
@@ -79,7 +76,7 @@ const AdminDashboard = () => {
             .catch((error) => {
                 setLoading02(true);
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {
@@ -99,14 +96,12 @@ const AdminDashboard = () => {
             url: 'http://localhost:3001/adminAPI/toggleFeaturedVenue/' + venue_id,
         }).then((response => {
             setLoading03(true);
-
             loadVenues(helper);
-
         }))
             .catch((error) => {
                 setLoading03(true);
                 if (typeof error.response === 'undefined') {
-                    console.log(error.response)
+
                     alert("Server Down")
                 }
                 else {
