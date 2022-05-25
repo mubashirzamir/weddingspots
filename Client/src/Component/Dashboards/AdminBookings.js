@@ -80,7 +80,7 @@ function AdminBookings() {
 
                 <h3>Bookings</h3>
                 <div>
-                    <table class="table shadow mb-3">
+                    <table className="table shadow mb-3">
                         <thead>
                             <tr>
                                 <th scope="col">Booking ID</th>
@@ -95,7 +95,7 @@ function AdminBookings() {
                             {
                                 bookings.map((booking, index) => (
 
-                                    <tr>
+                                    <tr key={booking.booking_id}>
                                         <th scope="row">{booking.booking_id}</th>
                                         <td>{booking.user.email}</td>
                                         <td>{booking.venue_name}</td>
@@ -106,7 +106,7 @@ function AdminBookings() {
                                         <td>
 
                                             <div className='btn-group'>
-                                                <button class="btn btn-danger me-2" onClick={() => rejectBooking(booking.booking_id)}>Admin reject</button>
+                                                <button className="btn btn-danger me-2" onClick={() => rejectBooking(booking.booking_id)}>Admin reject</button>
                                             </div>
                                         </td>
                                     </tr>

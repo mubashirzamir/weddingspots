@@ -11,8 +11,6 @@ import { AuthContext } from "../../Helpers/AuthContext";
 export default function BasicMenu() {
     const { authState } = useContext(AuthContext)
 
-
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -45,7 +43,7 @@ export default function BasicMenu() {
             >
                 {authState.type === 2 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className="text-decoration-none" aria-current="page" exact to="/managervenuelist">
+                        <Link className="text-decoration-none" aria-current="page" to="/managervenuelist">
                             Manage Venues
                         </Link>
                     </MenuItem>
@@ -53,7 +51,7 @@ export default function BasicMenu() {
 
                 {authState.type > 2 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className='text-decoration-none' exact to="/adminvenuelist">
+                        <Link className='text-decoration-none' to="/adminvenuelist">
                             Manage Venues
                         </Link>
                     </MenuItem>
@@ -61,7 +59,7 @@ export default function BasicMenu() {
 
                 {authState.type > 2 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className="text-decoration-none" aria-current="page" exact to="/adminuserlist">
+                        <Link className="text-decoration-none" aria-current="page" to="/adminuserlist">
                             Manage Users
                         </Link>
                     </MenuItem>
@@ -69,7 +67,7 @@ export default function BasicMenu() {
 
                 {authState.type === 3 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className='text-decoration-none' exact to="/AdminBookings">
+                        <Link className='text-decoration-none' to="/AdminBookings">
                             Manage Bookings
                         </Link>
                     </MenuItem>
@@ -77,7 +75,7 @@ export default function BasicMenu() {
 
                 {authState.type === 2 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className='text-decoration-none' exact to="/ManagerBookings">
+                        <Link className='text-decoration-none' to="/ManagerBookings">
                             Manage Bookings
                         </Link>
                     </MenuItem>
@@ -85,7 +83,7 @@ export default function BasicMenu() {
 
                 {authState.type >= 1 && (
                     <MenuItem onClick={handleClose}>
-                        <Link className='text-decoration-none' exact to="/UserBookings">
+                        <Link className='text-decoration-none' to="/UserBookings">
                             Manage Personal Bookings
                         </Link>
                     </MenuItem>

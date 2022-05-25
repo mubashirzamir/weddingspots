@@ -14,7 +14,7 @@ const ReviewList = ({ buttonPress }) => {
     const [reviews, setReview] = useState([]);
 
     const [pageCount, setPageCount] = useState(0);
-    let size = 10;
+    let size = 5;
 
     const [loading, setLoading] = useState(false);
 

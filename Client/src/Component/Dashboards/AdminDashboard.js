@@ -156,7 +156,7 @@ const AdminDashboard = () => {
                         {
                             venues.map((venue, index) => (
 
-                                <tr>
+                                <tr key={venue.venue_id}>
                                     <th scope="row">{venue.venue_id}</th>
                                     <td>
                                         <div >

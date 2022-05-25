@@ -45,7 +45,7 @@ const Search = () => {
                         <div className="col-md-3 mb-3">
                             <span className="caret"></span>
                             <select className="search form-select" placeholder="City" name="city" value={city} onChange={e => onInputChange(e)} required>
-                                <option selected>City</option>
+                                <option>City</option>
                                 <option value="Karachi">Karachi</option>
                                 <option value="Lahore">Lahore</option>
                                 <option value="Islamabad">Islamabad</option>
@@ -60,7 +60,7 @@ const Search = () => {
                         <div className="col-md-3 mb-3">
                             <span className="caret"></span>
                             <select className="search form-select" placeholder="Type" name="type" value={type} onChange={e => onInputChange(e)} required>
-                                <option selected>Type</option>
+                                <option>Type</option>
                                 <option value="Banquet">Banquet</option>
                                 <option value="Lawn">Lawn</option>
                                 <option value="Hotel">Hotel</option>

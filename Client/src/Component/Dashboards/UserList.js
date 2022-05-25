@@ -126,7 +126,7 @@ const UserList = () => {
                         {
                             users.map((user, index) => (
 
-                                <tr>
+                                <tr key={user.user_id}>
                                     <th scope="row">{user.user_id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>

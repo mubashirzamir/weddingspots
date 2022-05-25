@@ -51,9 +51,9 @@ function UserBookings() {
 
             <div className='py-4'>
 
-                <h1>Bookings</h1>
+                <h1>Personal Bookings</h1>
                 <div>
-                    <table class="table shadow mb-3">
+                    <table className="table shadow mb-3">
                         <thead>
                             <tr>
                                 <th scope="col">Booking ID</th>
@@ -67,7 +67,7 @@ function UserBookings() {
                             {
                                 bookings.map((booking, index) => (
 
-                                    <tr>
+                                    <tr key={booking.booking_id}>
                                         <th scope="row">{booking.booking_id}</th>
                                         <td>{booking.venue_name}</td>
                                         <td>{booking.booking_date}</td>

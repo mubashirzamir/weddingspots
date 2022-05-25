@@ -42,8 +42,6 @@ function SearchResults(query) {
             currentPage = 0;
         }
         await axios.get(`http://localhost:3001/api/venues${query.query}&page=${currentPage}&size=${size}`).then(response => {
-
-
             const total = response.data.data.totalItems
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
@@ -127,11 +125,12 @@ function SearchResults(query) {
                                 <div>
 
                                     <Slider
+                                        component={'span'} variant={'body2'}
                                         color={"primary"}
                                         min={0}
                                         step={25}
                                         max={10000}
-                                        defaultValue={[sliderValue01]}
+                                        defaultValue={sliderValue01}
                                         getAriaLabel={() => 'Price Range'}
                                         value={sliderValue01}
                                         onChange={handlePriceChange}
@@ -149,6 +148,7 @@ function SearchResults(query) {
                                 <label className='text-center mb-5 fw-bold'>Capacity</label>
                                 <div>
                                     <Slider
+                                        component={'span'} variant={'body2'}
                                         min={0}
                                         step={25}
                                         max={5000}
