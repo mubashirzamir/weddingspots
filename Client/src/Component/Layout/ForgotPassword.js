@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import axios from 'axios'
-import { useHistory, Link } from 'react-router-dom';
-import { useContext } from "react"
-import { AuthContext } from '../../Helpers/AuthContext'
+import axios from 'axios';
+import React, { useContext, useState } from "react";
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../Helpers/AuthContext';
 
 const ForgotPassword = () => {
 
@@ -93,7 +92,7 @@ const ForgotPassword = () => {
 
                             <div className="row mb-3">
                                 <div className="col-sm-10 mx-auto">
-                                    <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} placeholder="Email Address" required />
+                                    <input type="email" className="form-control" name="email" value={email} onChange={e => onInputChange(e)} placeholder="Email Address" required />
                                 </div>
                             </div>
 

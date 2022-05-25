@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import MapDisplay from "../Layout/MapDisplay"
+import React, { useEffect, useState } from "react";
+import { GoLocation } from "react-icons/go";
+import { RiPriceTag3Line } from "react-icons/ri";
+import { useHistory, useParams } from 'react-router-dom';
+import MapDisplay from "../Layout/MapDisplay";
+import Booking from "./Booking";
 import ContactCard from "./ContactCard";
 import Overview from "./Overview";
-import { GoLocation } from "react-icons/go"
-import { RiPriceTag3Line } from "react-icons/ri"
 import ReviewParent from "./ReviewParent";
-import Booking from "./Booking";
 import Whatsapp from "./Whatsapp";
 
 const ViewVenue = () => {

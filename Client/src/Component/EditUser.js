@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditUser = () => {
 
-    let history = useHistory();
 
     const [message, setMessage] = useState("")
     const [message02, setMessage02] = useState("")
@@ -130,29 +129,29 @@ const EditUser = () => {
                 <form onSubmit={e => onSubmit(e)}>
 
                     <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">ID</label>
+                        <label className="col-sm-2 col-form-label">ID</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputText3" name="user_id" value={user.user_id} readOnly />
+                            <input type="text" className="form-control" name="user_id" value={user.user_id} readOnly />
                         </div>
                     </div>
 
                     <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">Name</label>
+                        <label className="col-sm-2 col-form-label">Name</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputText3" name="name" value={name} onChange={e => onInputChange(e)} />
+                            <input type="text" className="form-control" name="name" value={name} onChange={e => onInputChange(e)} />
                         </div>
                     </div>
 
                     <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">Email</label>
+                        <label className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputText3" name="email" value={user.email} readOnly />
+                            <input type="email" className="form-control" name="email" value={user.email} readOnly />
                         </div>
                     </div>
 
 
                     <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">Type</label>
+                        <label className="col-sm-2 col-form-label">Type</label>
                         <div className="col-sm-10">
                             <select className="form-control" value={type} name="type" onChange={e => onInputChange(e)}>
                                 <option value="3">Admin</option>

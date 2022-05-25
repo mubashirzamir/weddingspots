@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import AddReview from './AddReview'
-import ReviewList from './ReviewList'
+import React, { useState } from "react";
+import AddReview from './AddReview';
+import ReviewList from './ReviewList';
 
 const ReviewParent = () => {
 

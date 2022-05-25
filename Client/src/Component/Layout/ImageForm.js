@@ -101,9 +101,9 @@ const ImageForm = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="row mb-3">
-                        <label for="inputText3" className="col-sm-2 col-form-label">File</label>
+                        <label className="col-sm-2 col-form-label">File</label>
                         <div className="col-sm-10">
-                            <input {...register('file', { required: true })} type="file" className="form-control" id="inputText3" required />
+                            <input {...register('file', { required: true })} type="file" className="form-control" required />
                         </div>
                     </div>
 

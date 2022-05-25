@@ -3,8 +3,6 @@ import "./Modal.css"
 
 const Modal = (props) => {
 
-
-
     return (
         <div tabindex="-1" role="dialog">
             <div role="document">

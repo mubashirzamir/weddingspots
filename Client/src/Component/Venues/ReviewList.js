@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
-import ReactPaginate from "react-paginate"
-import ReactStars from "react-rating-stars-component";
 import dateFormat from 'dateformat';
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import ReactStars from "react-rating-stars-component";
+import { useParams } from 'react-router-dom';
 
 const ReviewList = ({ buttonPress }) => {
 

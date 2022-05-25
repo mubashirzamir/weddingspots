@@ -2,7 +2,6 @@ import React from 'react'
 import { GiPerson } from "react-icons/gi"
 import { HiOfficeBuilding } from "react-icons/hi"
 import { MdLocationOn, MdMap } from "react-icons/md"
-//import { GiPerson } from "react-icons/gi"
 
 const Overview = (props) => {
     return (

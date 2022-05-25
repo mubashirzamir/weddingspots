@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
 
 export default function Booking(props) {
 

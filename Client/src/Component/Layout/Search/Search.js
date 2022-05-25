@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
-import { AiOutlineSearch } from 'react-icons/ai'
-import "./search.css"
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
+import "./search.css";
 
 const Search = () => {
 

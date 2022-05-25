@@ -1,10 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 
 function GetUser() {
-
-    let history = useHistory();
 
     const [loading, setLoading] = useState(false);
     const [loading02, setLoading02] = useState(true);

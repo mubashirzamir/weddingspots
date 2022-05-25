@@ -1,16 +1,15 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { AuthContext } from "../../Helpers/AuthContext";
+import * as React from 'react';
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { fontFamily } from '@mui/system';
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Helpers/AuthContext";
 
 
 
 export default function BasicMenu() {
-    const { authState, setAuthState } = useContext(AuthContext)
+    const { authState } = useContext(AuthContext)
 
 
 

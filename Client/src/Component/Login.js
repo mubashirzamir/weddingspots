@@ -75,13 +75,13 @@ const Login = () => {
 
                             <div className="row mb-3">
                                 <div className="col-sm-10 mx-auto">
-                                    <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} placeholder="Email Address" required />
+                                    <input type="email" className="form-control" name="email" value={email} onChange={e => onInputChange(e)} placeholder="Email Address" required />
                                 </div>
                             </div>
 
                             <div className="row mb-2">
                                 <div className="col-sm-10 mx-auto">
-                                    <input type="password" className="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} placeholder="Password" required />
+                                    <input type="password" className="form-control" name="password" value={password} onChange={e => onInputChange(e)} placeholder="Password" required />
                                 </div>
                                 <div className="col-sm-10 mt-1 mx-auto">
                                     <span className="error text-danger">{message}</span>

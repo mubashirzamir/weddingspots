@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { BsTelephone } from "react-icons/bs"
-import { AiOutlineMail } from "react-icons/ai"
+import React from "react";
+import { AiOutlineMail } from "react-icons/ai";
 
 const ContactCard = (props) => {
     return (

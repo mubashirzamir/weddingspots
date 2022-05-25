@@ -1,38 +1,34 @@
-import Register from './Component/Register'
-import Login from './Component/Login'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import "../node_modules/bootstrap/dist/css/bootstrap.css"
+import About from './Component/About'
+import AdminBookings from './Component/Dashboards/AdminBookings'
+import AdminDashboard from './Component/Dashboards/AdminDashboard'
+import ManagerBookings from './Component/Dashboards/ManagerBookings'
+import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
+import UserBookings from './Component/Dashboards/UserBookings'
+import UserList from './Component/Dashboards/UserList'
+import EditUser from './Component/EditUser'
 import GetUser from './Component/GetUser'
 import Home from './Component/Home'
-import About from './Component/About'
-import Navbar from './Component/Layout/Navbar'
 import Footer from './Component/Layout/Footer'
-import NotFound from './Component/Layout/NotFound'
+import ForgotPassword from './Component/Layout/ForgotPassword'
+import ImageForm from './Component/Layout/ImageForm'
+import LoginFailure from './Component/Layout/LoginFailure'
+import MapDisplay from './Component/Layout/MapDisplay'
+import MapForm from './Component/Layout/MapForm'
+import Navbar from './Component/Layout/Navbar'
 import NotAuthenticated from './Component/Layout/NotAuthenticated'
+import NotFound from './Component/Layout/NotFound'
+import SearchParent from './Component/Layout/Search/SearchParent'
+import Login from './Component/Login'
+import Register from './Component/Register'
+import ScrollToTop from './Component/ScrollToTop'
 import AddVenue from './Component/Venues/AddVenue'
 import EditVenue from './Component/Venues/EditVenue'
 import ViewVenue from './Component/Venues/ViewVenue'
-import AdminDashboard from './Component/Dashboards/AdminDashboard'
-import UserList from './Component/Dashboards/UserList'
-import EditUser from './Component/EditUser'
-import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
-import SearchParent from './Component/Layout/Search/SearchParent'
-import LoginFailure from './Component/Layout/LoginFailure'
-import ImageForm from './Component/Layout/ImageForm'
-import MapForm from './Component/Layout/MapForm'
-import MapDisplay from './Component/Layout/MapDisplay'
-import ForgotPassword from './Component/Layout/ForgotPassword'
-import ScrollToTop from './Component/ScrollToTop'
-
-import UserBookings from './Component/Dashboards/UserBookings'
-import AdminBookings from './Component/Dashboards/AdminBookings'
-import ManagerBookings from './Component/Dashboards/ManagerBookings'
-
 import { AuthContext } from './Helpers/AuthContext'
-import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import axios from 'axios'
-
-import "../node_modules/bootstrap/dist/css/bootstrap.css"
-
 
 function App() {
 
