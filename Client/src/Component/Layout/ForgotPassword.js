@@ -18,28 +18,27 @@ const ForgotPassword = () => {
     }
 
     const onSubmit = async e => {
-        setLoading(false)
-
         e.preventDefault();
-        await axios({
-            method: 'post',
-            url: "http://localhost:3001/api/forgotPassword",
-            data: user
-        })
-            .then((response => {
-                setLoading(true)
-                setMessage(response.data.message)
-            }))
-            .catch((error) => {
-                setLoading(true)
-                if (typeof error.response === 'undefined') {
+        // setLoading(false)
+        // await axios({
+        //     method: 'post',
+        //     url: "http://localhost:3001/api/forgotPassword",
+        //     data: user
+        // })
+        //     .then((response => {
+        //         setLoading(true)
+        //         setMessage(response.data.message)
+        //     }))
+        //     .catch((error) => {
+        //         setLoading(true)
+        //         if (typeof error.response === 'undefined') {
 
-                    alert("Server Down")
-                }
-                else {
-                    alert(error.response.data.error.message)
-                }
-            })
+        //             alert("Server Down")
+        //         }
+        //         else {
+        //             alert(error.response.data.error.message)
+        //         }
+        //     })
 
     }
 
@@ -72,7 +71,7 @@ const ForgotPassword = () => {
                         </div>
 
 
-                        <form>
+                        <form onSubmit={e => onSubmit(e)}>
 
                             <div className="row mb-3">
                                 <div className="col-sm-10 mx-auto">

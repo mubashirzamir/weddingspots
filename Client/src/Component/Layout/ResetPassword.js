@@ -32,28 +32,29 @@ const ResetPassword = () => {
     }
 
     const onSubmit = async e => {
+        e.preventDefault();
+
         setLoading(false)
 
-        e.preventDefault();
-        await axios({
-            method: 'post',
-            url: `http://localhost:3001/api/ResetPassword?token=${token}&email=${email}`,
-            data: user
-        })
-            .then((response => {
-                setLoading(true)
-                setMessage(response.data.message)
-            }))
-            .catch((error) => {
-                setLoading(true)
-                if (typeof error.response === 'undefined') {
+        // await axios({
+        //     method: 'post',
+        //     url: `http://localhost:3001/api/ResetPassword?token=${token}&email=${email}`,
+        //     data: user
+        // })
+        //     .then((response => {
+        //         setLoading(true)
+        //         setMessage(response.data.message)
+        //     }))
+        //     .catch((error) => {
+        //         setLoading(true)
+        //         if (typeof error.response === 'undefined') {
 
-                    alert("Server Down")
-                }
-                else {
-                    alert(error.response.data.error.message)
-                }
-            })
+        //             alert("Server Down")
+        //         }
+        //         else {
+        //             alert(error.response.data.error.message)
+        //         }
+        //     })
 
     }
 
@@ -74,7 +75,7 @@ const ResetPassword = () => {
                         </h4>
 
 
-                        <form>
+                        <form onSubmit={e => onSubmit(e)}>
 
                             <div className="row mb-3">
                                 <div className="col-sm-10 mx-auto">
