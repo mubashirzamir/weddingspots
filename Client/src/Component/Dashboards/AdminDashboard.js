@@ -32,26 +32,30 @@ const AdminDashboard = () => {
     useEffect(() => {
         loadVenues();
         //setTimeout(loadVenues, 5000);
-        //console.log("Hello")
+        //
     }, []);
 
     const loadVenues = async (currentPage) => {
-        console.log("Current page", currentPage)
+
         setHelper(currentPage)
 
         if (!currentPage) {
             currentPage = 0;
         }
         await axios.get(`http://localhost:3001/api/venues?page=${currentPage}&size=${size}`).then(response => {
-            console.log(response.data)
-            console.log("total", response.data.data.totalItems)
+
+
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            if (error.response.data.error.message) {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
                 alert(error.response.data.error.message)
             }
         });
@@ -68,13 +72,14 @@ const AdminDashboard = () => {
             url: 'http://localhost:3001/managerAPI/deleteVenue/' + venue_id,
         }).then((response => {
             setLoading02(true);
-            console.log(response.data)
+
             loadVenues(helper);
 
         }))
             .catch((error) => {
                 setLoading02(true);
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -94,13 +99,14 @@ const AdminDashboard = () => {
             url: 'http://localhost:3001/adminAPI/toggleFeaturedVenue/' + venue_id,
         }).then((response => {
             setLoading03(true);
-            console.log(response.data)
+
             loadVenues(helper);
 
         }))
             .catch((error) => {
                 setLoading03(true);
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -111,7 +117,7 @@ const AdminDashboard = () => {
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadVenues(currentPage)
     }

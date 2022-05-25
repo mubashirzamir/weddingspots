@@ -31,8 +31,8 @@ export default function Booking(props) {
 
     const onSubmit = async e => {
         e.preventDefault();
-        // console.log(dateState);
-        // console.log(optionValue);
+        // 
+        // 
 
         // setbooking({
         //     booking_date: dateState,
@@ -48,7 +48,7 @@ export default function Booking(props) {
         //     data: booking
         // }).
         //     then((response => {
-        //         console.log(response.data)
+        //         
         //         setMessage(response.data.message)
         //     }))
         //     .catch((error) => {

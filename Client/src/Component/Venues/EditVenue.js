@@ -74,13 +74,13 @@ const EditVenue = () => {
         })
             .then((response => {
                 setLoading02(true)
-                console.log(response.data)
                 setMessage(response.data.message)
 
             }))
             .catch((error) => {
                 setLoading02(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -105,7 +105,15 @@ const EditVenue = () => {
                 setLoading01(true)
                 setMessage02("No such venue")
             }
-        }).catch(error => console.log(error.response.data))
+        }).catch(error => {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
+                alert(error.response.data.error.message)
+            }
+        });
     }
 
     const imageChange = async () => {
@@ -136,12 +144,7 @@ const EditVenue = () => {
 
                 }
 
-                {!loading02 &&
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only"></span>
-                    </div>
 
-                }
 
                 <div className="w-50 mx-auto mb-3 mt-3">
 
@@ -237,6 +240,13 @@ const EditVenue = () => {
                     <div className="col-12">
                         <button className="btn btn-warning" type="submit">Update</button>
                     </div>
+
+                    {!loading02 &&
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+
+                    }
 
 
 

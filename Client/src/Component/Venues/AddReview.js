@@ -52,7 +52,8 @@ const AddReview = ({ onButtonPressChange }) => {
                 onButtonPressChange();
             }).catch(error => {
                 setLoading(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {

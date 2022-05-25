@@ -27,7 +27,7 @@ const Login = () => {
 
     const onSubmit = async e => {
         setLoading(false)
-        console.log(user);
+
         e.preventDefault();
         await axios({
             method: 'post',
@@ -35,7 +35,7 @@ const Login = () => {
             data: user
         })
             .then((response => {
-                console.log(response.data)
+
                 localStorage.setItem("accessToken", response.data.data.theToken)
                 setAuthState({
                     user_id: response.data.data.user.user_id,
@@ -44,13 +44,13 @@ const Login = () => {
                     type: response.data.data.user.type,
                     status: true
                 })
-                console.log("AuthState", authState)
+
                 setLoading(true)
                 history.push("/")
             }))
             .catch((error) => {
                 setLoading(true)
-                console.log(error.response.data)
+
                 setMessage(error.response.data.error.message)
             })
 

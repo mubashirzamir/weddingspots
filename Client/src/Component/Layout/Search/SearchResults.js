@@ -42,14 +42,18 @@ function SearchResults(query) {
             currentPage = 0;
         }
         await axios.get(`http://localhost:3001/api/venues${query.query}&page=${currentPage}&size=${size}`).then(response => {
-            console.log(response.data)
-            console.log("total", response.data.data.totalItems)
+
+
             const total = response.data.data.totalItems
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            if (error.response.data.error.message) {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
                 alert(error.response.data.error.message)
             }
         });
@@ -57,7 +61,7 @@ function SearchResults(query) {
     }
 
     const handlePageClick = async (data) => {
-        console.log("hi", data.selected)
+
         let currentPage = data.selected
         setPageHelper(currentPage);
         loadVenues(currentPage)
@@ -98,7 +102,7 @@ function SearchResults(query) {
     const onSubmitFilters = async (e) => {
         e.preventDefault();
         const searchString = qs.stringify(queryHelper);
-        console.log(searchString)
+
         history.push({
             pathname: '/Search',
             search: searchString,

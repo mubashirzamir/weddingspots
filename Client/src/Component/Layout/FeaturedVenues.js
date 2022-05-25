@@ -21,15 +21,16 @@ const FeaturedVenues = () => {
             currentPage = 0;
         }
         await axios.get(`http://localhost:3001/api/venues?page=${currentPage}&size=${size}&isFeatured=true`).then(response => {
-            console.log(response.data)
-            console.log("total", response.data.data.totalItems)
+
+
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            if (!error.hasOwnProperty('response.data')) {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
                 alert("Server Down")
             }
             else {
@@ -40,7 +41,7 @@ const FeaturedVenues = () => {
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadVenues(currentPage)
     }

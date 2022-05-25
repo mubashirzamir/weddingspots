@@ -3,7 +3,7 @@ import "./Modal.css"
 
 const Modal = (props) => {
 
-    console.log("hello modal")
+
 
     return (
         <div tabindex="-1" role="dialog">

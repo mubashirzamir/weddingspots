@@ -25,7 +25,7 @@ const EditUser = () => {
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
+        //
     };
 
     useEffect(() => {
@@ -49,12 +49,13 @@ const EditUser = () => {
         })
             .then((response => {
                 setLoading02(true)
-                console.log(response.data)
+
                 setMessage(response.data.message)
             }))
             .catch((error) => {
                 setLoading02(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -65,7 +66,7 @@ const EditUser = () => {
     };
 
     const loadUser = async () => {
-        console.log("params_user_id", params_user_id)
+
         await await axios({
             method: 'get',
             headers: {
@@ -75,7 +76,7 @@ const EditUser = () => {
         }).then(response => {
             if (response.data.data) {
                 setLoading01(true)
-                console.log(response.data.data)
+
                 setUser(response.data.data);
 
             }
@@ -83,7 +84,16 @@ const EditUser = () => {
                 setLoading01(true)
                 setMessage02("No such user")
             }
-        }).catch(error => console.log(error.response.data))
+        }).catch(error => {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
+                alert(error.response.data.error.message)
+            }
+        })
+
     }
 
 

@@ -35,13 +35,13 @@ const Register = () => {
                 data: data
             })
                 .then((response => {
-                    console.log(response.data.message)
+
                     setLoading(true)
                     history.push("/login")
                 }))
                 .catch((error) => {
                     setLoading(true)
-                    console.log(error.response.data)
+
                     setRegisterStatus(error.response.data.error.message)
                 })
 

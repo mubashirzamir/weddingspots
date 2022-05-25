@@ -17,13 +17,14 @@ function About() {
             url: "http://localhost:3001/api/about",
         })
             .then((response => {
-                console.log(response.data)
+
                 setInfo(response.data.data)
                 setLoading(true)
             }))
             .catch((error) => {
                 setLoading(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {

@@ -24,11 +24,11 @@ const UserList = () => {
     useEffect(() => {
         loadUsers();
         //setTimeout(loadUsers, 5000);
-        //console.log("Hello")
+        //
     }, []);
 
     const loadUsers = async (currentPage) => {
-        console.log("Current page", currentPage)
+
         setHelper(currentPage)
 
         if (!currentPage) {
@@ -41,15 +41,19 @@ const UserList = () => {
             },
             url: `http://localhost:3001/adminAPI/getUsers?page=${currentPage}&size=${size}`
         }).then(response => {
-            console.log(response.data)
-            console.log("total", response.data.data.totalItems)
+
+
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
             setUser(response.data.data.users)
             setLoading(true)
         }).catch(error => {
-            if (error.response.data.error.message) {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
                 alert(error.response.data.error.message)
             }
         });
@@ -66,13 +70,14 @@ const UserList = () => {
             url: 'http://localhost:3001/adminAPI/deleteUser/' + user_id,
         }).then((response => {
             setLoading02(true);
-            console.log(response.data)
+
             loadUsers(helper);
 
         }))
             .catch((error) => {
                 setLoading02(true);
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -84,7 +89,7 @@ const UserList = () => {
 
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadUsers(currentPage)
     }

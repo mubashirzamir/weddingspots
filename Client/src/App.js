@@ -69,7 +69,7 @@ function App() {
         }
       }))
       .catch((error) => {
-        console.log(error.response)
+
         setAuthState({
           user_id: "",
           email: "",

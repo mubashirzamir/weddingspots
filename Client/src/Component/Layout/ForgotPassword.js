@@ -26,7 +26,7 @@ const ForgotPassword = () => {
 
     const onSubmit = async e => {
         setLoading(false)
-        console.log(user);
+
         e.preventDefault();
         await axios({
             method: 'post',
@@ -34,7 +34,7 @@ const ForgotPassword = () => {
             data: user
         })
             .then((response => {
-                console.log(response.data)
+
                 localStorage.setItem("accessToken", response.data.data.theToken)
                 setAuthState({
                     user_id: response.data.data.user.user_id,
@@ -43,13 +43,14 @@ const ForgotPassword = () => {
                     type: response.data.data.user.type,
                     status: true
                 })
-                console.log("AuthState", authState)
+
                 setLoading(true)
                 history.push("/")
             }))
             .catch((error) => {
                 setLoading(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {

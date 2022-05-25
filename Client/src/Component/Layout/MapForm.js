@@ -61,10 +61,11 @@ function Map() {
         })
             .then((response => {
                 history.push("/venue/edit/" + venue_id)
-                console.log(response.data);
+
             }))
             .catch((error) => {
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {

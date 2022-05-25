@@ -46,14 +46,21 @@ const ViewVenue = () => {
         await axios.get("http://localhost:3001/api/venues/" + venue_id).then(response => {
             if (response.data.data) {
                 setLoading(true)
-                console.log(response.data.data)
                 setVenue(response.data.data);
             }
             else {
                 setLoading(true)
                 setMessage01("No such venue")
             }
-        }).catch(error => console.log(error.response.data))
+        }).catch(error => {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
+                alert(error.response.data.error.message)
+            }
+        });
     }
 
 

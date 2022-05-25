@@ -32,17 +32,21 @@ const ReviewList = ({ buttonPress }) => {
             setPageCount(Math.ceil(total / size))
             setReview(response.data.data.items)
             setLoading(true)
-            console.log(response.data)
+
         }).catch(error => {
             setLoading(true)
-            if (error.response.data.error.message) {
+            if (typeof error.response === 'undefined') {
+                console.log(error.response)
+                alert("Server Down")
+            }
+            else {
                 alert(error.response.data.error.message)
             }
         });
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadReview(currentPage)
     }

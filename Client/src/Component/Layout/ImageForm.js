@@ -32,7 +32,8 @@ const ImageForm = () => {
                 s3URL = response.data.data.url;
             }))
             .catch((error) => {
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -50,7 +51,7 @@ const ImageForm = () => {
                 },
                 body: data.file[0]
             }).then((response => {
-                console.log(response)
+
                 imageURL = s3URL.split('?')[0]
                 uploadSuccess = true
             }))
@@ -74,7 +75,7 @@ const ImageForm = () => {
                 })
                     .then((response => {
                         history.push("/venue/edit/" + venue_id)
-                        console.log(response.data);
+
                     }))
                     .catch((error) => {
                         if (error.response.data.error.message) {

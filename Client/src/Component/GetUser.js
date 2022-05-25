@@ -21,7 +21,7 @@ function GetUser() {
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
+        //
     };
 
     useEffect(() => {
@@ -37,13 +37,15 @@ function GetUser() {
             url: "http://localhost:3001/api/getUser",
         })
             .then((response => {
-                console.log(response.data)
+
                 setUser(response.data.data)
                 setLoading(true)
             }))
             .catch((error) => {
                 setLoading(true)
-                if (!error.hasOwnProperty('response.data')) {
+
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -73,7 +75,8 @@ function GetUser() {
             }))
             .catch((error) => {
                 setLoading02(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {

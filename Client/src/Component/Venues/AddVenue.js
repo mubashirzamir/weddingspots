@@ -30,11 +30,11 @@ const AddVenue = () => {
 
     const onInputChange = e => {
         setVenue({ ...venue, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
+        //
     };
 
     const onSubmit = async e => {
-        console.log(venue);
+
         e.preventDefault();
         setLoading(false);
         await axios({
@@ -46,14 +46,15 @@ const AddVenue = () => {
             data: venue
         }).then((response => {
             setLoading(true)
-            console.log(response.data)
+
             setMessage(response.data.message)
             const venue_id = response.data.data.venue_id
             history.push("/venue/addImage/" + venue_id)
         }))
             .catch((error) => {
                 setLoading(true)
-                if (!error.hasOwnProperty('response.data')) {
+                if (typeof error.response === 'undefined') {
+                    console.log(error.response)
                     alert("Server Down")
                 }
                 else {
@@ -150,6 +151,13 @@ const AddVenue = () => {
                     <div className="col-12">
                         <button className="btn btn-primary" type="submit">Create</button>
                     </div>
+
+                    {!loading &&
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only"></span>
+                        </div>
+
+                    }
 
 
 

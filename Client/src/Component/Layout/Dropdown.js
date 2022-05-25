@@ -12,7 +12,7 @@ import { fontFamily } from '@mui/system';
 export default function BasicMenu() {
     const { authState, setAuthState } = useContext(AuthContext)
 
-    console.log(authState.type)
+
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);

@@ -24,7 +24,7 @@ function MapDisplay(props) {
     return <Map />;
 
     function Map() {
-        console.log("hello")
+
 
         const center = useMemo(() => ({ lat: selected.lat, lng: selected.lng }), []);
 
