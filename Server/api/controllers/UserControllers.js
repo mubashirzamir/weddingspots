@@ -109,4 +109,51 @@ exports.getBookings = async function (req, res, next) {
     }
 }
 
+exports.forgotPassword = async function (req, res, next) {
+    try {
+
+        const isUser = await UserService.isUser(req.body.email);
+
+        if (!isUser) {
+            return res.status(200).json({ error: noError, data: result, message: "Reset password link sent to email" });
+        }
+
+        else {
+            const result = UserService.forgotStuff(req)
+            if (result) {
+                return res.status(200).json({ error: noError, data: result, message: "Reset password link sent to email real" });
+
+            }
+            else {
+                return res.status(400).json({ error: noError, data: result, message: "Unexpected error" });
+            }
+
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+
+    }
+}
+
+
+exports.resetPassword = async function (req, res, next) {
+    try {
+
+        const result = UserService.resetStuff(req)
+        if (result) {
+            return res.status(400).json({ error: { status: 1, message: "Token has expired. Please try password reset again" }, data: {}, message: {} });
+        }
+
+        else {
+            return res.status(400).json({ error: noError, data: result, message: "Unexpected error" });
+        }
+
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+
+    }
+}
+
 

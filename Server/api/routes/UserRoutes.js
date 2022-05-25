@@ -9,6 +9,8 @@ router.get('/getUser', validateToken, UserController.getUser);
 router.get('/isLoggedIn', validateToken, UserController.getUser);
 router.post('/updateProfile', validateToken, UserController.updateProfile);
 router.get('/bookings', validateToken, UserController.getBookings);
+// router.post('/forgotPassword', UserController.forgotPassword);
+// router.post('/resetPassword', UserController.resetPassword);
 
 
 module.exports = router;

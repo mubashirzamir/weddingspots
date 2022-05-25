@@ -21,6 +21,7 @@ import MapForm from './Component/Layout/MapForm'
 import Navbar from './Component/Layout/Navbar'
 import NotAuthenticated from './Component/Layout/NotAuthenticated'
 import NotFound from './Component/Layout/NotFound'
+import ResetPassword from './Component/Layout/ResetPassword'
 import SearchParent from './Component/Layout/Search/SearchParent'
 import Login from './Component/Login'
 import Register from './Component/Register'
@@ -126,6 +127,10 @@ function App() {
 
             <Route exact path="/ForgotPassword">
               {!authState.status ? <ForgotPassword /> : <Home />}
+            </Route>
+
+            <Route exact path="/ResetPassword">
+              {!authState.status ? <ResetPassword /> : <Home />}
             </Route>
 
             <Route exact path="/GetUser">
