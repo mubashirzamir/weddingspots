@@ -39,5 +39,5 @@ app.use("/api/social", socialRouter)
 app.use(errorHandler)
 
 db.sequelize.sync().then(() => {
-    app.listen(PORT, () => 
+    app.listen(PORT, () => console.log("Server is running on port 3001"))
 })
