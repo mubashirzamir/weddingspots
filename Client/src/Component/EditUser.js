@@ -21,7 +21,7 @@ const EditUser = () => {
         type: ""
     })
 
-    const { user_id, name, email, type } = user;
+    const { name, type } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -42,9 +42,8 @@ const EditUser = () => {
             },
             url: 'http://localhost:3001/adminAPI/updateUser',
             data: {
-                user_id: user_id,
+                user_id: user.user_id,
                 name: name,
-                email: email,
                 type: type
             }
         })
@@ -55,8 +54,9 @@ const EditUser = () => {
             }))
             .catch((error) => {
                 setLoading02(true)
-                console.log(error.response.data)
-                setMessage(error.response.data.error.message)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
 
             })
     };
@@ -91,13 +91,7 @@ const EditUser = () => {
 
                 <div className="row mb-3">
                     <div className="col-sm">
-                        <h1>Edit Venue</h1>
-                    </div>
-                    <div className="col-sm">
-                        <div className="text-end">
-                            <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-
-                        </div>
+                        <h5>Edit User</h5>
                     </div>
                 </div>
 
@@ -125,7 +119,7 @@ const EditUser = () => {
                     <div className="row mb-3">
                         <label for="inputText3" className="col-sm-2 col-form-label">ID</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputText3" name="user_id" value={user_id} onChange={e => onInputChange(e)} readOnly />
+                            <input type="text" className="form-control" id="inputText3" name="user_id" value={user.user_id} readOnly />
                         </div>
                     </div>
 
@@ -139,7 +133,7 @@ const EditUser = () => {
                     <div className="row mb-3">
                         <label for="inputText3" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} />
+                            <input type="email" className="form-control" id="inputText3" name="email" value={user.email} readOnly />
                         </div>
                     </div>
 

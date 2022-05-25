@@ -51,7 +51,9 @@ const AdminDashboard = () => {
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            console.log(error.response.data)
+            if (error.response.data.error.message) {
+                alert(error.response.data.error.message)
+            }
         });
 
     }
@@ -72,7 +74,9 @@ const AdminDashboard = () => {
         }))
             .catch((error) => {
                 setLoading02(true);
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }
@@ -93,7 +97,9 @@ const AdminDashboard = () => {
         }))
             .catch((error) => {
                 setLoading03(true);
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }

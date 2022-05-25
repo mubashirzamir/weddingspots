@@ -49,7 +49,9 @@ const UserList = () => {
             setUser(response.data.data.users)
             setLoading(true)
         }).catch(error => {
-            console.log(error.response.data)
+            if (error.response.data.error.message) {
+                alert(error.response.data.error.message)
+            }
         });
 
     }
@@ -70,7 +72,9 @@ const UserList = () => {
         }))
             .catch((error) => {
                 setLoading02(true);
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }

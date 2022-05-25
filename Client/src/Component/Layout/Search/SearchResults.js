@@ -46,7 +46,9 @@ function SearchResults(query) {
             setVenue(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            console.log(error.response)
+            if (error.response.data.error.message) {
+                alert(error.response.data.error.message)
+            }
         });
 
     }
@@ -113,7 +115,7 @@ function SearchResults(query) {
                         <div className='col'>
 
                             <div className='row'>
-                                <label className='text-center mb-5'>PKR/Head</label>
+                                <label className='text-center mb-5 fw-bold'>PKR/Head</label>
                                 <div>
 
                                     <Slider
@@ -136,7 +138,7 @@ function SearchResults(query) {
                             <hr className='mt-5 mb-5'></hr>
 
                             <div className='row mb-5'>
-                                <label className='text-center mb-5'>Capacity</label>
+                                <label className='text-center mb-5 fw-bold'>Capacity</label>
                                 <div>
                                     <Slider
                                         min={0}

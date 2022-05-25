@@ -53,8 +53,9 @@ const AddVenue = () => {
         }))
             .catch((error) => {
                 setLoading(true)
-                console.log(error.response.data)
-                setMessage(error.response.data.error.message)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
 
             });
         //history.push("/")

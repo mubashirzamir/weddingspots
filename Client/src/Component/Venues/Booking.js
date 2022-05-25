@@ -52,8 +52,9 @@ export default function Booking(props) {
         //         setMessage(response.data.message)
         //     }))
         //     .catch((error) => {
-        //         console.log(error)
-        //         //setMessage(error.response.data.error.message)
+        //        if (error.response.data.error.message) {
+        //             alert(error.response.data.error.message)
+        //         }
 
         //     });
 

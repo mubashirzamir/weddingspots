@@ -23,8 +23,9 @@ function About() {
             }))
             .catch((error) => {
                 setLoading(true)
-                //alert(error.response.data.error.message)
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
     }
 

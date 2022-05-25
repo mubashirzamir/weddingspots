@@ -80,8 +80,9 @@ const EditVenue = () => {
             }))
             .catch((error) => {
                 setLoading02(true)
-                console.log(error.response.data)
-                setMessage(error.response.data.error.message)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
 
             })
     };

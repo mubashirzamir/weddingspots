@@ -52,7 +52,9 @@ const AddReview = ({ onButtonPressChange }) => {
                 onButtonPressChange();
             }).catch(error => {
                 setLoading(true)
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
         }
 

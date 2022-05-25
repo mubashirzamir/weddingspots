@@ -64,7 +64,9 @@ function Map() {
                 console.log(response.data);
             }))
             .catch((error) => {
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
     }
 

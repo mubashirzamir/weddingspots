@@ -12,9 +12,10 @@ function GetUser() {
         user_id: "",
         name: "",
         email: "",
+        type: ""
     });
 
-    const { user_id, name, email } = user;
+    const { user_id, name, email, type } = user;
 
     useEffect(() => {
         loadUser()
@@ -36,9 +37,7 @@ function GetUser() {
             .catch((error) => {
                 setLoading(true)
                 if (error.response.data.error.message) {
-                    if (error.response.data.error.message === "jwt malformed") {
-                        history.go(0);
-                    }
+                    alert(error.response.data.error.message)
                 }
             })
     }
@@ -48,31 +47,69 @@ function GetUser() {
 
             <div className="py-4">
 
-                <div className="row mb-3">
-                    <h3>User</h3>
+                <div className="row">
+                    <div className="card shadow py-4 col-xl-6 mx-auto">
+
+                        <h4 className="card-title text-center mb-4 mt-1">Profile
+                            {!loading &&
+                                <div className="spinner-border text-primary ms-3" role="status">
+                                    <span className="sr-only"></span>
+                                </div>}
+                        </h4>
+
+                        <div className="row mb-3">
+                            <div className="col-sm-10 mx-auto">
+                                <input type="text" className="form-control" name="name" value={name} placeholder="Name" />
+                            </div>
+                        </div>
+
+                        <div className="row mb-3">
+                            <div className="col-sm-10 mx-auto">
+                                <input type="email" className="form-control" name="email" value={email} placeholder="Email Address" />
+                            </div>
+                        </div>
+
+
+                        <div className="row mb-3">
+                            <div className="col-sm-10 mx-auto">
+                                <select className="form-select" required>
+                                    {type === 3 &&
+                                        <>
+                                            <option value="3">Admin</option>
+                                            <option value="1">User</option>
+                                            <option value="2">Vendor</option>
+                                        </>
+                                    }
+                                    {type === 2 &&
+                                        <>
+                                            <option value="2">Vendor</option>
+                                            <option value="1">User</option>
+                                        </>
+                                    }
+                                    {type === 1 &&
+                                        <>
+                                            <option value="1">User</option>
+                                            <option value="2">Vendor</option>
+                                        </>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className='row'>
+                            <div className="col-sm-10 mx-auto">
+                                <div className="row">
+                                    <div className="col-sm">
+                                        <button className="btn btn-warning" type="submit">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                {!loading &&
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only"></span>
-                    </div>
 
-                }
 
-                <table className="table shadow">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                    <tr>
-
-                        <td>{user_id}</td>
-                        <td>{name}</td>
-                        <td>{email}</td>
-
-                    </tr>
-                </table>
             </div>
 
 

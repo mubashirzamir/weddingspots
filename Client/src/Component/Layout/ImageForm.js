@@ -32,7 +32,9 @@ const ImageForm = () => {
                 s3URL = response.data.data.url;
             }))
             .catch((error) => {
-                console.log(error.response.data)
+                if (error.response.data.error.message) {
+                    alert(error.response.data.error.message)
+                }
             })
 
         if (s3URL) {
@@ -50,7 +52,9 @@ const ImageForm = () => {
                 uploadSuccess = true
             }))
                 .catch((error) => {
-                    console.log(error)
+                    if (error.response.data.error.message) {
+                        alert(error.response.data.error.message)
+                    }
                 })
 
             if (uploadSuccess) {
@@ -70,7 +74,9 @@ const ImageForm = () => {
                         console.log(response.data);
                     }))
                     .catch((error) => {
-                        console.log(error.response.data)
+                        if (error.response.data.error.message) {
+                            alert(error.response.data.error.message)
+                        }
                     })
             }
 

@@ -27,6 +27,10 @@ exports.deleteUser = async function (req, res, next) {
     try {
         const user = await AdminService.deleteUser(req.params.user_id)
 
+        if (user.type === 3) {
+            return res.status(400).json({ error: { status: 1, message: "Admin can not be deleted" }, data: {}, message: {} })
+        }
+
         if (user) {
             return res.status(200).json({ error: noError, data: user, message: "Succesfully deleted user" });
         }

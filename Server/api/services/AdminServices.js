@@ -85,33 +85,3 @@ exports.updateUser = async function (userInfo) {
     await user.save();
     return user;
 }
-
-/*exports.getUsers = async function () {
-    const listOfUsers = await users.findAll({ where: { isDelete: false } });
-    return listOfUsers;
-}*/
-
-/*exports.addFeaturedVenue = async function (venue_id) {
-    const [featured_venue, created] = await featured_venues.findOrCreate({
-        where: { venue_id: venue_id, isDelete: false },
-        defaults: {
-            venue_id: venue_id
-        }
-    });
-
-    return [featured_venue, created];
-}
-
-
-exports.deleteFeaturedVenue = async function (featured_id) {
-
-    const featured_venue = await featured_venues.findOne({ where: { featured_id: featured_id, isDelete: false } });
-
-    if (featured_venue) {
-        featured_venue.isDelete = true
-        await featured_venue.save();
-    }
-
-    return featured_venue;
-
-}*/

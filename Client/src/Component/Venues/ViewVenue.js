@@ -8,6 +8,7 @@ import { GoLocation } from "react-icons/go"
 import { RiPriceTag3Line } from "react-icons/ri"
 import ReviewParent from "./ReviewParent";
 import Booking from "./Booking";
+import Whatsapp from "./Whatsapp";
 
 const ViewVenue = () => {
 
@@ -153,6 +154,8 @@ const ViewVenue = () => {
 
                     </>
                 }
+
+                <Whatsapp />
 
             </div>
 
