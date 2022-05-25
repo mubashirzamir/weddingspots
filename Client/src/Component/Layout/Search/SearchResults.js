@@ -9,7 +9,7 @@ function SearchResults(query) {
 
     let history = useHistory();
 
-    let size = 5;
+    let size = 10;
 
     const [loading, setLoading] = useState(false);
     const [venues, setVenue] = useState([]);

@@ -4,7 +4,7 @@ import axios from 'axios'
 
 function AdminBookings() {
 
-    let size = 5;
+    let size = 10;
 
     //const [loading01, setLoading01] = useState(false);
     const [bookings, setbooking] = useState([]);
@@ -121,23 +121,25 @@ function AdminBookings() {
                 </div>
 
 
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    next={"Next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={3}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    nextClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
             </div>
         </div>
     )

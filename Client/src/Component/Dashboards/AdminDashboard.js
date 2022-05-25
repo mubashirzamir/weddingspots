@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     });
 
     const [pageCount, setPageCount] = useState(0);
-    let size = 5;
+    let size = 10;
 
     useEffect(() => {
         loadVenues();
@@ -204,23 +204,25 @@ const AdminDashboard = () => {
                 {openModal02.status && <ModalFeature modalInfo={openModal02} modalHandler={setOpenModal02} featureVenue={featureVenue} />}
 
 
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    next={"Next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={3}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    nextClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
 
             </div>
         </div >

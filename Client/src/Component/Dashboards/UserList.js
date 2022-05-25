@@ -19,7 +19,7 @@ const UserList = () => {
     });
 
     const [pageCount, setPageCount] = useState(0);
-    let size = 5;
+    let size = 10;
 
     useEffect(() => {
         loadUsers();
@@ -155,24 +155,25 @@ const UserList = () => {
 
                 {openModal01.status && <ModalDelete modalInfo={openModal01} modalHandler={setOpenModal01} deleteuser={deleteUser} />}
 
-
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    next={"Next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={3}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    nextClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
 
             </div>
         </div >
