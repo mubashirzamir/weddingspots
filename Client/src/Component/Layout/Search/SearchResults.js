@@ -15,6 +15,9 @@ function SearchResults(query) {
     const [venues, setVenue] = useState([]);
     const [pageCount, setPageCount] = useState(0);
 
+    const [pageHelper, setPageHelper] = useState(0);
+
+
     const [sliderValue01, setSliderValues01] = useState([0, 10000]);
     const [sliderValue02, setSliderValues02] = useState([0, 10000]);
 
@@ -54,8 +57,9 @@ function SearchResults(query) {
     }
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+        console.log("hi", data.selected)
         let currentPage = data.selected
+        setPageHelper(currentPage);
         loadVenues(currentPage)
     }
 
@@ -236,6 +240,7 @@ function SearchResults(query) {
                                         breakClassName={"page-item"}
                                         breakLinkClassName={"page-link"}
                                         activeClassName={"active"}
+                                        forcePage={pageHelper}
                                     />
                                 }
                             </div>

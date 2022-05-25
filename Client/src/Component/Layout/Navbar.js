@@ -88,11 +88,13 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
+                        {authState.status && (
 
-                        <li className="nav-item me-2">
-                            <Dropdown />
-                        </li>
+                            <li className="nav-item me-2">
+                                <Dropdown />
+                            </li>
 
+                        )}
 
                     </ul>
 

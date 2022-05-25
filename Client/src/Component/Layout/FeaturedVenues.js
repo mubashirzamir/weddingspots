@@ -14,8 +14,6 @@ const FeaturedVenues = () => {
 
     useEffect(() => {
         loadVenues();
-        //setTimeout(loadVenues, 5000);
-        //console.log("Hello")
     }, []);
 
     const loadVenues = async (currentPage) => {

@@ -4,7 +4,7 @@ exports.createVenue = async function (venueInfo, user_id) {
     const newVenue = venues.build(venueInfo);
     newVenue.user_id = user_id;
 
-    newVenue.image_thumb = 'placeholder';
+    newVenue.image_thumb = 'https://weddingspots.s3.amazonaws.com/909f928f0b07399e43a54f045bcbb7a5';
     newVenue.latitude = "24.941985222562053"
     newVenue.longitude = "67.11435194116635"
 

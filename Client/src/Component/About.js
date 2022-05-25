@@ -23,7 +23,10 @@ function About() {
             }))
             .catch((error) => {
                 setLoading(true)
-                if (error.response.data.error.message) {
+                if (!error.hasOwnProperty('response.data')) {
+                    alert("Server Down")
+                }
+                else {
                     alert(error.response.data.error.message)
                 }
             })

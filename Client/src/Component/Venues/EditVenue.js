@@ -80,7 +80,10 @@ const EditVenue = () => {
             }))
             .catch((error) => {
                 setLoading02(true)
-                if (error.response.data.error.message) {
+                if (!error.hasOwnProperty('response.data')) {
+                    alert("Server Down")
+                }
+                else {
                     alert(error.response.data.error.message)
                 }
 
@@ -152,8 +155,11 @@ const EditVenue = () => {
                     <div className="col-12">
                         <button className="btn btn-outline-primary" onClick={imageChange}>Edit Thumbnail</button>
                     </div>
+                </div>
 
-
+                <div className="col-12 mt-4 mb-3">
+                    <MemoizedMapDisplay lat={location.latitude} lng={location.longitude}></MemoizedMapDisplay>
+                    <button className="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
                 </div>
 
                 <form className="mb-4" onSubmit={e => onSubmit(e)}>
@@ -237,11 +243,6 @@ const EditVenue = () => {
                 </form>
 
 
-                <div className="col-12 mt-4">
-                    <MemoizedMapDisplay lat={location.latitude} lng={location.longitude}></MemoizedMapDisplay>
-
-                    <button className="btn btn-outline-primary" onClick={locationChange}>Edit Location</button>
-                </div>
 
                 <MaterialModal message={message} />
 

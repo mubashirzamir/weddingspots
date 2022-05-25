@@ -32,7 +32,10 @@ const ImageForm = () => {
                 s3URL = response.data.data.url;
             }))
             .catch((error) => {
-                if (error.response.data.error.message) {
+                if (!error.hasOwnProperty('response.data')) {
+                    alert("Server Down")
+                }
+                else {
                     alert(error.response.data.error.message)
                 }
             })

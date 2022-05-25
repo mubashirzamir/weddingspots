@@ -53,7 +53,10 @@ const AddVenue = () => {
         }))
             .catch((error) => {
                 setLoading(true)
-                if (error.response.data.error.message) {
+                if (!error.hasOwnProperty('response.data')) {
+                    alert("Server Down")
+                }
+                else {
                     alert(error.response.data.error.message)
                 }
 
@@ -145,7 +148,7 @@ const AddVenue = () => {
 
 
                     <div className="col-12">
-                        <button className="btn btn-primary" type="submit">Submit</button>
+                        <button className="btn btn-primary" type="submit">Create</button>
                     </div>
 
 
