@@ -54,7 +54,6 @@ export default function BasicMenu() {
 
                 {authState.type > 2 && (
                     <MenuItem onClick={handleClose}>
-
                         <Link className='text-decoration-none' exact to="/adminvenuelist">
                             Manage Venues
                         </Link>
@@ -65,6 +64,30 @@ export default function BasicMenu() {
                     <MenuItem onClick={handleClose}>
                         <Link className="text-decoration-none" aria-current="page" exact to="/adminuserlist">
                             Manage Users
+                        </Link>
+                    </MenuItem>
+                )}
+
+                {authState.type === 3 && (
+                    <MenuItem onClick={handleClose}>
+                        <Link className='text-decoration-none' exact to="/AdminBookings">
+                            Manage Bookings
+                        </Link>
+                    </MenuItem>
+                )}
+
+                {authState.type === 2 && (
+                    <MenuItem onClick={handleClose}>
+                        <Link className='text-decoration-none' exact to="/ManagerBookings">
+                            Manage Bookings
+                        </Link>
+                    </MenuItem>
+                )}
+
+                {authState.type >= 1 && (
+                    <MenuItem onClick={handleClose}>
+                        <Link className='text-decoration-none' exact to="/UserBookings">
+                            Manage Personal Bookings
                         </Link>
                     </MenuItem>
                 )}

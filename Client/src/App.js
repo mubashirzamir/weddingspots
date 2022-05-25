@@ -22,6 +22,10 @@ import MapDisplay from './Component/Layout/MapDisplay'
 import ForgotPassword from './Component/Layout/ForgotPassword'
 import ScrollToTop from './Component/ScrollToTop'
 
+import UserBookings from './Component/Dashboards/UserBookings'
+import AdminBookings from './Component/Dashboards/AdminBookings'
+import ManagerBookings from './Component/Dashboards/ManagerBookings'
+
 import { AuthContext } from './Helpers/AuthContext'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -180,9 +184,23 @@ function App() {
               <LoginFailure />
             </Route>
 
+            <Route exact path="/UserBookings">
+              {authState.type >= 1 ? <UserBookings /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/ManagerBookings">
+              {authState.type === 2 ? <ManagerBookings /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/AdminBookings">
+              {authState.type === 3 ? <AdminBookings /> : <NotAuthenticated />}
+            </Route>
+
             <Route>
               <NotFound />
             </Route>
+
+
 
           </Switch>
 

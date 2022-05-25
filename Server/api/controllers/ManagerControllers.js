@@ -82,3 +82,46 @@ exports.addLocation = async function (req, res, next) {
     }
 
 }
+
+
+exports.getBookings = async function (req, res, next) {
+    try {
+
+        const user = await ManagerService.getUser(res.locals.decoded.user_id);
+        if (user) {
+            const booking = await ManagerService.getManagerBookings(res.locals.decoded.user_id, req);
+            return res.status(200).json({ error: noError, data: booking, message: "Successfully retrieved booking" })
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+
+    }
+}
+
+exports.approveBooking = async function (req, res, next) {
+    try {
+
+        const booking = await ManagerService.approveBooking(req.params.booking_id, res.locals.decoded.user_id, res.locals.decoded.type);
+
+        if (booking) {
+            return res.status(200).json({ error: noError, data: booking, message: "Succesfully approved booking" });
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+}
+
+exports.refuseBooking = async function (req, res, next) {
+    try {
+        const booking = await ManagerService.refuseBooking(req.params.booking_id, res.locals.decoded.user_id, res.locals.decoded.type);
+
+        if (booking) {
+            return res.status(200).json({ error: noError, data: booking, message: "Succesfully refused booking" });
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+}

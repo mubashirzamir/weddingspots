@@ -94,4 +94,19 @@ exports.updateProfile = async function (req, res, next) {
     }
 }
 
+exports.getBookings = async function (req, res, next) {
+    try {
+
+        const user = await UserService.getUser(res.locals.decoded.user_id);
+        if (user) {
+            const booking = await UserService.getUserBookings(res.locals.decoded.user_id, req);
+            return res.status(200).json({ error: noError, data: booking, message: "Successfully retrieved booking" })
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+
+    }
+}
+
 

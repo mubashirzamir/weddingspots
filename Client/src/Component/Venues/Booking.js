@@ -31,34 +31,23 @@ export default function Booking(props) {
 
     const onSubmit = async e => {
         e.preventDefault();
-        // 
-        // 
+        await axios({
+            method: 'post',
+            headers: {
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
+            },
+            url: 'http://localhost:3001/api/venues/book/' + venue_id,
+            data: booking
+        }).
+            then((response => {
+                console.log(response.data)
+                setMessage(response.data.message)
+            }))
+            .catch((error) => {
+                console.log(error.response.data.error.message)
+                //setMessage(error.response.data.error.message)
 
-        // setbooking({
-        //     booking_date: dateState,
-        //     booking_time: optionValue
-        // })
-
-        // await axios({
-        //     method: 'post',
-        //     headers: {
-        //         'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
-        //     },
-        //     url: 'http://localhost:3001/api/venues/book/' + venue_id,
-        //     data: booking
-        // }).
-        //     then((response => {
-        //         
-        //         setMessage(response.data.message)
-        //     }))
-        //     .catch((error) => {
-        //        if (error.response.data.error.message) {
-        //             alert(error.response.data.error.message)
-        //         }
-
-        //     });
-
-        // //history.push("/")
+            });
     }
 
     return (
@@ -66,7 +55,12 @@ export default function Booking(props) {
 
             <div>
                 <div className="card mt-3 shadow-sm">
-                    <p className="fw-bold text-center mt-2 mb-0">Book Venue</p>
+                    <p className="fw-bold text-center mt-2 mb-0">Book Request</p>
+
+                    {!loading &&
+                        <div className="spinner-border text-primary text-center ms-3" role="status">
+                            <span className="sr-only"></span>
+                        </div>}
 
                     <div className="mt-3 mb-3">
 
@@ -88,26 +82,17 @@ export default function Booking(props) {
                                         <option value="Night">Night</option>
                                     </select>
                                 </div>
+                                <div className="col-sm-10 mx-auto mb-0 mt-0">
+                                    <span className="error text-warning">{message}</span>
+                                </div>
+
                             </div>
 
                             <div className='row'>
                                 <p className='text-center'>
-                                    <button className="col-sm-10 mx-auto btn btn-block btn-success">Check Availability</button>
+                                    <button className="col-sm-10 mx-auto btn btn-block btn-primary" type="submit">Request Booking</button>
                                 </p>
                             </div>
-
-                            <div className='row'>
-                                <p className='text-center'>
-                                    <button className="col-sm-10 mx-auto btn btn-block btn-primary" type="submit">Book</button>
-                                </p>
-                            </div>
-
-                            {/* <div className='row mb-3'>
-                            <div className="col-sm-10 mx-auto">
-                                <p className='mb-0'>Selected Date: <b>{moment(booking_date).format('MMMM Do YYYY')}</b></p>
-                                <p className="mb-0">Selected Time: <b>{booking_time}</b></p>
-                            </div>
-                        </div> */}
 
                         </form>
 

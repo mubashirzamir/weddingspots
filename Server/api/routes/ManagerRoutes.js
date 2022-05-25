@@ -11,4 +11,8 @@ router.get('/s3URL', validateToken, permitManager, ManagerController.s3URL);
 
 router.post('/addLocation/:venue_id', validateToken, permitManager, ManagerController.addLocation);
 
+router.post('/approveBooking/:booking_id', validateToken, permitManager, ManagerController.approveBooking);
+router.post('/refuseBooking/:booking_id', validateToken, permitManager, ManagerController.refuseBooking);
+router.get('/bookings', validateToken, ManagerController.getBookings);
+
 module.exports = router;

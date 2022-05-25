@@ -1,4 +1,4 @@
-const { users } = require('../models')
+const { users, bookings } = require('../models')
 const { accounts } = require('../models')
 
 const bcrypt = require('bcryptjs');
@@ -12,11 +12,11 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: venues } = data;
+    const { count: totalItems, rows: items } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
-    return { totalItems, venues, totalPages, currentPage };
+    return { totalItems, items, totalPages, currentPage };
 };
 
 exports.login = async function (email, password) {
@@ -67,4 +67,19 @@ exports.updateProfile = async function (userInfo) {
     Object.assign(user, userInfo);
     await user.save();
     return user;
+}
+
+exports.getUserBookings = async function (user_id, req) {
+    const { page, size } = req.query;
+
+    const { limit, offset } = getPagination(page, size);
+
+    const data = await bookings.findAndCountAll({
+        where: { user_id: user_id, isDelete: false },
+        limit,
+        offset
+    })
+
+    const result = getPagingData(data, page, limit);
+    return result;
 }

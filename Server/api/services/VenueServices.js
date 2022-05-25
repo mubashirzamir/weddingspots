@@ -1,4 +1,4 @@
-const { venues, users, venue_reviews } = require('../models')
+const { venues, users, venue_reviews, bookings } = require('../models')
 const { Op } = require("sequelize");
 
 
@@ -77,3 +77,59 @@ exports.getReviews = async function (req) {
     const result = getPagingData(data, page, limit);
     return result;
 };
+
+
+exports.getManager = async function (venue_id) {
+
+    const book = await venues.findOne({
+        where: { venue_id: venue_id },
+        attributes: {
+            exclude: ['venue_id', 'name', 'type', 'halls', 'description', 'latitude', 'longitude',
+                'address', 'city', 'area', 'price_per_head', 'min_cap', 'max_cap', 'image_thumb', 'image_gallery',
+                'isFeatured', 'isDelete', 'createdAt', 'updatedAt']
+        },
+    });
+    return book
+
+}
+
+exports.getVenue_name = async function (venue_id) {
+
+    const book = await venues.findOne({
+        where: { venue_id: venue_id },
+        attributes: {
+            exclude: ['venue_id', 'user_id', 'type', 'halls', 'description', 'latitude', 'longitude',
+                'address', 'city', 'area', 'price_per_head', 'min_cap', 'max_cap', 'image_thumb', 'image_gallery',
+                'isFeatured', 'isDelete', 'createdAt', 'updatedAt']
+        },
+    });
+    return book
+
+}
+
+exports.isBook = async function (venue_id, booking_date, booking_time, user_id) {
+
+    const book = await bookings.findOne({
+        where: {
+            [Op.or]: [{ user_id: user_id }, { status: 'Approved' }],
+            venue_id: venue_id,
+            booking_date: booking_date,
+            booking_time: booking_time,
+            isDelete: false,
+        }
+    });
+
+    if (book) {
+        return true;
+    }
+
+    else {
+        return false;
+    }
+}
+
+
+exports.book = async function (bookInfo) {
+    newBooking = await bookings.create(bookInfo);
+    return newBooking;
+}

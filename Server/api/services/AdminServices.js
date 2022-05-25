@@ -1,5 +1,4 @@
-const { users } = require('../models')
-const { venues } = require('../models')
+const { users, venues, bookings } = require('../models')
 
 exports.deleteUser = async function (user_id) {
 
@@ -42,11 +41,11 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: users } = data;
+    const { count: totalItems, rows: items } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
-    return { totalItems, users, totalPages, currentPage };
+    return { totalItems, items, totalPages, currentPage };
 };
 
 exports.findAllUsers = async function (req) {
@@ -84,4 +83,45 @@ exports.updateUser = async function (userInfo) {
     Object.assign(user, userInfo);
     await user.save();
     return user;
+}
+
+exports.getAdminBookings = async function (req) {
+    const { page, size } = req.query;
+
+    var condition_01 = { isDelete: false };
+
+    const { limit, offset } = getPagination(page, size);
+
+    const data = await bookings.findAndCountAll({
+        where: { ...condition_01 },
+        limit,
+        offset
+    })
+
+    const result = getPagingData(data, page, limit);
+    return result;
+}
+
+
+exports.rejectBooking = async function (booking_id, user_id, type) {
+
+    const booking = await bookings.findOne({ where: { booking_id: booking_id, isDelete: false } });
+
+    if (!booking) {
+        throw new Error("The booking you are trying to reject does not exist");
+    }
+
+    if (type != 3) {
+        if (booking.manager_id != user_id) {
+            throw new Error("Insufficient privileges to reject booking");
+        }
+    }
+
+    if (booking) {
+        booking.status = 'Admin rejected'
+        await booking.save();
+    }
+
+    return booking;
+
 }

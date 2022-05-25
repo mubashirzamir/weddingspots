@@ -46,7 +46,7 @@ const UserList = () => {
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
-            setUser(response.data.data.users)
+            setUser(response.data.data.items)
             setLoading(true)
         }).catch(error => {
             if (typeof error.response === 'undefined') {

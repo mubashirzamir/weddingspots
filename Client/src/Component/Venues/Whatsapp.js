@@ -11,7 +11,7 @@ const Whatsapp = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <BsWhatsapp onMouseOver={({ target }) => target.style.color} />
+                <BsWhatsapp onMouseOver={({ target }) => target.style.color = "white"} />
 
             </a>
         </div>

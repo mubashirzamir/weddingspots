@@ -9,4 +9,7 @@ router.get('', VenueController.getVenues);
 router.get('/:venue_id', VenueController.getVenues);
 router.get('/contact/:venue_id', VenueController.getVenueContact);
 
+router.post('/book/:venue_id', validateToken, VenueController.book);
+
+
 module.exports = router;
