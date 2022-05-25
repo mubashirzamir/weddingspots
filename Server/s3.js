@@ -1,4 +1,4 @@
-const aws = require('aws-sdk');
+const S3 = require('aws-sdk/clients/s3')
 const crypto = require('crypto');
 const { promisify } = require("util");
 const randomBytes = promisify(crypto.randomBytes)
@@ -8,7 +8,7 @@ const bucketName = "weddingspots"
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
-const s3 = new aws.S3({
+const s3 = new S3({
     region,
     accessKeyId,
     secretAccessKey,

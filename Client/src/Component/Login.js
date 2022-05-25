@@ -51,7 +51,16 @@ const Login = () => {
             .catch((error) => {
                 setLoading(true)
 
-                setMessage(error.response.data.error.message)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    setMessage(error.response.data.error.message)
+                }
+
+
+
             })
 
     }

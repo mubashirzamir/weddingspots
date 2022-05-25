@@ -28,7 +28,8 @@ passport.use(new GoogleStrategy({
             }
 
             else {
-                const password = await bcrypt.hash("social-password", 12);
+                var randomstring = Math.random().toString(36).slice(-8);
+                const password = await bcrypt.hash(randomstring, 12);
                 user = await users.create({
                     name: profile.displayName,
                     email: email,

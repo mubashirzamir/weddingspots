@@ -42,7 +42,15 @@ const Register = () => {
                 .catch((error) => {
                     setLoading(true)
 
-                    setRegisterStatus(error.response.data.error.message)
+                    if (typeof error.response === 'undefined') {
+
+                        alert("Server Down")
+                    }
+                    else {
+                        setRegisterStatus(error.response.data.error.message)
+                    }
+
+
                 })
 
         }

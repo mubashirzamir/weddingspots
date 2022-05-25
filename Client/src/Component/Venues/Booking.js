@@ -43,7 +43,13 @@ export default function Booking(props) {
             }))
             .catch((error) => {
 
-                //setMessage(error.response.data.error.message)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
 
             });
     }
