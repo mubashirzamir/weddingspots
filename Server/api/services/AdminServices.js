@@ -77,7 +77,7 @@ exports.updateUser = async function (userInfo) {
     const user = await users.findOne({ where: { user_id: userInfo.user_id, isDelete: false } });
 
     if (!user) {
-        throw new Error("The venue you are trying to update does not exist");
+        throw new Error("The user you are trying to update does not exist");
     }
 
 

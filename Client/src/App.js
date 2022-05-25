@@ -6,6 +6,7 @@ import About from './Component/About'
 import Navbar from './Component/Layout/Navbar'
 import Footer from './Component/Layout/Footer'
 import NotFound from './Component/Layout/NotFound'
+import ServerDown from './Component/Layout/ServerDown'
 import NotAuthenticated from './Component/Layout/NotAuthenticated'
 import AddVenue from './Component/Venues/AddVenue'
 import EditVenue from './Component/Venues/EditVenue'
@@ -183,6 +184,10 @@ function App() {
 
             <Route>
               <NotFound />
+            </Route>
+
+            <Route exact path="/ServerDown">
+              <ServerDown />
             </Route>
 
           </Switch>

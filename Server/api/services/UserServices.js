@@ -56,44 +56,15 @@ exports.getUser = async function (user_id) {
     return user;
 }
 
-/*exports.getFeaturedVenues = async function (req) {
-    const { page, size } = req.query;
-    var condition_01 = { isDelete: false };
-    const { limit, offset } = getPagination(page, size);
+exports.updateProfile = async function (userInfo) {
+    const user = await users.findOne({ where: { user_id: userInfo.user_id, isDelete: false } });
 
-    venues.hasMany(featured_venues, { foreignKey: 'venue_id' })
-    featured_venues.belongsTo(venues, { foreignKey: 'venue_id' })
+    if (!user) {
+        throw new Error("The user you are trying to update does not exist");
+    }
 
-    const data = await venues.findAndCountAll({
-        include: [{
-            model: featured_venues,
-            required: true,
-            where: { ...condition_01 },
-            attributes: ['featured_id']
-        }],
-        attributes: { exclude: ['user_id', 'isDelete', 'createdAt', 'updatedAt'] },
-        limit,
-        offset
-    })
 
-    const result = getPagingData(data, page, limit);
-    return result;
-}*/
-
-/*exports.getFeaturedVenues = async function () {
-    venues.hasMany(featured_venues, { foreignKey: 'venue_id' })
-    featured_venues.belongsTo(venues, { foreignKey: 'venue_id' })
-
-    const featured_list = await venues.findAll({
-        include: [{
-            model: featured_venues,
-            required: true,
-            where: { isDelete: false },
-            attributes: ['featured_id']
-        }],
-        attributes: { exclude: ['user_id', 'isDelete', 'createdAt', 'updatedAt'] }
-    })
-
-    return featured_list;
-}*/
-
+    Object.assign(user, userInfo);
+    await user.save();
+    return user;
+}

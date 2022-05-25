@@ -82,7 +82,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
-                        <li className="nav-item me-1">
+                        <li className="nav-item me-2">
                             <NavLink className="nav-link" aria-current="page" exact to="/Search?area=&city=&max_cap=&max_price=&min_cap=&min_price=&name=&type=">
                                 Venues
                             </NavLink>

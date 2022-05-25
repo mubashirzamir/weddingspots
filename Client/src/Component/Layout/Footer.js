@@ -29,7 +29,7 @@ const Footer = () => {
                     <div className="col">
                         <h5>Contact</h5>
                         <ul className="nav flex-column">
-                            <li className="nav-item nav-link mb-2 p-0 text-muted">Phone: +92 313 2306986</li>
+                            <li className="nav-item nav-link mb-2 p-0 text-muted">Phone: +92 309 0826778</li>
                             <li className="nav-item nav-link mb-2 p-0 text-muted">Email: info@weddingspots.pk</li>
                         </ul>
                     </div>

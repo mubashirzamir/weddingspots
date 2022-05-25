@@ -76,4 +76,22 @@ exports.about = async function (req, res, next) {
     }
 }
 
+exports.updateProfile = async function (req, res, next) {
+    try {
+
+        if (res.locals.decoded.user_id !== req.body.user_id) {
+            return res.status(400).json({ error: noError, data: result, message: "user_id mismatch" });
+        }
+
+        const result = await UserService.updateProfile(req.body);
+
+        if (result) {
+            return res.status(200).json({ error: noError, data: result, message: "Successfully updated profile. Changes will applied on the next login." });
+        }
+
+    } catch (e) {
+        return res.status(400).json({ error: { status: 1, message: e.message }, data: {}, message: {} });
+    }
+}
+
 
