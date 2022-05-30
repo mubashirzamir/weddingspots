@@ -6,11 +6,11 @@ import { FaFacebook } from "react-icons/fa";
 const Social = () => {
 
     const google = () => {
-        window.open("http://localhost:3001/api/social/google", "_self");
+        window.open(`https://weddingspots.herokuapp.com/api/social/google`, "_self");
     }
 
     const facebook = () => {
-        window.open("http://localhost:3001/api/social/facebook", "_self");
+        window.open(`https://weddingspots.herokuapp.com/api/social/facebook`, "_self");
     }
 
     return (

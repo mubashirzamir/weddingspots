@@ -39,7 +39,7 @@ const EditUser = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/adminAPI/updateUser',
+            url: `https://weddingspots.herokuapp.com/adminAPI/updateUser`,
             data: {
                 user_id: user.user_id,
                 name: name,
@@ -71,7 +71,7 @@ const EditUser = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/adminAPI/getUsers/' + params_user_id,
+            url: `https://weddingspots.herokuapp.com/adminAPI/getUsers/` + params_user_id,
         }).then(response => {
             if (response.data.data) {
                 setLoading01(true)

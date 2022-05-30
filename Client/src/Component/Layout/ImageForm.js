@@ -26,7 +26,7 @@ const ImageForm = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
             },
-            url: "http://localhost:3001/managerAPI/s3Url",
+            url: `https://weddingspots.herokuapp.com/managerAPI/s3Url`,
         })
             .then((response => {
                 s3URL = response.data.data.url;
@@ -76,7 +76,7 @@ const ImageForm = () => {
                     data: {
                         imageURL: imageURL
                     },
-                    url: "http://localhost:3001/managerAPI/addImage/" + venue_id,
+                    url: `https://weddingspots.herokuapp.com/managerAPI/addImage/` + venue_id,
                 })
                     .then((response => {
                         history.push("/venue/edit/" + venue_id)

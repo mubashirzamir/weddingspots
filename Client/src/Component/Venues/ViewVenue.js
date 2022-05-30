@@ -43,8 +43,11 @@ const ViewVenue = () => {
 
 
     const loadVenue = async () => {
-        await axios.get("http://localhost:3001/api/venues/" + venue_id).then(response => {
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues/` + venue_id).then(response => {
+            console.log(response.data);
+
             if (response.data.data) {
+
                 setLoading(true)
                 setVenue(response.data.data);
             }
@@ -53,6 +56,7 @@ const ViewVenue = () => {
                 setMessage01("No such venue")
             }
         }).catch(error => {
+            console.log(error.response);
             if (typeof error.response === 'undefined') {
 
                 alert("Server Down")

@@ -14,7 +14,7 @@ const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3001/api/social/google/callback"
+    callbackURL: `https://weddingspots.herokuapp.com/api/social/google/callback`
 },
     async function (accessToken, refreshToken, profile, done) {
 
@@ -48,7 +48,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3001/api/social/facebook/callback"
+    callbackURL: `https://weddingspots.herokuapp.com/api/social/facebook/callback`
 },
     async function (accessToken, refreshToken, profile, cb) {
         try {

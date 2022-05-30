@@ -54,7 +54,7 @@ const EditVenue = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
             },
-            url: 'http://localhost:3001/managerAPI/updateVenue',
+            url: `https://weddingspots.herokuapp.com/managerAPI/updateVenue`,
             data: {
                 venue_id: venue_id,
                 name: name,
@@ -91,7 +91,7 @@ const EditVenue = () => {
     };
 
     const loadVenue = async () => {
-        await axios.get("http://localhost:3001/api/venues/" + venue_id).then(response => {
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues/` + venue_id).then(response => {
             if (response.data.data) {
                 setLoading01(true)
 

@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/api/venues?page=${currentPage}&size=${size}`).then(response => {
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues?page=${currentPage}&size=${size}`).then(response => {
 
 
             const total = response.data.data.totalItems
@@ -66,7 +66,7 @@ const AdminDashboard = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/managerAPI/deleteVenue/' + venue_id,
+            url: `https://weddingspots.herokuapp.com/managerAPI/deleteVenue/` + venue_id,
         }).then((response => {
             setLoading02(true);
 
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/adminAPI/toggleFeaturedVenue/' + venue_id,
+            url: `https://weddingspots.herokuapp.com/adminAPI/toggleFeaturedVenue/` + venue_id,
         }).then((response => {
             setLoading03(true);
             loadVenues(helper);

@@ -34,7 +34,7 @@ export default function Booking(props) {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/api/venues/book/' + venue_id,
+            url: `https://weddingspots.herokuapp.com/api/venues/book/` + venue_id,
             data: booking
         }).
             then((response => {

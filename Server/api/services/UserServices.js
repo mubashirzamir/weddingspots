@@ -36,7 +36,7 @@ const getPagingData = (data, page, limit) => {
 };
 
 exports.login = async function (email, password) {
-    const users = await users.findOne({ where: { email: email, isDelete: false } });
+    const user = await users.findOne({ where: { email: email, isDelete: false } });
     const passMatch = await bcrypt.compare(password, user.password);
 
     if (user && passMatch) {

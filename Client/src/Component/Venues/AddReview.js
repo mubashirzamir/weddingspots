@@ -41,7 +41,7 @@ const AddReview = ({ onButtonPressChange }) => {
                 headers: {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
                 },
-                url: 'http://localhost:3001/api/venues/addreview',
+                url: `https://weddingspots.herokuapp.com/api/venues/addreview`,
                 data: {
                     venue_id: venue_id,
                     review: review_text,

@@ -22,7 +22,7 @@ const ForgotPassword = () => {
         // setLoading(false)
         // await axios({
         //     method: 'post',
-        //     url: "http://localhost:3001/api/forgotPassword",
+        //     url: `https://weddingspots.herokuapp.com/api/forgotPassword`,
         //     data: user
         // })
         //     .then((response => {

@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
         await axios({
             method: 'post',
-            url: "http://localhost:3001/api/login",
+            url: `https://weddingspots.herokuapp.com/api/login`,
             data: user
         })
             .then((response => {
@@ -49,6 +49,7 @@ const Login = () => {
                 history.push("/")
             }))
             .catch((error) => {
+                console.log(error.response);
                 setLoading(true)
 
                 if (typeof error.response === 'undefined') {

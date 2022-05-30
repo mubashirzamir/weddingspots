@@ -31,7 +31,7 @@ function GetUser() {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: "http://localhost:3001/api/getUser",
+            url: `https://weddingspots.herokuapp.com/api/getUser`,
         })
             .then((response => {
 
@@ -59,7 +59,7 @@ function GetUser() {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/api/updateProfile',
+            url: `https://weddingspots.herokuapp.com/api/updateProfile`,
             data: {
                 user_id: user.user_id,
                 name: name,

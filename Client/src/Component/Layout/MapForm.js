@@ -57,7 +57,7 @@ function Map() {
                 lat: lat,
                 lng: lng
             },
-            url: "http://localhost:3001/managerAPI/addLocation/" + venue_id,
+            url: `https://weddingspots.herokuapp.com/managerAPI/addLocation/` + venue_id,
         })
             .then((response => {
                 history.push("/venue/edit/" + venue_id)

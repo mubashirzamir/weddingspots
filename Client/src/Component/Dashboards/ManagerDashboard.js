@@ -37,7 +37,7 @@ const ManagerDashboard = () => {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/api/venues?page=${currentPage}&size=${size}&user_id=${authState.user_id}`).then(response => {
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues?page=${currentPage}&size=${size}&user_id=${authState.user_id}`).then(response => {
 
 
             const total = response.data.data.totalItems
@@ -64,7 +64,7 @@ const ManagerDashboard = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/managerAPI/deleteVenue/' + venue_id,
+            url: `https://weddingspots.herokuapp.com/managerAPI/deleteVenue/` + venue_id,
         }).then((response => {
             setLoading02(true);
 

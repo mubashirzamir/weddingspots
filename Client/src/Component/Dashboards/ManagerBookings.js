@@ -20,7 +20,7 @@ function ManagerBookings() {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/managerAPI/bookings?page=${currentPage}&size=${size}`,
+        await axios.get(`https://weddingspots.herokuapp.com/managerAPI/bookings?page=${currentPage}&size=${size}`,
             {
                 headers: {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
@@ -50,7 +50,7 @@ function ManagerBookings() {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
 
             },
-            url: 'http://localhost:3001/managerAPI/approveBooking/' + booking_id,
+            url: `https://weddingspots.herokuapp.com/managerAPI/approveBooking/` + booking_id,
         }).
             then((response => {
                 loadBookings();
@@ -76,7 +76,7 @@ function ManagerBookings() {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
 
             },
-            url: 'http://localhost:3001/managerAPI/refuseBooking/' + booking_id,
+            url: `https://weddingspots.herokuapp.com/managerAPI/refuseBooking/` + booking_id,
         }).
             then((response => {
                 loadBookings();

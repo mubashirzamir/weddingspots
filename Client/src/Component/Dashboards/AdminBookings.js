@@ -20,7 +20,7 @@ function AdminBookings() {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/adminAPI/bookings?page=${currentPage}&size=${size}`,
+        await axios.get(`https://weddingspots.herokuapp.com/adminAPI/bookings?page=${currentPage}&size=${size}`,
             {
                 headers: {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
@@ -50,7 +50,7 @@ function AdminBookings() {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
 
             },
-            url: 'http://localhost:3001/adminAPI/rejectBooking/' + booking_id,
+            url: `https://weddingspots.herokuapp.com/adminAPI/rejectBooking/` + booking_id,
         }).
             then((response => {
                 loadBookings();

@@ -3,8 +3,8 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken');
 
 const noError = { status: 0, message: "No error" }
-const CLIENT_SUCCESS_URL = "http://localhost:3000";
-const CLIENT_FAILURE_URL = "http://localhost:3000/Login/Failure"
+const CLIENT_SUCCESS_URL = "https://www.weddingspots.pk";
+const CLIENT_FAILURE_URL = "https://www.weddingspots.pk/Login/Failure"
 
 // Google
 

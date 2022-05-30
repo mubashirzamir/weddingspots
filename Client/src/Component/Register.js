@@ -31,7 +31,7 @@ const Register = () => {
             setLoading(false)
             await axios({
                 method: 'post',
-                url: "http://localhost:3001/api/register",
+                url: `https://weddingspots.herokuapp.com/api/register`,
                 data: data
             })
                 .then((response => {

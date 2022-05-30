@@ -18,7 +18,7 @@ function UserBookings() {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/api/bookings?page=${currentPage}&size=${size}`,
+        await axios.get(`https://weddingspots.herokuapp.com/api/bookings?page=${currentPage}&size=${size}`,
             {
                 headers: {
                     'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),

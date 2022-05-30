@@ -27,7 +27,7 @@ const ReviewList = ({ buttonPress }) => {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`http://localhost:3001/api/venues/reviews?page=${currentPage}&size=${size}&venue_id=${venue_id}`).then(response => {
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues/reviews?page=${currentPage}&size=${size}&venue_id=${venue_id}`).then(response => {
             const total = response.data.data.totalItems
             setPageCount(Math.ceil(total / size))
             setReview(response.data.data.items)
