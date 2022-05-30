@@ -19,16 +19,16 @@ const UserList = () => {
     });
 
     const [pageCount, setPageCount] = useState(0);
-    let size = 5;
+    let size = 10;
 
     useEffect(() => {
         loadUsers();
         //setTimeout(loadUsers, 5000);
-        //console.log("Hello")
+        //
     }, []);
 
     const loadUsers = async (currentPage) => {
-        console.log("Current page", currentPage)
+
         setHelper(currentPage)
 
         if (!currentPage) {
@@ -37,19 +37,25 @@ const UserList = () => {
         await await axios({
             method: 'get',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: `http://localhost:3001/adminAPI/getUsers?page=${currentPage}&size=${size}`
+            url: `https://weddingspots.herokuapp.com/adminAPI/getUsers?page=${currentPage}&size=${size}`
         }).then(response => {
-            console.log(response.data)
-            console.log("total", response.data.data.totalItems)
+
+
             const total = response.data.data.totalItems
             //total/size
             setPageCount(Math.ceil(total / size))
-            setUser(response.data.data.users)
+            setUser(response.data.data.items)
             setLoading(true)
         }).catch(error => {
-            console.log(error.response.data)
+            if (typeof error.response === 'undefined') {
+
+                alert("Server Down")
+            }
+            else {
+                alert(error.response.data.error.message)
+            }
         });
 
     }
@@ -59,48 +65,53 @@ const UserList = () => {
         await axios({
             method: 'post',
             headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+                'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: 'http://localhost:3001/adminAPI/deleteUser/' + user_id,
-        }).
-            then((response => {
-                setLoading02(true);
-                console.log(response.data)
-                loadUsers(helper);
+            url: `https://weddingspots.herokuapp.com/adminAPI/deleteUser/` + user_id,
+        }).then((response => {
+            setLoading02(true);
 
-            }))
+            loadUsers(helper);
+
+        }))
             .catch((error) => {
                 setLoading02(true);
-                console.log(error.response.data)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
             })
 
     }
 
 
     const handlePageClick = async (data) => {
-        console.log(data.selected)
+
         let currentPage = data.selected
         loadUsers(currentPage)
     }
 
     return (
-        <div class="container">
+        <div className="container">
             <div className="py-4">
 
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <h1>Manage Users</h1>
+                <div className="row mb-3">
+                    <div className="col-sm">
+                        <h5>Manage Users</h5>
                     </div>
                 </div>
 
                 {(!loading && !loading02) &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only"></span>
                     </div>
 
                 }
 
-                <table class="table shadow mb-3">
+                <table className="table shadow mb-3">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -115,7 +126,7 @@ const UserList = () => {
                         {
                             users.map((user, index) => (
 
-                                <tr>
+                                <tr key={user.user_id}>
                                     <th scope="row">{user.user_id}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -124,10 +135,10 @@ const UserList = () => {
 
                                         <div className='btn-group'>
 
-                                            <Link class="btn btn-primary me-2" to={`/user/edit/${user.user_id}`}>Edit</Link>
+                                            <Link className="btn btn-primary me-2" to={`/user/edit/${user.user_id}`}>Edit</Link>
 
-                                            <button class="btn btn-danger" onClick={() => setOpenModal01({ status: true, user_id: user.user_id })}>Delete</button>
-                                            {/*<button class="btn btn-danger me-2" onClick={() => deleteuser(user.user_id)}>Delete</button>*/}
+                                            <button className="btn btn-danger" onClick={() => setOpenModal01({ status: true, user_id: user.user_id })}>Delete</button>
+                                            {/*<button className="btn btn-danger me-2" onClick={() => deleteuser(user.user_id)}>Delete</button>*/}
 
                                         </div>
 
@@ -144,24 +155,25 @@ const UserList = () => {
 
                 {openModal01.status && <ModalDelete modalInfo={openModal01} modalHandler={setOpenModal01} deleteuser={deleteUser} />}
 
-
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    next={"Next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={3}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-link"}
-                    nextClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
 
             </div>
         </div >

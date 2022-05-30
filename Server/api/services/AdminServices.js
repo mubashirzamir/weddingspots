@@ -1,5 +1,4 @@
-const { users } = require('../models')
-const { venues } = require('../models')
+const { users, venues, bookings } = require('../models')
 
 exports.deleteUser = async function (user_id) {
 
@@ -42,11 +41,11 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: users } = data;
+    const { count: totalItems, rows: items } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
-    return { totalItems, users, totalPages, currentPage };
+    return { totalItems, items, totalPages, currentPage };
 };
 
 exports.findAllUsers = async function (req) {
@@ -77,7 +76,7 @@ exports.updateUser = async function (userInfo) {
     const user = await users.findOne({ where: { user_id: userInfo.user_id, isDelete: false } });
 
     if (!user) {
-        throw new Error("The venue you are trying to update does not exist");
+        throw new Error("The user you are trying to update does not exist");
     }
 
 
@@ -86,32 +85,45 @@ exports.updateUser = async function (userInfo) {
     return user;
 }
 
-/*exports.getUsers = async function () {
-    const listOfUsers = await users.findAll({ where: { isDelete: false } });
-    return listOfUsers;
-}*/
+exports.getAdminBookings = async function (req) {
+    const { page, size } = req.query;
 
-/*exports.addFeaturedVenue = async function (venue_id) {
-    const [featured_venue, created] = await featured_venues.findOrCreate({
-        where: { venue_id: venue_id, isDelete: false },
-        defaults: {
-            venue_id: venue_id
-        }
-    });
+    var condition_01 = { isDelete: false };
 
-    return [featured_venue, created];
+    const { limit, offset } = getPagination(page, size);
+
+    const data = await bookings.findAndCountAll({
+        where: { ...condition_01 },
+        order: [['booking_id', 'DESC']],
+        include: [{ model: users, attributes: ["name", "email"], where: { isDelete: false } }],
+        limit,
+        offset
+    })
+
+    const result = getPagingData(data, page, limit);
+    return result;
 }
 
 
-exports.deleteFeaturedVenue = async function (featured_id) {
+exports.rejectBooking = async function (booking_id, user_id, type) {
 
-    const featured_venue = await featured_venues.findOne({ where: { featured_id: featured_id, isDelete: false } });
+    const booking = await bookings.findOne({ where: { booking_id: booking_id, isDelete: false } });
 
-    if (featured_venue) {
-        featured_venue.isDelete = true
-        await featured_venue.save();
+    if (!booking) {
+        throw new Error("The booking you are trying to reject does not exist");
     }
 
-    return featured_venue;
+    if (type != 3) {
+        if (booking.manager_id != user_id) {
+            throw new Error("Insufficient privileges to reject booking");
+        }
+    }
 
-}*/
+    if (booking) {
+        booking.status = 'Admin rejected'
+        await booking.save();
+    }
+
+    return booking;
+
+}

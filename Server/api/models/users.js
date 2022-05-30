@@ -37,7 +37,14 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         },
 
-    })
+    }, {})
+
+
+    users.associate = function (models) {
+        users.hasMany(models.venue_reviews, { as: 'comments', foreignKey: 'user_id' });
+        users.hasMany(models.bookings, { as: 'bookings', foreignKey: 'user_id' });
+        users.hasMany(models.venues, { as: 'venues', foreignKey: 'user_id' });
+    }
 
     return users;
 };

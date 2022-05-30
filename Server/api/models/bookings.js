@@ -14,22 +14,35 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
 
+        venue_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
 
-        date: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW,
+        manager_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
 
-        description: {
-            type: DataTypes.TEXT
+        booking_date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
         },
 
-        details: {
-            type: DataTypes.JSON,
+        booking_time: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'Pending'
         },
 
         isDelete: {
@@ -37,7 +50,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-    })
+
+    }, {})
+
+    bookings.associate = function (models) {
+        bookings.belongsTo(models.users, { foreignKey: 'user_id' });
+        bookings.belongsTo(models.venues, { foreignKey: 'venue_id' });
+
+    }
 
     return bookings;
 };

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useContext } from "react"
 import { AuthContext } from '../Helpers/AuthContext'
+import Social from "./Layout/Social";
 
 const Login = () => {
 
@@ -26,16 +27,16 @@ const Login = () => {
 
     const onSubmit = async e => {
         setLoading(false)
-        console.log(user);
+
         e.preventDefault();
         await axios({
             method: 'post',
-            url: "http://localhost:3001/api/login",
+            url: `https://weddingspots.herokuapp.com/api/login`,
             data: user
         })
             .then((response => {
-                console.log(response.data)
-                sessionStorage.setItem("accessToken", response.data.data.theToken)
+
+                localStorage.setItem("accessToken", response.data.data.theToken)
                 setAuthState({
                     user_id: response.data.data.user.user_id,
                     email: response.data.data.user.email,
@@ -43,59 +44,81 @@ const Login = () => {
                     type: response.data.data.user.type,
                     status: true
                 })
-                console.log("AuthState", authState)
+
                 setLoading(true)
                 history.push("/")
             }))
             .catch((error) => {
+                console.log(error.response);
                 setLoading(true)
-                console.log(error.response.data)
-                setMessage(error.response.data.error.message)
+
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    setMessage(error.response.data.error.message)
+                }
+
+
+
             })
 
     }
 
-
     return (
-        <div class="container">
+        <div className="container">
 
             <div className="py-4">
 
-                <h1>Login</h1>
+                <div className="row">
+                    <div className="card shadow py-4 col-xl-6 mx-auto">
 
-                {!loading &&
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
+                        <h4 className="card-title text-center mb-4 mt-1">Login
+                            {!loading &&
+                                <div className="spinner-border text-primary ms-3" role="status">
+                                    <span className="sr-only"></span>
+                                </div>}
+                        </h4>
+
+                        <form onSubmit={e => onSubmit(e)}>
+
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input type="email" className="form-control" name="email" value={email} onChange={e => onInputChange(e)} placeholder="Email Address" required />
+                                </div>
+                            </div>
+
+                            <div className="row mb-2">
+                                <div className="col-sm-10 mx-auto">
+                                    <input type="password" className="form-control" name="password" value={password} onChange={e => onInputChange(e)} placeholder="Password" required />
+                                </div>
+                                <div className="col-sm-10 mt-1 mx-auto">
+                                    <span className="error text-danger">{message}</span>
+                                </div>
+                            </div>
+
+
+                            <div className='row'>
+                                <div className="col-sm-10 mx-auto">
+                                    <div className="row">
+                                        <div className="col-sm">
+                                            <button className="btn btn-primary" type="submit">Login</button>
+                                        </div>
+
+                                        <div className="col-sm text-end">
+                                            <Link className="text-decoration-none" to="/ForgotPassword">Forgot password?</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <hr />
+                        <Social />
                     </div>
-
-                }
-
-                <form onSubmit={e => onSubmit(e)}>
-
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputText3" name="email" value={email} onChange={e => onInputChange(e)} required />
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="inputText3" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputText3" name="password" value={password} onChange={e => onInputChange(e)} required />
-                        </div>
-                    </div>
-
-
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Login</button>
-                    </div>
-
-
-                </form>
-
-                <br></br>
-                <h2>{message}</h2>
+                </div>
 
 
             </div>

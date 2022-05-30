@@ -1,77 +1,143 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
-import AddReview from "./AddReview";
+import dateFormat from 'dateformat';
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import ReactStars from "react-rating-stars-component";
+import { useParams } from 'react-router-dom';
 
-const ReviewList = () => {
+const ReviewList = ({ buttonPress }) => {
+
+    const [start, setStart] = useState(buttonPress);
 
     const { venue_id } = useParams();
 
     const [reviews, setReview] = useState([]);
 
+    const [pageCount, setPageCount] = useState(0);
+    let size = 5;
+
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setStart(buttonPress);
         loadReview();
-        //console.log("Hello")
-    }, []);
+    }, [buttonPress]);
 
-    const loadReview = async () => {
-        const result = await axios.post("http://localhost:3001/api/venue/reviews", {
-            venue_id: venue_id
-        })
-        console.log(result.data)
-        console.log("Hi")
-        setReview(result.data.review)
-        console.log(result.data.review);
+    const loadReview = async (currentPage) => {
+        if (!currentPage) {
+            currentPage = 0;
+        }
+        await axios.get(`https://weddingspots.herokuapp.com/api/venues/reviews?page=${currentPage}&size=${size}&venue_id=${venue_id}`).then(response => {
+            const total = response.data.data.totalItems
+            setPageCount(Math.ceil(total / size))
+            setReview(response.data.data.items)
+            setLoading(true)
+
+        }).catch(error => {
+            setLoading(true)
+            if (typeof error.response === 'undefined') {
+
+                alert("Server Down")
+            }
+            else {
+                alert(error.response.data.error.message)
+            }
+        });
+    }
+
+    const handlePageClick = async (data) => {
+
+        let currentPage = data.selected
+        loadReview(currentPage)
     }
 
     return (
 
         <div>
 
-            <AddReview loadReview={loadReview} />
+            <span>
+                {!loading &&
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only"></span>
+                    </div>
+                }
+            </span>
 
-            <h1>Review List</h1>
+            <div className="row d-flex justify-content-center mt-3">
+                {reviews.map((review) => {
+                    return (
+                        <div key={review.review_id} className="row v my-2">
+
+                            <div className="card shadow-sm w-100">
+                                <div className="card-body">
+
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <p className="">{review.review}</p>
+
+                                        </div>
+
+                                        <div className="col-3 col-xs-3">
+                                            <p className="text-end">{dateFormat(review.date, "mmmm dS, yyyy")}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <span className="fw-bold text-primary">{review.user.name} </span>
+                                            <span className="float-end">
+                                                <ReactStars
+                                                    count={review.rating}
+                                                    size={20}
+                                                    edit={false}
+                                                    color="#ffd700"
+                                                />
+
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
 
 
-            <table class="table shadow">
-                <thead>
-                    <tr>
-                        {/*<th scope="col">Review ID</th>
-                        <th scope="col">Venue ID</th>
-                        <th scope="col">User ID</th>*/}
-                        <th scope="col">Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Review</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        reviews.map((review, index) => (
 
-                            <tr>
-                                {/*<th scope="row">{review.review_id}</th>
-                                <td>{review.venue_id}</td>
-                        <td>{review.user_id}</td>*/}
-                                <td>{review.name}</td>
-                                <td>{review.review_date}</td>
-                                <td>{review.rating}</td>
-                                <td>{review.review_text}</td>
+                        </div>
+                    );
+                })}
+            </div>
 
-                            </tr>
+            <div className="mt-3">
 
-                        ))
+                {!(pageCount <= 1) &&
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        next={"Next"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-link"}
+                        nextClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+                }
 
-                    }
-
-
-                </tbody>
-            </table>
+            </div>
 
 
 
-        </div>
+
+
+
+        </div >
 
     )
 

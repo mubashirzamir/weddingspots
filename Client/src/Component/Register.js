@@ -1,171 +1,132 @@
-import React, { Component } from 'react'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+import Social from './Layout/Social'
+import passwordValidator from 'password-validator'
 
-class Register extends Component {
+var schema = new passwordValidator();
 
-    constructor(props) {
-        super(props)
+schema
+    .is().min(8)                                    // Minimum length 8
+    .is().max(100)                                  // Maximum length 100
+// .has().uppercase()                              // Must have uppercase letters
+// .has().lowercase()                              // Must have lowercase letters
+// .has().digits(2)                                // Must have at least 2 digits
+// .has().not().spaces()                           // Should not have spaces
+// .is().not().oneOf(['Passw0rd', 'Password123']);
 
-        this.state = {
-            type: "1",
-            name: "",
-            email: "",
-            password: "",
-            registerStatus: ""
-        }
+const Register = () => {
 
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
+    const { register, handleSubmit } = useForm();
+    const [loading, setLoading] = useState(true);
+    const [registerStatus, setRegisterStatus] = useState();
+    const [passwordError, setPasswordError] = useState();
 
-    typehandler = (event) => {
-        console.log("EYa", this.state.type)
-        this.setState({
-            type: event.target.value
-        })
-    }
+    let history = useHistory();
 
-    namehandler = (event) => {
-        this.setState({
-            name: event.target.value
-        })
-    }
-    emailhandler = (event) => {
-        this.setState({
-            email: event.target.value
-        })
-    }
-    passwordhandler = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
+    const onSubmit = async (data) => {
+        if (schema.validate(data.password)) {
 
-
-    handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(this.state);
-
-        await axios({
-            method: 'post',
-            url: "http://localhost:3001/api/register",
-            data: this.state
-        })
-            .then((response => {
-                console.log(response.data.message)
-                this.setState({
-                    registerStatus: response.data.message
-                })
-                //history.push("/login")
-            }))
-            .catch((error) => {
-                console.log(error.response.data)
-                this.setState({
-                    registerStatus: error.response.data.error.message
-                })
-            })
-
-        /*try {
-
-            fetch("http://localhost:3001/api/register", {
+            setLoading(false)
+            await axios({
                 method: 'post',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state)
-            }).then(response => response.json())
-                .then((data) => {
+                url: `https://weddingspots.herokuapp.com/api/register`,
+                data: data
+            })
+                .then((response => {
 
-                    if (data.errors) {
-                        this.setState({
-                            registerStatus: data.errors[0].msg
-                        })
+                    setLoading(true)
+                    history.push("/login")
+                }))
+                .catch((error) => {
+                    setLoading(true)
+
+                    if (typeof error.response === 'undefined') {
+
+                        alert("Server Down")
                     }
-
                     else {
-                        this.setState({
-                            registerStatus: data.message
-                        })
+                        setRegisterStatus(error.response.data.error.message)
                     }
 
 
-                    console.log(data)
-                });
+                })
 
-        } catch (e) {
-            console.log(e)
         }
 
-
-        this.setState({
-            name: "",
-            email: "",
-            password: "",
-            registerStatus: ""
-        })
-        event.preventDefault()*/
+        else {
+            setPasswordError("Password must be at least 8 characters long")
+        }
 
     }
 
+    return (
+        <div className="container">
 
+            <div className="py-4">
 
+                <div className='row'>
+                    <div className='card shadow py-4 col-xl-6 mx-auto'>
 
-    render() {
-        return (
-            <div class="container">
+                        <h4 className="card-title text-center mb-4 mt-1">Register
+                            {!loading &&
+                                <div className="spinner-border text-primary ms-3" role="status">
+                                    <span className="sr-only"></span>
+                                </div>}
+                        </h4>
 
-                <div className="py-4">
+                        <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <form onSubmit={this.handleSubmit}>
-
-                        <h1>Register</h1>
-
-                        <div class="row mb-3">
-                            <label for="inputType3" class="col-sm-2 col-form-label">User Type</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" value={this.state.type} onChange={this.typehandler} required>
-                                    <option value="2">Manager</option>
-                                    <option value="1">User</option>
-                                </select>
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <select  {...register('type', { required: true })} className="form-select" required>
+                                        <option value="1">User</option>
+                                        <option value="2">Vendor</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputText3" value={this.state.name} onChange={this.namehandler} required />
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('name', { required: true })} type="text" className="form-control" placeholder="Name" required />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" value={this.state.email} onChange={this.emailhandler} required />
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('email', { required: true })} type="email" className="form-control" placeholder="Email" required />
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" value={this.state.password} onChange={this.passwordhandler} required />
+                            <div className="row mb-3">
+                                <div className="col-sm-10 mx-auto">
+                                    <input {...register('password', { required: true })} type="password" className="form-control" placeholder="Password" required />
+                                </div>
+                                <div className="col-sm-10 mt-1 mx-auto">
+                                    <span className="error text-danger">{passwordError}</span>
+                                    <span className="error text-danger">{registerStatus}</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Register</button>
-                        </div>
+                            <div className="col-sm-10 mx-auto">
+                                <button className="btn btn-primary" type="submit">Register</button>
+                            </div>
 
-                    </form>
+                        </form>
 
-                    <br></br>
-                    <h2>{this.state.registerStatus}</h2>
+                        <hr />
 
+                        <Social />
+
+                    </div >
                 </div>
+
 
             </div>
 
-        )
-    }
+        </div>
+    )
 }
 
 export default Register

@@ -3,9 +3,7 @@ module.exports = errorHandler;
 function errorHandler(err, req, res, next) {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
-    res.status(err.statusCode).json({
-        message: err.message,
-    });
+    res.status(err.statusCode).json({ error: { status: 1, message: err.message }, data: {}, message: {} });
 };
 
 /*module.exports = errorHandler;

@@ -1,14 +1,20 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Helpers/AuthContext";
 import { useHistory } from 'react-router-dom';
+import './Navbar.css'
+import logo from '../../Assets/logo.svg'
+
+import Dropdown from '../Layout/Dropdown'
 
 const Navbar = () => {
 
     let history = useHistory();
 
     const { authState, setAuthState } = useContext(AuthContext)
+
+    const [collapse, setCollapse] = useState(false);
 
     let roleName = "User"
 
@@ -22,7 +28,7 @@ const Navbar = () => {
 
 
     const logout = () => {
-        sessionStorage.removeItem("accessToken")
+        localStorage.removeItem("accessToken")
         setAuthState({
             user_id: "",
             email: "",
@@ -33,94 +39,119 @@ const Navbar = () => {
         history.push("/")
     }
 
+    const show = (collapse) ? "show" : "";
+
     return (
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-primary shadow-sm bg-white my-navbar">
             <div className="container">
-                <Link class="navbar-brand" to="/">
-                    Venue Portal
+
+
+                <Link className="me-2" to="/">
+                    <img src={logo} width="60" alt="logo"></img>
                 </Link>
+
+                <Link className="navbar-brand my-navbar-brand" to="/">
+                    weddingspots
+                </Link>
+
                 <button
-                    class="navbar-toggler"
+                    className="navbar-toggler navbar-light"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
+                    onClick={() => setCollapse(!collapse)}
                 >
-                    <span class="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div className={"collapse navbar-collapse " + show} id="navbarSupportedContent">
+                    <ul className="navbar-nav nav-pills nav-fill me-auto ms-2 mb-2 mb-lg-0">
 
-                        <li class="nav-item">
+                        <li className="nav-item me-2">
                             <NavLink className="nav-link" aria-current="page" exact to="/">
                                 Home
                             </NavLink>
                         </li>
 
-                        <li className="nav-item">
+                        <li className="nav-item me-2">
                             <NavLink className="nav-link" aria-current="page" exact to="/about">
                                 About
                             </NavLink>
                         </li>
 
-                        {!authState.status && (
+                        <li className="nav-item me-2">
+                            <NavLink className="nav-link" aria-current="page" exact to="/Search?area=&city=&max_cap=&max_price=&min_cap=&min_price=&name=&type=">
+                                Venues
+                            </NavLink>
+                        </li>
 
-                            <>
+                        {authState.status && (
 
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" aria-current="page" exact to="/register">
-                                        Register
-                                    </NavLink>
-                                </li>
-
-                                <li className="nav-item">
-                                    <NavLink className="nav-link" aria-current="page" exact to="/login">
-                                        Login
-                                    </NavLink>
-                                </li>
-
-
-
-                            </>
-
-                        )}
-
-                        {authState.type === 2 && (
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" exact to="/managervenuelist">
-                                    Manage Venues
-                                </NavLink>
+                            <li className="nav-item me-2">
+                                <Dropdown />
                             </li>
-                        )}
 
-                        {authState.type > 2 && (
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" exact to="/adminvenuelist">
-                                    Manage Venues
-                                </NavLink>
-                            </li>
-                        )}
-
-                        {authState.type > 2 && (
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" exact to="/adminuserlist">
-                                    Manage Users
-                                </NavLink>
-                            </li>
                         )}
 
                     </ul>
+
+                    {!authState.status && (
+
+                        <>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/login">
+                                Login
+                            </Link>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/register">
+                                Register
+                            </Link>
+
+                        </>
+
+                    )}
+
+                    {authState.status && (
+                        <>
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/getUser">{authState.name} ({roleName})</Link>
+                            <button className="btn btn-outline-danger my-button" onClick={logout}>Logout</button>
+                        </>
+                    )}
+
                 </div>
 
-                {authState.status && (
-                    <>
-                        <Link className="btn btn-outline-light me-2" to="/getUser">{authState.name} ({roleName})</Link>
-                        <button className="btn btn-outline-light" onClick={logout}>Logout</button>
-                    </>
-                )}
+                <div>
+
+
+                    {/* {!authState.status && (
+
+                        <>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/login">
+                                Login
+                            </Link>
+
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/register">
+                                Register
+                            </Link>
+
+                        </>
+
+                    )} */}
+
+                    {/* {authState.status && (
+                        <>
+                            <Link className="btn btn-outline-primary me-2 my-button" to="/getUser">{authState.name} ({roleName})</Link>
+                            <button className="btn btn-outline-danger my-button" onClick={logout}>Logout</button>
+                        </>
+                    )} */}
+
+                </div>
+
+
 
             </div>
         </nav >

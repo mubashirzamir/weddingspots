@@ -6,10 +6,10 @@ import { AuthContext } from "./AuthContext";
 function ProtectedRoutes({ component: Component, ...rest }) {
 
     const { authState } = useContext(AuthContext)
-    console.log("Protected authState", authState)
 
 
-    if (sessionStorage.getItem('accessToken')) {
+
+    if (localStorage.getItem('accessToken')) {
         var isAuth = true;
     }
 

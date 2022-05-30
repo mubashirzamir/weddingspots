@@ -12,11 +12,19 @@ module.exports = (sequelize, DataTypes) => {
         venue_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'venues',
+                key: 'venue_id'
+            }
         },
 
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'users',
+                key: 'user_id'
+            }
         },
 
         date: {
@@ -41,7 +49,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-    })
+
+    }, {})
+
+    venue_reviews.associate = function (models) {
+        venue_reviews.belongsTo(models.users, { foreignKey: 'user_id' });
+    }
+
 
     return venue_reviews;
 };

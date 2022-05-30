@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         },
 
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
 
@@ -102,7 +102,13 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         },
 
-    })
+    }, {})
+
+    venues.associate = function (models) {
+        venues.belongsTo(models.users, { foreignKey: 'user_id' });
+        venues.hasMany(models.bookings, { as: 'bookings', foreignKey: 'venue_id' });
+    }
+
 
     return venues;
 };

@@ -1,27 +1,35 @@
-import Register from './Component/Register'
-import Login from './Component/Login'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import "../node_modules/bootstrap/dist/css/bootstrap.css"
+import About from './Component/About'
+import AdminBookings from './Component/Dashboards/AdminBookings'
+import AdminDashboard from './Component/Dashboards/AdminDashboard'
+import ManagerBookings from './Component/Dashboards/ManagerBookings'
+import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
+import UserBookings from './Component/Dashboards/UserBookings'
+import UserList from './Component/Dashboards/UserList'
+import EditUser from './Component/EditUser'
 import GetUser from './Component/GetUser'
 import Home from './Component/Home'
-import About from './Component/About'
+import Footer from './Component/Layout/Footer'
+import ForgotPassword from './Component/Layout/ForgotPassword'
+import ImageForm from './Component/Layout/ImageForm'
+import LoginFailure from './Component/Layout/LoginFailure'
+import MapDisplay from './Component/Layout/MapDisplay'
+import MapForm from './Component/Layout/MapForm'
 import Navbar from './Component/Layout/Navbar'
-import NotFound from './Component/Layout/NotFound'
 import NotAuthenticated from './Component/Layout/NotAuthenticated'
+import NotFound from './Component/Layout/NotFound'
+import ResetPassword from './Component/Layout/ResetPassword'
+import SearchParent from './Component/Layout/Search/SearchParent'
+import Login from './Component/Login'
+import Register from './Component/Register'
+import ScrollToTop from './Component/ScrollToTop'
 import AddVenue from './Component/Venues/AddVenue'
 import EditVenue from './Component/Venues/EditVenue'
 import ViewVenue from './Component/Venues/ViewVenue'
-import AdminDashboard from './Component/Dashboards/AdminDashboard'
-import UserList from './Component/Dashboards/UserList'
-import EditUser from './Component/EditUser'
-import ManagerDashboard from './Component/Dashboards/ManagerDashboard'
-import SearchResults from './Component/Layout/SearchResults'
-
 import { AuthContext } from './Helpers/AuthContext'
-import { useState, useEffect } from 'react'
-
-import "../node_modules/bootstrap/dist/css/bootstrap.css"
-
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import axios from 'axios'
 
 function App() {
 
@@ -33,16 +41,24 @@ function App() {
     status: false
   })
 
+  const cookieToToken = async () => {
+    const theToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //eslint-disable-line
+    const flag = theToken === 'undefined' || theToken === null;
+    if (!flag) {
+      localStorage.setItem("accessToken", theToken)
+      document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+  }
+
   const checkLoginStatus = async () => {
     await axios({
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
+        'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
       },
-      url: "http://localhost:3001/api/isloggedin",
+      url: `https://weddingspots.herokuapp.com/api/isloggedin`,
     })
       .then((response => {
-        console.log(response.data)
         if (!authState.status) {
           setAuthState({
             user_id: response.data.data.user_id,
@@ -54,7 +70,7 @@ function App() {
         }
       }))
       .catch((error) => {
-        console.log(error.response)
+
         setAuthState({
           user_id: "",
           email: "",
@@ -65,7 +81,12 @@ function App() {
       })
   }
 
+
+
   useEffect(() => {
+    if (localStorage.getItem("accessToken") === null || localStorage.getItem("accessToken") === '') {
+      cookieToToken()
+    }
     checkLoginStatus()
   }, [])
 
@@ -77,16 +98,19 @@ function App() {
 
         <Router>
 
+          <ScrollToTop />
+
           <Navbar />
 
           <Switch>
+
 
             <Route exact path="/">
               <Home />
             </Route>
 
-            <Route exact path="/SearchResults">
-              <SearchResults />
+            <Route exact path="/Search">
+              <SearchParent />
             </Route>
 
             <Route exact path="/About">
@@ -94,11 +118,19 @@ function App() {
             </Route>
 
             <Route exact path="/Register">
-              <Register />
+              {!authState.status ? <Register /> : <Home />}
             </Route>
 
             <Route exact path="/Login">
-              <Login />
+              {!authState.status ? <Login /> : <Home />}
+            </Route>
+
+            <Route exact path="/ForgotPassword">
+              {!authState.status ? <ForgotPassword /> : <Home />}
+            </Route>
+
+            <Route exact path="/ResetPassword">
+              {!authState.status ? <ResetPassword /> : <Home />}
             </Route>
 
             <Route exact path="/GetUser">
@@ -133,15 +165,48 @@ function App() {
               <ViewVenue />
             </Route>
 
+            <Route exact path="/venue/addImage/:venue_id">
+              {authState.type > 1 ? <ImageForm /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/venue/addLocation/:venue_id">
+              {authState.type > 1 ? <MapForm /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/Map">
+              <MapDisplay />
+            </Route>
+
             <Route exact path="/NotAuthenticated">
               <NotAuthenticated />
+            </Route>
+
+            <Route exact path="/Login/Failure">
+              <LoginFailure />
+            </Route>
+
+            <Route exact path="/UserBookings">
+              {authState.type >= 1 ? <UserBookings /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/ManagerBookings">
+              {authState.type === 2 ? <ManagerBookings /> : <NotAuthenticated />}
+            </Route>
+
+            <Route exact path="/AdminBookings">
+              {authState.type === 3 ? <AdminBookings /> : <NotAuthenticated />}
             </Route>
 
             <Route>
               <NotFound />
             </Route>
 
+
+
           </Switch>
+
+          <Footer />
+
 
         </Router>
 

@@ -6,22 +6,22 @@ const Modal = (props) => {
     return (
         <div tabindex="-1" role="dialog">
             <div role="document">
-                <div class="modalBackground" style={{ zIndex: 1060 }}>
-                    <div class="modal-header">
+                <div className="modalBackground" style={{ zIndex: 1060 }}>
+                    <div className="modal-header">
                         {props.modalInfo.isFeatured ?
-                            <h5 class="modal-title">Unfeature Venue</h5> :
-                            <h5 class="modal-title">Feature Venue</h5>
+                            <h5 className="modal-title">Unfeature Venue</h5> :
+                            <h5 className="modal-title">Feature Venue</h5>
                         }
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                         {props.modalInfo.isFeatured ?
                             <p>Are you sure you want to unfeature venue ID: {props.modalInfo.venue_id}?</p> :
                             <p>Are you sure you want to feature venue ID: {props.modalInfo.venue_id}?</p>
                         }
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                         <button onClick={() => { props.featureVenue(props.modalInfo.venue_id); props.modalHandler({ status: false }) }
-                        } type="button" class="btn btn-warning">
+                        } type="button" className="btn btn-warning">
                             {props.modalInfo.isFeatured ?
                                 <>
                                     Unfeature
@@ -31,7 +31,7 @@ const Modal = (props) => {
                                 </>
                             }
                         </button>
-                        <button onClick={() => props.modalHandler({ status: false })} type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <button onClick={() => props.modalHandler({ status: false })} type="button" className="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>

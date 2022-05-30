@@ -1,71 +1,129 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import ReactStars from "react-rating-stars-component";
+import { AuthContext } from "../../Helpers/AuthContext";
 
-const AddReview = ({ loadReview }) => {
+const AddReview = ({ onButtonPressChange }) => {
 
     const { venue_id } = useParams();
 
-    //console.log(venue_id)
+    const { authState } = useContext(AuthContext)
+
+    const [warning, setWarning] = useState(false);
+
+
+    const [loading, setLoading] = useState(true);
+
+    const [rating, setRating] = useState(0)
 
     const [review, setReview] = useState({
         review_text: "",
-        rating: ""
     })
 
-    const { review_text, rating } = review;
+    const { review_text } = review;
 
     const onInputChange = e => {
         setReview({ ...review, [e.target.name]: e.target.value })
-        //console.log(e.target.value)
     };
 
     const onSubmit = async e => {
-        console.log(review);
         e.preventDefault();
-        await axios({
-            method: 'post',
-            headers: {
-                'Authorization': 'Bearer ' + String(sessionStorage.getItem("accessToken"),),
-            },
-            url: 'http://localhost:3001/api/venue/addreview',
-            data: {
-                venue_id: venue_id,
-                review_text: review_text,
-                rating: rating
-            }
-        });
-        //conditions 
-        loadReview()
-        //history.push("/")
+        if (rating === 0) {
+            setWarning(true);
+        }
+
+        else {
+            setWarning(false);
+            setLoading(false);
+            await axios({
+                method: 'post',
+                headers: {
+                    'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken")),
+                },
+                url: `https://weddingspots.herokuapp.com/api/venues/addreview`,
+                data: {
+                    venue_id: venue_id,
+                    review: review_text,
+                    rating: rating
+                }
+            }).then(response => {
+                setLoading(true)
+                onButtonPressChange();
+            }).catch(error => {
+                setLoading(true)
+                if (typeof error.response === 'undefined') {
+
+                    alert("Server Down")
+                }
+                else {
+                    alert(error.response.data.error.message)
+                }
+            })
+        }
+
+    }
+
+    const ratingChanged = (newRating) => {
+        setRating(newRating);
     }
 
     return (
         <div>
 
-            <h1>Add Review</h1>
-
             <form onSubmit={e => onSubmit(e)}>
 
-                <div>
-                    <label for="exampleFormControlTextarea1" class="form-label">Review</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review_text" value={review_text} onChange={e => onInputChange(e)} required></textarea>
+                <div className="shadow-sm">
+                    <textarea className="form-control" rows="3" name="review_text" value={review_text} onChange={e => onInputChange(e)} placeholder="Leave a review..." required></textarea>
                 </div>
 
-                <label className="mt-2 me-2" for="rating">Rating</label>
+                <div className="row mt-2">
+                    <div className="col">
+                        <div>
+                            <ReactStars
+                                classNames={"px-1"}
+                                count={5}
+                                onChange={newRating => {
+                                    ratingChanged(newRating)
+                                }}
+                                size={20}
+                                activeColor="#ffd700"
+                            />
 
-                <select name="rating" value={rating} required onChange={e => onInputChange(e)}>
-                    <option value="">Please Select</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                            {warning && <span className="error text-danger">Please fill out the rating</span>}
+                        </div>
+                    </div>
 
-                <div className="mt-2">
-                    <button class="btn btn-primary" type="submit">Post</button>
+                    <div className="col">
+                        <div className="mt-2">
+
+                            {authState.status ?
+                                <div>
+                                    <button className="btn btn-primary me-2 float-end" type="submit">
+                                        Post
+                                    </button>
+                                </div>
+                                :
+                                <div>
+                                    <Link className="btn btn-primary me-2 float-end" to="/login">
+                                        Post
+                                    </Link>
+                                </div>
+                            }
+
+                            {!loading &&
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only"></span>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
                 </div>
+
+
+
+
 
             </form >
 

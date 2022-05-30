@@ -1,0 +1,15 @@
+.my-navbar-brand {
+    color: black;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    font-size: x-large !important;
+}
+
+.my-navbar {
+    font-weight: bold;
+
+}
+
+.my-button {
+    font-weight: 500 !important;
+}
