@@ -93,13 +93,13 @@ module.exports = (sequelize, DataTypes) => {
         isFeatured: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: false
         },
 
         isDelete: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: false
         },
 
     }, {})
