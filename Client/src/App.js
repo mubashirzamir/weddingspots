@@ -56,7 +56,7 @@ function App() {
       headers: {
         'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
       },
-      url: `https://weddingspots.herokuapp.com/api/isloggedin`,
+      url: `/api/isloggedin`,
     })
       .then((response => {
         if (!authState.status) {

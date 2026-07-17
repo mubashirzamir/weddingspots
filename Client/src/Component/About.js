@@ -14,7 +14,7 @@ function About() {
     const loadInfo = async () => {
         await axios({
             method: 'get',
-            url: `https://weddingspots.herokuapp.com/api/about`,
+            url: `/api/about`,
         })
             .then((response => {
 

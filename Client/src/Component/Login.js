@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
         await axios({
             method: 'post',
-            url: `https://weddingspots.herokuapp.com/api/login`,
+            url: `/api/login`,
             data: user
         })
             .then((response => {

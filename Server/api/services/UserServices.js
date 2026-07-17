@@ -154,7 +154,7 @@ exports.resetStuff = async function (req) {
 
         await reset_tokens.destroy({
             where: {
-                expiration: { [Op.lt]: Sequelize.fn('CURDATE') },
+                expiration: { [Op.lt]: Sequelize.fn('CURRENT_DATE') },
             }
         });
 
@@ -162,7 +162,7 @@ exports.resetStuff = async function (req) {
         var record = await reset_tokens.findOne({
             where: {
                 email: req.query.email,
-                expiration: { [Op.gt]: Sequelize.fn('CURDATE') },
+                expiration: { [Op.gt]: Sequelize.fn('CURRENT_DATE') },
                 token: req.query.token,
                 used: 0
             }

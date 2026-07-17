@@ -42,7 +42,7 @@ const AddVenue = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: `https://weddingspots.herokuapp.com/managerAPI/createVenue`,
+            url: `/managerAPI/createVenue`,
             data: venue
         }).then((response => {
             setLoading(true)

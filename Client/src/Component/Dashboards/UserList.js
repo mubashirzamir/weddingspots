@@ -39,7 +39,7 @@ const UserList = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: `https://weddingspots.herokuapp.com/adminAPI/getUsers?page=${currentPage}&size=${size}`
+            url: `/adminAPI/getUsers?page=${currentPage}&size=${size}`
         }).then(response => {
 
 
@@ -67,7 +67,7 @@ const UserList = () => {
             headers: {
                 'Authorization': 'Bearer ' + String(localStorage.getItem("accessToken"),),
             },
-            url: `https://weddingspots.herokuapp.com/adminAPI/deleteUser/` + user_id,
+            url: `/adminAPI/deleteUser/` + user_id,
         }).then((response => {
             setLoading02(true);
 

@@ -43,7 +43,7 @@ const ViewVenue = () => {
 
 
     const loadVenue = async () => {
-        await axios.get(`https://weddingspots.herokuapp.com/api/venues/` + venue_id).then(response => {
+        await axios.get(`/api/venues/` + venue_id).then(response => {
             console.log(response.data);
 
             if (response.data.data) {

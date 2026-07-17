@@ -20,7 +20,7 @@ const FeaturedVenues = () => {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`https://weddingspots.herokuapp.com/api/venues?page=${currentPage}&size=${size}&isFeatured=true`).then(response => {
+        await axios.get(`/api/venues?page=${currentPage}&size=${size}&isFeatured=true`).then(response => {
 
 
             const total = response.data.data.totalItems

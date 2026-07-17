@@ -41,7 +41,7 @@ function SearchResults(query) {
         if (!currentPage) {
             currentPage = 0;
         }
-        await axios.get(`https://weddingspots.herokuapp.com/api/venues${query.query}&page=${currentPage}&size=${size}`).then(response => {
+        await axios.get(`/api/venues${query.query}&page=${currentPage}&size=${size}`).then(response => {
             const total = response.data.data.totalItems
             setPageCount(Math.ceil(total / size))
             setVenue(response.data.data.items)

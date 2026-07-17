@@ -38,7 +38,7 @@ const ResetPassword = () => {
 
         // await axios({
         //     method: 'post',
-        //     url: `https://weddingspots.herokuapp.com/api/ResetPassword?token=${token}&email=${email}`,
+        //     url: `/api/ResetPassword?token=${token}&email=${email}`,
         //     data: user
         // })
         //     .then((response => {
