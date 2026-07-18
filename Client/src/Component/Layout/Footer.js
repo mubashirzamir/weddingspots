@@ -35,9 +35,6 @@ const Footer = () => {
                     </div>
 
                 </footer>
-                <p className="text-center text-muted mt-3 mb-0 small">
-                    This was my final year project for my BSc — some features (e.g. image uploads, social logins, map integration) may not work due to expired API keys.
-                </p>
             </div>
 
         </div >

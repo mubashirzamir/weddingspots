@@ -102,6 +102,10 @@ function App() {
 
           <Navbar />
 
+          <div className="alert alert-warning text-center small mb-0 rounded-0">
+            This was my final year project for my BSc — some features (e.g. image uploads, social logins, map integration) may not work due to expired API keys.
+          </div>
+
           <Switch>
 
 
